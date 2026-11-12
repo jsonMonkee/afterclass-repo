@@ -94,51 +94,45 @@ export default function HomePage() {
         <div className="scallop-bottom-cream"></div>
       </section>
 
-      {/* 2. CAMPUS LOVE / TESTIMONIALS SECTION — Sky Blue band on white bg, no card wrapper */}
-      <div className="bg-[#FFFDF5]">
-        <section className="bg-gradient-to-b from-[#E0F2FE] via-[#BAE6FD] to-[#E0F2FE] text-[#000000] py-20 sm:py-24 px-6 sm:px-12 relative overflow-hidden">
+      {/* 2. CAMPUS LOVE / TESTIMONIALS SECTION — Seamless white background, no cards, clean typography */}
+      <section className="bg-[#FFFDF5] text-[#000000] pt-16 pb-12 px-6 sm:px-12 border-b border-black/10">
+        <div className="max-w-[85rem] mx-auto text-center">
           
-          {/* Subtle decorative glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/60 via-transparent to-transparent pointer-events-none" />
-
-          <div className="max-w-[85rem] mx-auto text-center relative z-10">
-            
-            <div className="flex items-center justify-center gap-6 mb-14">
-              <svg className="w-7 h-7 text-[#E11D48] filter drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
-              </svg>
-              <svg className="w-7 h-7 text-[#E11D48] filter drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-              <svg className="w-7 h-7 text-[#E11D48] filter drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 18l8-14 8 14"/>
-                <path d="M6.5 13.5h11"/>
-                <circle cx="18" cy="8" r="2"/>
-              </svg>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 text-center items-stretch">
-              {testimonialsList.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  className="bg-white/90 backdrop-blur-md rounded-[28px] p-7 border-2 border-white shadow-[0_15px_35px_rgba(2,132,199,0.12)] flex flex-col items-center justify-between min-h-[220px] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
-                >
-                  <h3 className="font-arc-display text-xl sm:text-2xl text-[#E11D48] leading-snug tracking-tight font-extrabold max-w-xs mb-8 group-hover:text-[#BE123C] transition-colors">
-                    {item.quote}
-                  </h3>
-
-                  <div className="inline-block bg-[#FFF1F2] border border-[#FECDD3] rounded-full px-4 py-1.5 transition-transform group-hover:scale-105 shadow-xs">
-                    <span className="font-arc-mono text-[10.5px] font-bold text-[#E11D48] tracking-wider uppercase">
-                      {item.handle}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
+          <div className="flex items-center justify-center gap-6 mb-12">
+            <svg className="w-6 h-6 text-[#E11D48]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+            </svg>
+            <svg className="w-6 h-6 text-[#E11D48]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <svg className="w-6 h-6 text-[#E11D48]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 18l8-14 8 14"/>
+              <path d="M6.5 13.5h11"/>
+              <circle cx="18" cy="8" r="2"/>
+            </svg>
           </div>
-        </section>
-      </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 text-center items-start">
+            {testimonialsList.map((item, idx) => (
+              <div 
+                key={idx} 
+                className="flex flex-col items-center justify-between min-h-[160px] group px-3"
+              >
+                <p className="font-arc-display text-lg sm:text-[21px] text-[#E11D48] leading-snug tracking-tight font-extrabold max-w-xs mb-6 group-hover:text-[#BE123C] transition-colors">
+                  {item.quote}
+                </p>
+
+                <div className="inline-block bg-[#FFF1F2] border border-[#FECDD3] rounded-full px-4 py-1.5 transition-transform group-hover:scale-105 shadow-xs">
+                  <span className="font-arc-mono text-[10.5px] font-bold text-[#E11D48] tracking-wider uppercase">
+                    {item.handle}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
 
       {/* 3. EVENTS DIRECTORY ON WARM CREAM */}
       <div className="bg-[#FFFDF5] flex-1 py-16 px-6 sm:px-12">
