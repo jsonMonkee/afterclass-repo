@@ -134,7 +134,7 @@ export default function DiaChatbot() {
           {/* Inner content wrapper with Curved Rounded Corners and Thin Red Border */}
           <div className="w-full h-full rounded-[32px] border-[1.5px] border-[#E11D48] overflow-hidden flex flex-col relative z-20 bg-[#FFFDF5]">
 
-            {/* Top Bar with Arc Scallop & Red Gradient */}
+            {/* Top Bar with Scallop & Red Gradient */}
           <div className="bg-gradient-to-r from-[#E11D48] via-[#881337] to-[#E11D48] text-white p-4.5 relative shrink-0">
             <div className="flex items-center justify-between">
               

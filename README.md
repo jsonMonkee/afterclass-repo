@@ -2,9 +2,9 @@
 
 > *"Amity placement cell aur official WhatsApp groups se thak chuke ho? Welcome to Afterclass, bsdk."*
 
-Afterclass is the high-energy, Arc-inspired student commons for **Amity University Kolkata**. Built because official campus portals look like they were coded in 2004 by someone's chacha on dial-up internet, and important fest notices get buried under 500 "Good Morning beta" forwards in unmoderated groups.
+Afterclass is the high-energy student commons for **Amity University Kolkata**. Built because official campus portals look like they were coded in 2004 by someone's chacha on dial-up internet, and important fest notices get buried under 500 "Good Morning beta" forwards in unmoderated groups.
 
-Made with pure adrenaline, Red Arc energy (`#E11D48`), and zero corporate BS by the bhaiyas at **[wyrcan.io](https://wyrcan.io)**.
+Made with pure adrenaline, bold crimson energy (`#E11D48`), and zero corporate BS by the bhaiyas at **[wyrcan.io](https://wyrcan.io)**.
 
 ---
 
@@ -14,14 +14,14 @@ Made with pure adrenaline, Red Arc energy (`#E11D48`), and zero corporate BS by 
 - **Official (Unfiltered) Campus Gazette** — Verified circulars posted without botla admin gatekeeping. Sealed by real students.
 - **Off-Campus Opportunities** — Real hackathons and gigs jo actually portfolio mein count hote hain. Amity placement cell ki tarah 1.5 LPA sales roles chipka ke "100% placed" nahi chillate hum.
 - **Choto Bantu AI 2.0 🍌** — Campus AI companion jo batayega fest kab hai, auditions kahan hain, aur canteen mein kya khana layak hai.
-- **Kinetic Arc UI** — Smooth scalloped edges, Lenis smooth scrolling, GSAP kinetic reveal typography, and pure red-blooded aesthetics.
+- **Kinetic UI** — Smooth scalloped edges, Lenis smooth scrolling, GSAP kinetic reveal typography, and pure red-blooded aesthetics.
 
 ---
 
 ## 🛠️ Tech Stack (Khaandaani Setup)
 
 - **Framework:** Next.js 16 (App Router + Turbopack)
-- **Styling:** Tailwind CSS + Custom Arc Design Tokens (`#E11D48`, `#881337`, `#FFFDF5`)
+- **Styling:** Tailwind CSS + Custom Design Tokens (`#E11D48`, `#881337`, `#FFFDF5`)
 - **Animation:** GSAP (`ScrollTrigger`), Lenis Smooth Scroll
 - **Icons:** Lucide React
 - **Built by:** [wyrcan.io](https://wyrcan.io) team

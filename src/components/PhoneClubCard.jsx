@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Sparkles, Users, ArrowUpRight } from 'lucide-react';
 
 export default function PhoneClubCard({ club }) {
-  // Dynamic aesthetic themes per club type matching the clean iOS/Arc squircle card design
+  // Dynamic aesthetic themes per club type matching the clean iOS squircle card design
   const getCardTheme = () => {
     switch (club.id) {
       case 'dramatics':

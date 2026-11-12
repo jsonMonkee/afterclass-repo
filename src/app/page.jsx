@@ -34,7 +34,7 @@ export default function HomePage() {
 
   const testimonialsList = [
     {
-      quote: "Bhai Chrome se way more powerful hai. Campus clubs manage karne ke liye this is insane.",
+      quote: "Bhai official portal se 100x better hai. Campus clubs manage karne ke liye this is insane.",
       handle: "@BEEBOMCO"
     },
     {
@@ -42,7 +42,7 @@ export default function HomePage() {
       handle: "@KATELAURIELEE"
     },
     {
-      quote: "Arc lives up to the campus hype. Super intuitive, playful aur ekdum fresh vibe.",
+      quote: "Afterclass completely changes the campus vibe. Super intuitive, playful aur ekdum fresh experience.",
       handle: "@FIVEBOIII"
     },
     {

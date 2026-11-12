@@ -7,7 +7,7 @@ import SmoothScrollProvider from '../components/SmoothScrollProvider';
 
 export const metadata = {
   title: 'Afterclass for Amity — Beyond the Classroom',
-  description: 'A campus-wide community and discovery platform for Amity University Kolkata built on the Arc.net high-energy design system in Red.',
+  description: 'A campus-wide community and discovery platform for Amity University Kolkata.',
   icons: {
     icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="25" fill="%23E11D48"/><path d="M30 70 L50 25 L70 70 L56 70 L50 52 L44 70 Z" fill="white"/><circle cx="68" cy="32" r="8" fill="%23FFFDF5"/></svg>'
   }

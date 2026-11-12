@@ -275,7 +275,7 @@ export const testimonials = [
     handle: "@srijita_cadence"
   },
   {
-    quote: "“The electric simplicity reminds me of Arc browser itself. Everything feels instant, tactile, and strictly about campus culture without the bureaucratic noise of old university portals.”",
+    quote: "“The electric simplicity is unmatched. Everything feels instant, tactile, and strictly about campus culture without the bureaucratic noise of old university portals.”",
     author: "DEBJIT MUKHERJEE",
     role: "HEAD OF TECH, TURING CLUB",
     dept: "B.TECH CSE '27",
