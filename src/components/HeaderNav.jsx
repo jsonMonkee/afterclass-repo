@@ -10,7 +10,7 @@ export default function HeaderNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '/events', label: 'Events' },
+    { href: '/', label: 'Events' },
     { href: '/clubs', label: 'Clubs' },
     { href: '/opportunities', label: 'Opportunities', comingSoon: true },
     { href: '/notices', label: 'Notices' },
@@ -58,7 +58,7 @@ export default function HeaderNav() {
         {/* Right Action & Mobile Toggle */}
         <div className="flex items-center gap-3">
           <Link 
-            href="/events"
+            href="/"
             className="hidden sm:inline-flex bg-white text-[#881337] hover:bg-[#FFFDF5] text-[11px] font-arc-mono font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all shadow-sm hover:shadow"
           >
             JOIN COMMUNITY
@@ -121,7 +121,7 @@ export default function HeaderNav() {
 
             <div className="pt-1.5 mt-1 border-t border-white/10">
               <Link
-                href="/events"
+                href="/"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-center bg-white text-[#881337] font-arc-mono text-[11px] font-bold py-2 rounded-xl uppercase tracking-wider shadow-sm"
               >

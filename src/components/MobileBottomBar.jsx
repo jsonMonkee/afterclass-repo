@@ -9,7 +9,7 @@ export default function MobileBottomBar({ onOpenAi }) {
   const pathname = usePathname();
 
   const navItems = [
-    { href: '/events', label: 'Events', icon: Calendar },
+    { href: '/', label: 'Events', icon: Calendar },
     { href: '/clubs', label: 'Clubs', icon: Users },
     { href: '/opportunities', label: 'Work', icon: Briefcase, comingSoon: true },
     { href: '/notices', label: 'Notices', icon: FileText }

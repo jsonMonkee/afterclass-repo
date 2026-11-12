@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Users, 
-  ShieldCheck, 
   ArrowUpRight,
   Sparkles,
   Compass
@@ -12,7 +11,6 @@ import {
 import { campusClubs } from '../../data/amityData';
 import { useApp } from '../../context/AppContext';
 import Footer from '../../components/Footer';
-import BounceCards from '../../components/BounceCards';
 import OptionWheel from '../../components/OptionWheel';
 import ClubHeroDeck from '../../components/ClubHeroDeck';
 import PhoneClubCard from '../../components/PhoneClubCard';
@@ -108,14 +106,6 @@ export default function ClubsPage() {
                          club.openRoles.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCat && matchesQuery;
   });
-
-  const clubPhotos = [
-    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&h=600&fit=crop&q=80'
-  ];
 
   return (
     <div className="bg-[#E11D48] min-h-screen text-[#000000] flex flex-col font-sans select-none selection:bg-[#FFFDF5] selection:text-[#E11D48]">

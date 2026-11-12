@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { Bell, ShieldCheck, FileText, ArrowDownToLine, Calendar, Stamp } from 'lucide-react';
+import { Bell, ShieldCheck, Calendar, Stamp } from 'lucide-react';
 import { notices } from '../../data/amityData';
 import Footer from '../../components/Footer';
 

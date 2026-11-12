@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Briefcase, 
-  Bookmark,
   ArrowUpRight
 } from 'lucide-react';
 import { opportunities } from '../../data/amityData';
@@ -25,14 +24,6 @@ export default function OpportunitiesPage() {
                          op.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCat && matchesQuery;
   });
-
-  const oppPhotos = [
-    'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&h=600&fit=crop&q=80'
-  ];
 
   return (
     <div className="bg-[#E11D48] min-h-screen text-[#000000] flex flex-col font-sans select-none selection:bg-[#FFFDF5] selection:text-[#E11D48]">

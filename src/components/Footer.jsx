@@ -23,7 +23,7 @@ export default function Footer() {
               </h4>
               <ul className="space-y-3 font-sans text-[13.5px] text-white/85 font-medium">
                 <li>
-                  <Link href="/events" className="hover:text-white hover:underline underline-offset-4 transition-colors">
+                  <Link href="/" className="hover:text-white hover:underline underline-offset-4 transition-colors">
                     Events
                   </Link>
                 </li>

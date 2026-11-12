@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import Footer from '../../components/Footer';
 import ReflectiveCard from '../../components/ReflectiveCard';
 import ScrollReveal from '../../components/ScrollReveal';
