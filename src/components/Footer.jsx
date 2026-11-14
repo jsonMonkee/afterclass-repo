@@ -6,9 +6,6 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <div className="relative w-full overflow-hidden select-none">
-      {/* 1. Scallop Border: Crisp White Scallop Border */}
-      <div className="scallop-top-white"></div>
-
       {/* 2. Main Footer Body: Solid Electric Red Canvas */}
       <footer className="arc-grain-red text-white pt-16 sm:pt-28 pb-20 sm:pb-24 px-6 sm:px-16 lg:px-24 relative">
         <div className="max-w-[88rem] mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-12 sm:gap-16 lg:gap-24">
