@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { 
   User, 
   Crown, 
@@ -14,7 +15,9 @@ import {
   Phone,
   Mail,
   Instagram,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck,
+  UploadCloud
 } from 'lucide-react';
 import Footer from '../../components/Footer';
 
@@ -183,207 +186,282 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* 3. POPUP MODAL DIALOGUE BOX */}
+      {/* 3. SPLIT POPUP MODAL DIALOGUE BOX (Left Pixelated Art + Right Centralized Form) */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
           
           {/* Backdrop Blur */}
           <div 
-            className="fixed inset-0 bg-black/60 backdrop-blur-md transition-opacity animate-in fade-in"
+            className="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity animate-in fade-in"
             onClick={() => setIsModalOpen(false)}
           />
 
-          {/* Dialog Container */}
-          <div className="relative w-full max-w-xl bg-[#FFFDF5] rounded-[36px] border-[3px] border-black shadow-[10px_10px_0px_#000000] p-6 sm:p-8 z-10 my-8 overflow-hidden animate-nav-pop">
+          {/* Dialog Container: 2-Column Split */}
+          <div className="relative w-full max-w-4xl bg-[#FFFDF5] rounded-[36px] sm:rounded-[44px] border-[3px] border-black shadow-[12px_12px_0px_#000000] z-10 my-6 overflow-hidden animate-nav-pop grid grid-cols-1 lg:grid-cols-12 max-h-[92vh] overflow-y-auto lg:overflow-visible">
             
             {/* Top Close Button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-black transition-colors"
+              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/5 hover:bg-black/15 flex items-center justify-center text-black transition-colors cursor-pointer"
             >
               <X size={18} />
             </button>
 
-            {/* Header */}
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-1.5 text-xs font-arc-mono font-bold text-[#E11D48] uppercase tracking-wider mb-2">
-                <Sparkles size={13} />
-                <span>RESTRICTED ONBOARDING</span>
-              </div>
-              <h3 className="font-arc-display font-black text-2xl sm:text-3xl text-black leading-tight">
-                Create Verified Profile
-              </h3>
-              <p className="text-xs sm:text-sm font-sans text-[#475569] mt-1 font-medium">
-                Select your status below. Verification secret code is required.
-              </p>
-            </div>
-
-            {/* Role Switcher Tab: Club Leader vs Dhanda Owner */}
-            <div className="grid grid-cols-2 gap-3 p-1.5 bg-black/5 rounded-2xl mb-6">
-              <button
-                type="button"
-                onClick={() => setProfileType('club')}
-                className={`py-3 rounded-xl font-arc-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                  profileType === 'club'
-                    ? 'bg-[#E11D48] text-white shadow-sm'
-                    : 'text-black/70 hover:text-black'
-                }`}
-              >
-                <span>👑</span>
-                <span>Club Leader</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setProfileType('dhanda')}
-                className={`py-3 rounded-xl font-arc-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                  profileType === 'dhanda'
-                    ? 'bg-[#000000] text-white shadow-sm'
-                    : 'text-black/70 hover:text-black'
-                }`}
-              >
-                <span>🚀</span>
-                <span>Dhanda Owner</span>
-              </button>
-            </div>
-
-            {/* Status Messages */}
-            {statusMsg && (
-              <div className={`p-4 rounded-2xl mb-5 flex items-start gap-3 text-xs sm:text-sm font-bold ${
-                statusMsg.type === 'error'
-                  ? 'bg-rose-100 text-rose-800 border border-rose-300'
-                  : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-              }`}>
-                {statusMsg.type === 'error' ? <AlertCircle size={18} className="shrink-0" /> : <CheckCircle2 size={18} className="shrink-0" />}
-                <span>{statusMsg.text}</span>
-              </div>
-            )}
-
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            {/* ================= LEFT COLUMN: Pixelated / Minecraft-style Image Placeholder ================= */}
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#881337] via-[#9F1239] to-[#E11D48] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden border-b-2 lg:border-b-0 lg:border-r-2 border-black">
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-arc-mono text-[11px] font-bold text-black uppercase tracking-wider mb-1">
-                    Your Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Joydeep Das"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-white border-2 border-black/20 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium focus:border-[#E11D48] outline-none"
-                  />
-                </div>
+              {/* Pixelated 8-Bit Grid Mesh overlay */}
+              <div 
+                className="absolute inset-0 opacity-20 pointer-events-none"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)
+                  `,
+                  backgroundSize: '16px 16px'
+                }}
+              />
 
-                <div>
-                  <label className="block font-arc-mono text-[11px] font-bold text-black uppercase tracking-wider mb-1">
-                    {profileType === 'club' ? 'Club Designation *' : 'Founder Role *'}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder={profileType === 'club' ? "e.g. President / Tech Head" : "e.g. Co-Founder / Lead"}
-                    value={formData.role}
-                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    className="w-full bg-white border-2 border-black/20 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium focus:border-[#E11D48] outline-none"
-                  />
-                </div>
+              {/* Decorative Minecraft-like pixel blocks floating */}
+              <div className="absolute -top-6 -left-6 w-24 h-24 bg-[#FEF08A]/20 border-4 border-black/30 pointer-events-none" />
+              <div className="absolute top-1/2 -right-6 w-16 h-16 bg-black/20 border-4 border-white/20 pointer-events-none" />
+
+              {/* Top Left Badge */}
+              <div className="relative z-10 flex items-center justify-between">
+                <span className="font-arc-mono text-[10px] font-black uppercase tracking-[0.2em] bg-black text-[#FEF08A] px-3 py-1 rounded-md border border-white/20 shadow-[2px_2px_0px_#000]">
+                  PIXEL VAULT · 8-BIT
+                </span>
+                <span className="font-arc-mono text-[10px] text-white/70 uppercase">
+                  VERIFIED ONLY
+                </span>
               </div>
 
-              <div>
-                <label className="block font-arc-mono text-[11px] font-bold text-black uppercase tracking-wider mb-1">
-                  {profileType === 'club' ? 'Society / Club Name *' : 'Dhanda / Venture Name *'}
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder={profileType === 'club' ? "e.g. Turing Tech Club" : "e.g. Wyrcan Studio / Campus Munchies"}
-                  value={formData.organization}
-                  onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                  className="w-full bg-white border-2 border-black/20 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium focus:border-[#E11D48] outline-none"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-arc-mono text-[11px] font-bold text-black uppercase tracking-wider mb-1">
-                    Official WhatsApp
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="+91 98765 43210"
-                    value={formData.whatsapp}
-                    onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                    className="w-full bg-white border-2 border-black/20 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium focus:border-[#E11D48] outline-none"
+              {/* Center: Pixelated Banana Mascot & Placeholder Frame */}
+              <div className="relative z-10 my-8 flex flex-col items-center text-center">
+                
+                {/* Minecraft-like Stepped Frame */}
+                <div className="relative w-44 h-44 sm:w-52 sm:h-52 bg-[#FFFDF5] p-3 border-[4px] border-black shadow-[6px_6px_0px_#000000] flex flex-col items-center justify-center">
+                  
+                  {/* Subtle inner pixel pattern */}
+                  <div 
+                    className="absolute inset-2 opacity-15 pointer-events-none"
+                    style={{
+                      backgroundImage: 'radial-gradient(circle, #000 2px, transparent 2px)',
+                      backgroundSize: '12px 12px'
+                    }}
                   />
-                </div>
 
-                <div>
-                  <label className="block font-arc-mono text-[11px] font-bold text-black uppercase tracking-wider mb-1">
-                    Instagram Handle
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="@venture_or_club"
-                    value={formData.instagram}
-                    onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
-                    className="w-full bg-white border-2 border-black/20 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium focus:border-[#E11D48] outline-none"
-                  />
-                </div>
-              </div>
+                  {/* Pixelated Mascot Image (rendering crisp pixels) */}
+                  <div className="w-28 h-28 sm:w-32 sm:h-32 relative mb-2">
+                    <Image 
+                      src="/dia-banana.png" 
+                      alt="Choto Bantu 8-bit" 
+                      width={128} 
+                      height={128}
+                      className="w-full h-full object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] [image-rendering:pixelated]"
+                    />
+                  </div>
 
-              <div>
-                <label className="block font-arc-mono text-[11px] font-bold text-black uppercase tracking-wider mb-1">
-                  Brief Pitch / Work Description
-                </label>
-                <textarea
-                  rows="2"
-                  placeholder={profileType === 'club' ? "What does this club organize?" : "What service or product does your dhanda provide?"}
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full bg-white border-2 border-black/20 rounded-xl p-3 text-xs sm:text-sm font-medium focus:border-[#E11D48] outline-none resize-none"
-                />
-              </div>
-
-              {/* Secret Verification Code Input */}
-              <div className="bg-[#FEF08A]/60 p-4 rounded-2xl border-2 border-dashed border-black/20">
-                <label className="block font-arc-mono text-[11px] font-black text-black uppercase tracking-wider mb-1 flex items-center justify-between">
-                  <span className="flex items-center gap-1">
-                    <Lock size={12} />
-                    <span>Secret Verification Passcode *</span>
+                  <span className="font-arc-mono text-[10.5px] font-black uppercase text-black tracking-wider bg-[#FEF08A] px-2 py-0.5 border border-black rounded shadow-[1.5px_1.5px_0px_#000]">
+                    CHOTO BANTU #001
                   </span>
-                  <span className="text-[10px] text-[#881337] lowercase">hint: BANTU2026 or WYRCAN</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter secret code from student council"
-                  value={formData.secretCode}
-                  onChange={(e) => setFormData({ ...formData, secretCode: e.target.value })}
-                  className="w-full bg-white border-2 border-black rounded-xl px-3.5 py-2 text-xs sm:text-sm font-arc-mono font-bold uppercase tracking-wider focus:border-[#E11D48] outline-none"
-                />
+                </div>
+
+                <p className="font-arc-mono text-xs text-white/90 mt-4 max-w-xs font-semibold leading-relaxed">
+                  Only verified club bhaiyas & dhanda founders receive this badge on campus.
+                </p>
               </div>
 
-              <div className="pt-2 flex items-center justify-end gap-3">
+              {/* Bottom Feature Pill */}
+              <div className="relative z-10 pt-2 border-t border-white/20 flex items-center justify-between text-white/80 font-arc-mono text-[10.5px]">
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck size={13} className="text-[#FEF08A]" />
+                  <span>Amity Kolkata Registry</span>
+                </span>
+                <span className="font-bold text-white">2026 EDITION</span>
+              </div>
+
+            </div>
+
+            {/* ================= RIGHT COLUMN: Centralized Content & Profile Form ================= */}
+            <div className="lg:col-span-7 p-6 sm:p-9 flex flex-col justify-center items-center text-center">
+              
+              {/* Centralized AFTERCLASS Wordmark Mention */}
+              <div className="w-full flex flex-col items-center mb-4">
+                <span className="font-arc-mono text-[11px] font-bold text-[#E11D48] uppercase tracking-[0.22em] mb-1">
+                  OFFICIAL ONBOARDING
+                </span>
+                
+                {/* Centralized Brand Mention */}
+                <h2 className="font-arc-display text-4xl sm:text-5xl font-black text-black tracking-tight leading-none">
+                  afterclass
+                </h2>
+                
+                <span className="font-arc-mono text-xs font-semibold text-black/60 uppercase tracking-widest mt-1">
+                  for amity university kolkata
+                </span>
+              </div>
+
+              <p className="text-xs sm:text-sm font-sans text-[#475569] max-w-md font-medium leading-relaxed mb-6">
+                Fill your venture or club details. Access is strictly gated through student council verification passcode.
+              </p>
+
+              {/* Centralized Role Switcher: Club Leader vs Dhanda Owner */}
+              <div className="w-full max-w-md grid grid-cols-2 gap-2.5 p-1.5 bg-black/5 rounded-2xl mb-5">
                 <button
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-5 py-3 rounded-xl font-arc-mono text-xs font-bold uppercase tracking-wider text-black/70 hover:text-black cursor-pointer"
+                  onClick={() => setProfileType('club')}
+                  className={`py-2.5 rounded-xl font-arc-display font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    profileType === 'club'
+                      ? 'bg-[#E11D48] text-white shadow-sm'
+                      : 'text-black/70 hover:text-black'
+                  }`}
                 >
-                  Cancel
+                  <span>👑</span>
+                  <span>Club Leader</span>
                 </button>
 
                 <button
-                  type="submit"
-                  className="px-7 py-3 rounded-xl bg-[#E11D48] hover:bg-[#881337] text-white font-arc-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-[3px_3px_0px_#000000] border-2 border-black active:translate-x-0.5 active:translate-y-0.5 cursor-pointer transition-all"
+                  type="button"
+                  onClick={() => setProfileType('dhanda')}
+                  className={`py-2.5 rounded-xl font-arc-display font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    profileType === 'dhanda'
+                      ? 'bg-[#000000] text-white shadow-sm'
+                      : 'text-black/70 hover:text-black'
+                  }`}
                 >
-                  Verify & Register Profile →
+                  <span>🚀</span>
+                  <span>Dhanda Owner</span>
                 </button>
               </div>
 
-            </form>
+              {/* Status Message Prompt */}
+              {statusMsg && (
+                <div className={`w-full max-w-md p-3.5 rounded-2xl mb-4 flex items-start gap-2.5 text-left text-xs sm:text-sm font-bold ${
+                  statusMsg.type === 'error'
+                    ? 'bg-rose-100 text-rose-800 border border-rose-300'
+                    : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                }`}>
+                  {statusMsg.type === 'error' ? <AlertCircle size={17} className="shrink-0 mt-0.5" /> : <CheckCircle2 size={17} className="shrink-0 mt-0.5" />}
+                  <span>{statusMsg.text}</span>
+                </div>
+              )}
+
+              {/* Form with Clean Centralized Width */}
+              <form onSubmit={handleSubmit} className="w-full max-w-md space-y-3.5 text-left">
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
+                      Your Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Joydeep Das"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
+                      {profileType === 'club' ? 'Club Designation *' : 'Founder Role *'}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder={profileType === 'club' ? "e.g. President" : "e.g. Founder"}
+                      value={formData.role}
+                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
+                    {profileType === 'club' ? 'Society / Club Name *' : 'Dhanda / Venture Name *'}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder={profileType === 'club' ? "e.g. Turing Tech Club" : "e.g. Wyrcan Studio"}
+                    value={formData.organization}
+                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                    className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
+                      WhatsApp Number
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="+91 98765 43210"
+                      value={formData.whatsapp}
+                      onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
+                      Instagram Handle
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="@venture_or_club"
+                      value={formData.instagram}
+                      onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
+                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Secret Passcode Box */}
+                <div className="bg-[#FEF08A]/50 p-3 rounded-2xl border-2 border-dashed border-black/25">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-arc-mono text-[10.5px] font-black text-black uppercase tracking-wider flex items-center gap-1">
+                      <Lock size={12} />
+                      <span>Council Secret Passcode *</span>
+                    </span>
+                    <span className="font-arc-mono text-[9.5px] text-[#881337] lowercase">hint: BANTU2026 or WYRCAN</span>
+                  </div>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Enter secret code"
+                    value={formData.secretCode}
+                    onChange={(e) => setFormData({ ...formData, secretCode: e.target.value })}
+                    className="w-full bg-white border-2 border-black rounded-xl px-3 py-2 text-xs font-arc-mono font-bold uppercase tracking-wider focus:border-[#E11D48] outline-none"
+                  />
+                </div>
+
+                {/* Buttons */}
+                <div className="pt-2 flex items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(false)}
+                    className="px-5 py-2.5 rounded-xl font-arc-mono text-xs font-bold uppercase tracking-wider text-black/70 hover:text-black cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="flex-1 py-3 px-5 rounded-xl bg-[#E11D48] hover:bg-[#881337] text-white font-arc-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-[3px_3px_0px_#000000] border-2 border-black active:translate-x-0.5 active:translate-y-0.5 cursor-pointer transition-all text-center"
+                  >
+                    Verify & Create Profile →
+                  </button>
+                </div>
+
+              </form>
+
+            </div>
 
           </div>
         </div>
