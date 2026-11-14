@@ -7,7 +7,6 @@ import {
   ShieldCheck, 
   ArrowLeft,
   Users,
-  Instagram,
   Sparkles,
   ArrowUpRight
 } from 'lucide-react';
