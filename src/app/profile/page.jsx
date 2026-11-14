@@ -422,32 +422,33 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Secret Passcode Box with @jethalal.das Instagram instruction */}
-                <div className="bg-[#FEF08A]/60 p-3.5 rounded-2xl border-2 border-dashed border-black/30">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
-                    <span className="font-arc-mono text-[10.5px] font-black text-black uppercase tracking-wider flex items-center gap-1">
-                      <Lock size={12} className="text-[#881337]" />
+                <div className="bg-[#FEF08A]/70 p-4 rounded-2xl border-2 border-black/20 shadow-xs">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <label className="font-arc-display font-black text-xs text-black flex items-center gap-1.5 tracking-tight">
+                      <Lock size={13} className="text-[#E11D48] stroke-[2.5]" />
                       <span>Secret Verification Passcode *</span>
-                    </span>
+                    </label>
                     <a
                       href="https://instagram.com/jethalal.das"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-arc-mono text-[10.5px] font-black text-[#E11D48] hover:underline flex items-center gap-1"
+                      className="font-sans text-xs font-bold text-[#E11D48] hover:text-[#881337] transition-colors flex items-center gap-1 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#E11D48]/30 shadow-2xs"
                     >
-                      <span>📸</span>
                       <span>DM @jethalal.das for code ↗</span>
                     </a>
                   </div>
+
                   <input
                     type="text"
                     required
                     placeholder="Enter passcode from @jethalal.das"
                     value={formData.secretCode}
                     onChange={(e) => setFormData({ ...formData, secretCode: e.target.value })}
-                    className="w-full bg-white border-2 border-black rounded-xl px-3 py-2 text-xs font-arc-mono font-bold uppercase tracking-wider focus:border-[#E11D48] outline-none"
+                    className="w-full bg-white border-2 border-black/40 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium text-black focus:border-[#E11D48] outline-none shadow-inner"
                   />
-                  <p className="font-sans text-[11px] text-[#475569] font-medium mt-1.5 leading-snug">
-                    For getting the passcode, you need to send a message on <a href="https://instagram.com/jethalal.das" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E11D48] underline">@jethalal.das</a> Instagram handle.
+
+                  <p className="font-sans text-[11.5px] text-[#475569] font-medium mt-2 leading-relaxed">
+                    For getting the passcode, send a quick DM to <a href="https://instagram.com/jethalal.das" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E11D48] hover:underline">@jethalal.das</a> on Instagram.
                   </p>
                 </div>
 
