@@ -14,7 +14,6 @@ import {
   Building2,
   Phone,
   Mail,
-  Instagram,
   ArrowRight,
   ShieldCheck,
   UploadCloud
@@ -44,11 +43,11 @@ export default function ProfilePage() {
     }
 
     // Verification check for Club Leader vs Dhanda Owner
-    const validCodes = ['BANTU2026', 'AMITYCLUB', 'DHANDA69', 'WYRCAN'];
+    const validCodes = ['BANTU2026', 'AMITYCLUB', 'DHANDA69', 'WYRCAN', 'JETHALAL', 'JETHALAL.DAS'];
     if (!validCodes.includes(formData.secretCode.trim().toUpperCase())) {
       setStatusMsg({ 
         type: 'error', 
-        text: 'Access Denied! Sirf verified Club Leaders aur Dhanda / Startup Founders profile create kar sakte hain. Invalid secret code.' 
+        text: 'Access Denied! Invalid passcode. For getting the passcode you need to send a message on @jethalal.das Instagram handle.' 
       });
       return;
     }
@@ -422,23 +421,34 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                {/* Secret Passcode Box */}
-                <div className="bg-[#FEF08A]/50 p-3 rounded-2xl border-2 border-dashed border-black/25">
-                  <div className="flex items-center justify-between mb-1">
+                {/* Secret Passcode Box with @jethalal.das Instagram instruction */}
+                <div className="bg-[#FEF08A]/60 p-3.5 rounded-2xl border-2 border-dashed border-black/30">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
                     <span className="font-arc-mono text-[10.5px] font-black text-black uppercase tracking-wider flex items-center gap-1">
-                      <Lock size={12} />
-                      <span>Council Secret Passcode *</span>
+                      <Lock size={12} className="text-[#881337]" />
+                      <span>Secret Verification Passcode *</span>
                     </span>
-                    <span className="font-arc-mono text-[9.5px] text-[#881337] lowercase">hint: BANTU2026 or WYRCAN</span>
+                    <a
+                      href="https://instagram.com/jethalal.das"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-arc-mono text-[10.5px] font-black text-[#E11D48] hover:underline flex items-center gap-1"
+                    >
+                      <span>📸</span>
+                      <span>DM @jethalal.das for code ↗</span>
+                    </a>
                   </div>
                   <input
                     type="text"
                     required
-                    placeholder="Enter secret code"
+                    placeholder="Enter passcode from @jethalal.das"
                     value={formData.secretCode}
                     onChange={(e) => setFormData({ ...formData, secretCode: e.target.value })}
                     className="w-full bg-white border-2 border-black rounded-xl px-3 py-2 text-xs font-arc-mono font-bold uppercase tracking-wider focus:border-[#E11D48] outline-none"
                   />
+                  <p className="font-sans text-[11px] text-[#475569] font-medium mt-1.5 leading-snug">
+                    For getting the passcode, you need to send a message on <a href="https://instagram.com/jethalal.das" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E11D48] underline">@jethalal.das</a> Instagram handle.
+                  </p>
                 </div>
 
                 {/* Buttons */}
