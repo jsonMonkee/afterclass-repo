@@ -43,9 +43,11 @@ export default function HeaderNav() {
                   isActive ? 'text-white' : 'text-white/90'
                 }`}
               >
-                <span className={isActive ? 'underline underline-offset-8 decoration-2 font-black text-white flex items-center gap-1.5' : 'flex items-center gap-1.5'}>
-                  {link.iconMoney && <span className="text-sm">💸</span>}
-                  <span>{link.label}</span>
+                <span className="flex items-center gap-1.5">
+                  {link.iconMoney && <span className="text-sm select-none no-underline inline-block">💸</span>}
+                  <span className={isActive ? 'underline underline-offset-8 decoration-2 font-black text-white' : ''}>
+                    {link.label}
+                  </span>
                 </span>
                 {link.comingSoon && (
                   <span className="font-righteous font-normal text-[11px] uppercase tracking-wider bg-[#FEF08A] text-[#881337] px-2 py-0.5 rounded-md shadow-sm transform -rotate-3 hover:rotate-0 transition-transform no-underline select-none">
