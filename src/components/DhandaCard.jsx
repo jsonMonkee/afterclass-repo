@@ -123,7 +123,7 @@ export default function DhandaCard({ business }) {
           onClick={() => setShowExploreModal(false)}
         >
           <div 
-            className="w-full max-w-3xl bg-[#FFFDF5] rounded-[36px] sm:rounded-[44px] shadow-[12px_12px_0px_#000000] relative border-[3px] border-black grid grid-cols-1 md:grid-cols-12 overflow-hidden animate-nav-pop my-6 max-h-[92vh] overflow-y-auto md:overflow-visible"
+            className="w-full max-w-3xl bg-[#FFFDF5] rounded-[32px] sm:rounded-[36px] shadow-2xl shadow-black/30 relative border border-slate-200/80 grid grid-cols-1 md:grid-cols-12 overflow-hidden animate-nav-pop my-6 max-h-[92vh] overflow-y-auto md:overflow-visible"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Close Button */}
@@ -136,7 +136,7 @@ export default function DhandaCard({ business }) {
             </button>
 
             {/* ------------ LEFT SIDE: 9:16 Aspect Image Poster with Circular Logo ------------ */}
-            <div className="md:col-span-5 relative w-full aspect-[9/16] min-h-[320px] md:min-h-[460px] overflow-hidden bg-black border-b-2 md:border-b-0 md:border-r-2 border-black flex flex-col justify-between p-6">
+            <div className="md:col-span-5 relative w-full aspect-[9/16] min-h-[320px] md:min-h-[460px] overflow-hidden bg-black border-b md:border-b-0 md:border-r border-slate-200/60 flex flex-col justify-between p-6">
               
               {/* Background 9:16 Cover Image */}
               <img 
@@ -150,10 +150,10 @@ export default function DhandaCard({ business }) {
 
               {/* Top Badge Tag */}
               <div className="relative z-10 flex items-center justify-between">
-                <span className="font-arc-mono text-[10px] font-black uppercase tracking-wider bg-[#E11D48] text-white px-3 py-1 rounded-full shadow-sm">
+                <span className="font-sans text-[10px] font-bold uppercase tracking-wider bg-[#E11D48] text-white px-3 py-1 rounded-full shadow-sm">
                   {business.badge || 'VERIFIED'}
                 </span>
-                <span className="font-arc-mono text-[10px] text-white/80 uppercase">
+                <span className="font-sans text-[10px] text-white/80 font-semibold uppercase">
                   9:16 SHOWCASE
                 </span>
               </div>
@@ -170,14 +170,14 @@ export default function DhandaCard({ business }) {
 
                 <div className="inline-flex items-center gap-1.5 bg-black/70 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/25">
                   <span className="text-base leading-none">{business.icon}</span>
-                  <span className="font-arc-mono text-[11px] font-black text-white uppercase tracking-wider">
+                  <span className="font-sans text-[11px] font-bold text-white uppercase tracking-wider">
                     {business.name}
                   </span>
                 </div>
               </div>
 
               {/* Bottom Details Overlay on Image */}
-              <div className="relative z-10 pt-2 border-t border-white/20 flex items-center justify-between text-white/90 font-arc-mono text-[10.5px]">
+              <div className="relative z-10 pt-2 border-t border-white/20 flex items-center justify-between text-white/90 font-sans text-xs">
                 <span>Amity Student Dhanda</span>
                 <span className="font-bold text-[#FEF08A]">{business.priceRange}</span>
               </div>
@@ -189,7 +189,7 @@ export default function DhandaCard({ business }) {
               
               <div>
                 {/* 1. Category Pill */}
-                <div className="inline-flex items-center gap-1.5 text-xs font-arc-mono font-bold text-[#E11D48] uppercase tracking-wider mb-2">
+                <div className="inline-flex items-center gap-1.5 text-xs font-sans font-bold text-[#E11D48] uppercase tracking-wider mb-2">
                   <Sparkles size={13} />
                   <span>{business.category}</span>
                 </div>
@@ -205,11 +205,11 @@ export default function DhandaCard({ business }) {
                 </p>
 
                 {/* 3. Key Business Metadata Grid (Founder & Business Type) */}
-                <div className="space-y-3 mb-6 bg-white p-4 rounded-2xl border-2 border-black/10 shadow-xs">
+                <div className="space-y-3 mb-6 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
                   
                   {/* Founder */}
-                  <div className="flex items-center justify-between border-b border-black/5 pb-2.5">
-                    <span className="font-arc-mono text-xs font-bold text-[#64748B] uppercase tracking-wider flex items-center gap-1.5">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <span className="font-sans text-xs font-bold text-[#64748B] uppercase tracking-wider flex items-center gap-1.5">
                       <User size={14} className="text-[#E11D48]" />
                       <span>Founder:</span>
                     </span>
@@ -220,11 +220,11 @@ export default function DhandaCard({ business }) {
 
                   {/* Business Type */}
                   <div className="flex items-center justify-between pt-0.5">
-                    <span className="font-arc-mono text-xs font-bold text-[#64748B] uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="font-sans text-xs font-bold text-[#64748B] uppercase tracking-wider flex items-center gap-1.5">
                       <Tag size={14} className="text-[#EA580C]" />
                       <span>Business Type:</span>
                     </span>
-                    <span className="inline-block bg-[#FFF1F2] text-[#E11D48] text-xs font-arc-mono font-black px-2.5 py-0.5 rounded-full border border-[#FECDD3]">
+                    <span className="inline-block bg-[#FFF1F2] text-[#E11D48] text-xs font-sans font-bold px-2.5 py-0.5 rounded-full border border-[#FECDD3]">
                       {business.businessType || 'Startup / Personal Business'}
                     </span>
                   </div>
@@ -232,57 +232,97 @@ export default function DhandaCard({ business }) {
                 </div>
               </div>
 
-              {/* 4. Social & Contact Handles (Only Links, Phone, Instagram) */}
+              {/* 4. Social & Contact Handles: Modular Square-Shaped Cards */}
               <div>
-                <span className="block font-arc-mono text-[11px] font-black uppercase tracking-wider text-black mb-3">
+                <span className="block font-arc-display font-black text-xs uppercase tracking-wider text-black mb-3">
                   Direct Contact & Social Handles:
                 </span>
 
-                <div className="space-y-2.5">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   
-                  {/* Instagram ID Handle Link */}
+                  {/* 1. Square-Shaped Instagram Handle Card */}
                   {business.instagram && (
                     <a 
                       href={`https://instagram.com/${business.instagram.replace('@', '')}`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="w-full bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] hover:opacity-95 text-white font-arc-display font-black text-xs sm:text-sm py-3 px-5 rounded-2xl flex items-center justify-between shadow-sm transition-all active:scale-[0.99] cursor-pointer"
+                      className="aspect-square bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] p-[1.5px] rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all group flex flex-col cursor-pointer border border-transparent"
+                      title={`Open ${business.instagram} on Instagram`}
                     >
-                      <span className="flex items-center gap-2">
-                        <span>📸</span>
-                        <span>Instagram: {business.instagram}</span>
-                      </span>
-                      <ExternalLink size={15} />
+                      <div className="w-full h-full bg-[#FFFDF5] group-hover:bg-white rounded-[14px] p-3 flex flex-col justify-between">
+                        <div className="flex items-center justify-between">
+                          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex items-center justify-center text-white shadow-xs">
+                            <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                          </div>
+                          <span className="text-[10px] font-bold text-white bg-black/80 px-2 py-0.5 rounded-full uppercase tracking-wider group-hover:bg-[#E11D48] transition-colors shadow-2xs">
+                            Open ↗
+                          </span>
+                        </div>
+                        <div>
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Instagram</span>
+                          <span className="font-arc-display font-black text-xs sm:text-[13px] text-black group-hover:text-[#E11D48] truncate block">
+                            {business.instagram}
+                          </span>
+                        </div>
+                      </div>
                     </a>
                   )}
 
-                  {/* Phone / WhatsApp */}
-                  {business.phone && (
-                    <a 
-                      href={`tel:${business.phone.replace(/[^0-9+]/g, '')}`}
-                      className="w-full bg-[#000000] hover:bg-[#1E293B] text-white font-arc-display font-black text-xs sm:text-sm py-3 px-5 rounded-2xl flex items-center justify-between shadow-sm transition-all active:scale-[0.99] cursor-pointer"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Phone size={15} className="text-[#FEF08A]" />
-                        <span>Phone: {business.phone}</span>
-                      </span>
-                      <span className="text-[11px] font-arc-mono text-[#FEF08A] uppercase">CALL NOW</span>
-                    </a>
-                  )}
-
-                  {/* WhatsApp Direct Chat Link */}
+                  {/* 2. Square-Shaped WhatsApp Direct Chat Card */}
                   {business.phone && (
                     <a 
                       href={`https://wa.me/${business.phone.replace(/[^0-9]/g, '')}?text=Hey!%20Saw%20${encodeURIComponent(business.name)}%20on%20Afterclass%20Dhanda.`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white font-arc-display font-black text-xs sm:text-sm py-3 px-5 rounded-2xl flex items-center justify-between shadow-sm transition-all active:scale-[0.99] cursor-pointer"
+                      className="aspect-square bg-white border border-emerald-200/80 p-[1.5px] rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all group flex flex-col cursor-pointer"
+                      title="Chat on WhatsApp"
                     >
-                      <span className="flex items-center gap-2">
-                        <span>💬</span>
-                        <span>WhatsApp Chat</span>
-                      </span>
-                      <ExternalLink size={15} />
+                      <div className="w-full h-full bg-[#FFFDF5] group-hover:bg-white rounded-[14px] p-3 flex flex-col justify-between">
+                        <div className="flex items-center justify-between">
+                          <div className="w-8 h-8 rounded-xl bg-[#25D366] flex items-center justify-center text-white shadow-xs">
+                            <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+                            </svg>
+                          </div>
+                          <span className="text-[10px] font-bold text-white bg-black/80 px-2 py-0.5 rounded-full uppercase tracking-wider group-hover:bg-[#25D366] transition-colors shadow-2xs">
+                            Chat ↗
+                          </span>
+                        </div>
+                        <div>
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">WhatsApp</span>
+                          <span className="font-arc-display font-black text-xs sm:text-[13px] text-black group-hover:text-[#25D366] truncate block">
+                            Direct Chat
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+                  )}
+
+                  {/* 3. Square-Shaped Phone Call Card */}
+                  {business.phone && (
+                    <a 
+                      href={`tel:${business.phone.replace(/[^0-9+]/g, '')}`}
+                      className="aspect-square bg-white border border-slate-200 p-[1.5px] rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all group flex flex-col cursor-pointer"
+                      title={`Call ${business.phone}`}
+                    >
+                      <div className="w-full h-full bg-[#FFFDF5] group-hover:bg-white rounded-[14px] p-3 flex flex-col justify-between">
+                        <div className="flex items-center justify-between">
+                          <div className="w-8 h-8 rounded-xl bg-black flex items-center justify-center text-[#FEF08A] shadow-xs">
+                            <Phone size={15} />
+                          </div>
+                          <span className="text-[10px] font-bold text-white bg-black/80 px-2 py-0.5 rounded-full uppercase tracking-wider group-hover:bg-[#E11D48] transition-colors shadow-2xs">
+                            Call ↗
+                          </span>
+                        </div>
+                        <div>
+                          <span className="block text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Phone Line</span>
+                          <span className="font-arc-display font-black text-xs sm:text-[13px] text-black group-hover:text-[#E11D48] truncate block">
+                            {business.phone}
+                          </span>
+                        </div>
+                      </div>
                     </a>
                   )}
 

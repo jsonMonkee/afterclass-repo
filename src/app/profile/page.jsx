@@ -124,12 +124,12 @@ export default function ProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             
             {/* Box 1: Club Leaders */}
-            <div className="bg-white rounded-[32px] p-8 border-2 border-black shadow-[6px_6px_0px_#000000] flex flex-col justify-between">
+            <div className="bg-white rounded-[28px] p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#FFE4E6] text-[#E11D48] flex items-center justify-center text-2xl mb-6 shadow-sm border border-[#FECDD3]">
+                <div className="w-14 h-14 rounded-2xl bg-[#FFE4E6] text-[#E11D48] flex items-center justify-center text-2xl mb-6 shadow-xs border border-[#FECDD3]">
                   👑
                 </div>
-                <div className="inline-block bg-[#FFE4E6] text-[#881337] text-[11px] font-arc-mono font-bold px-3 py-1 rounded-full uppercase mb-3">
+                <div className="inline-block bg-[#FFE4E6] text-[#881337] text-[11px] font-sans font-bold px-3 py-1 rounded-full uppercase mb-3">
                   Tier 1: Club Leadership
                 </div>
                 <h3 className="font-arc-display text-2xl font-black text-[#000000] mb-3">
@@ -140,19 +140,19 @@ export default function ProfilePage() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-black/10 flex items-center justify-between text-xs font-arc-mono font-bold text-[#E11D48]">
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-sans font-bold text-[#E11D48]">
                 <span>REQUIRES VERIFIED AMITY LEAD CODE</span>
                 <span>★ 100% EXCLUSIVE</span>
               </div>
             </div>
 
             {/* Box 2: Dhanda / Startup Founders */}
-            <div className="bg-white rounded-[32px] p-8 border-2 border-black shadow-[6px_6px_0px_#000000] flex flex-col justify-between">
+            <div className="bg-white rounded-[28px] p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#FEF08A] text-[#881337] flex items-center justify-center text-2xl mb-6 shadow-sm border border-[#FACC15]">
+                <div className="w-14 h-14 rounded-2xl bg-[#FEF08A] text-[#881337] flex items-center justify-center text-2xl mb-6 shadow-xs border border-[#FACC15]">
                   🚀
                 </div>
-                <div className="inline-block bg-[#FEF08A] text-[#881337] text-[11px] font-arc-mono font-bold px-3 py-1 rounded-full uppercase mb-3">
+                <div className="inline-block bg-[#FEF08A] text-[#881337] text-[11px] font-sans font-bold px-3 py-1 rounded-full uppercase mb-3">
                   Tier 2: Dhanda / Startups
                 </div>
                 <h3 className="font-arc-display text-2xl font-black text-[#000000] mb-3">
@@ -163,7 +163,7 @@ export default function ProfilePage() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-black/10 flex items-center justify-between text-xs font-arc-mono font-bold text-[#881337]">
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-sans font-bold text-[#881337]">
                 <span>REQUIRES ACTIVE VENTURE PROOF</span>
                 <span>⚡ ZERO BROKERS</span>
               </div>
@@ -196,7 +196,7 @@ export default function ProfilePage() {
           />
 
           {/* Dialog Container: 2-Column Split */}
-          <div className="relative w-full max-w-4xl bg-[#FFFDF5] rounded-[36px] sm:rounded-[44px] border-[3px] border-black shadow-[12px_12px_0px_#000000] z-10 my-6 overflow-hidden animate-nav-pop grid grid-cols-1 lg:grid-cols-12 max-h-[92vh] overflow-y-auto lg:overflow-visible">
+          <div className="relative w-full max-w-4xl bg-[#FFFDF5] rounded-[32px] sm:rounded-[36px] border border-slate-200/80 shadow-2xl shadow-black/25 z-10 my-6 overflow-hidden animate-nav-pop grid grid-cols-1 lg:grid-cols-12 max-h-[92vh] overflow-y-auto lg:overflow-visible">
             
             {/* Top Close Button */}
             <button
@@ -207,11 +207,11 @@ export default function ProfilePage() {
             </button>
 
             {/* ================= LEFT COLUMN: Pixelated / Minecraft-style Image Placeholder ================= */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#881337] via-[#9F1239] to-[#E11D48] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden border-b-2 lg:border-b-0 lg:border-r-2 border-black">
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#881337] via-[#9F1239] to-[#E11D48] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-200/60">
               
-              {/* Pixelated 8-Bit Grid Mesh overlay */}
+              {/* Subtle grid mesh overlay */}
               <div 
-                className="absolute inset-0 opacity-20 pointer-events-none"
+                className="absolute inset-0 opacity-15 pointer-events-none"
                 style={{
                   backgroundImage: `
                     linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px),
@@ -221,16 +221,16 @@ export default function ProfilePage() {
                 }}
               />
 
-              {/* Decorative Minecraft-like pixel blocks floating */}
-              <div className="absolute -top-6 -left-6 w-24 h-24 bg-[#FEF08A]/20 border-4 border-black/30 pointer-events-none" />
-              <div className="absolute top-1/2 -right-6 w-16 h-16 bg-black/20 border-4 border-white/20 pointer-events-none" />
+              {/* Decorative soft glowing elements */}
+              <div className="absolute -top-10 -left-10 w-36 h-36 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute -bottom-10 -right-10 w-36 h-36 bg-[#FEF08A]/15 rounded-full blur-2xl pointer-events-none" />
 
               {/* Top Left Badge */}
               <div className="relative z-10 flex items-center justify-between">
-                <span className="font-arc-mono text-[10px] font-black uppercase tracking-[0.2em] bg-black text-[#FEF08A] px-3 py-1 rounded-md border border-white/20 shadow-[2px_2px_0px_#000]">
+                <span className="font-sans text-[11px] font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-[#FEF08A] px-3 py-1 rounded-full border border-white/15 shadow-sm">
                   PIXEL VAULT · 8-BIT
                 </span>
-                <span className="font-arc-mono text-[10px] text-white/70 uppercase">
+                <span className="font-sans text-[11px] text-white/80 font-semibold uppercase">
                   VERIFIED ONLY
                 </span>
               </div>
@@ -238,12 +238,12 @@ export default function ProfilePage() {
               {/* Center: Pixelated Banana Mascot & Placeholder Frame */}
               <div className="relative z-10 my-8 flex flex-col items-center text-center">
                 
-                {/* Minecraft-like Stepped Frame */}
-                <div className="relative w-44 h-44 sm:w-52 sm:h-52 bg-[#FFFDF5] p-3 border-[4px] border-black shadow-[6px_6px_0px_#000000] flex flex-col items-center justify-center">
+                {/* Modern Soft Frame */}
+                <div className="relative w-44 h-44 sm:w-52 sm:h-52 bg-white/95 backdrop-blur-md p-4 rounded-3xl border border-white/50 shadow-xl flex flex-col items-center justify-center">
                   
                   {/* Subtle inner pixel pattern */}
                   <div 
-                    className="absolute inset-2 opacity-15 pointer-events-none"
+                    className="absolute inset-2 opacity-10 pointer-events-none rounded-2xl"
                     style={{
                       backgroundImage: 'radial-gradient(circle, #000 2px, transparent 2px)',
                       backgroundSize: '12px 12px'
@@ -257,27 +257,27 @@ export default function ProfilePage() {
                       alt="Choto Bantu 8-bit" 
                       width={128} 
                       height={128}
-                      className="w-full h-full object-contain filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)] [image-rendering:pixelated]"
+                      className="w-full h-full object-contain filter drop-shadow-[0_6px_12px_rgba(0,0,0,0.15)] [image-rendering:pixelated]"
                     />
                   </div>
 
-                  <span className="font-arc-mono text-[10.5px] font-black uppercase text-black tracking-wider bg-[#FEF08A] px-2 py-0.5 border border-black rounded shadow-[1.5px_1.5px_0px_#000]">
+                  <span className="font-sans text-[11px] font-extrabold uppercase text-[#881337] tracking-wider bg-[#FEF08A] px-3 py-0.5 rounded-full shadow-xs">
                     CHOTO BANTU #001
                   </span>
                 </div>
 
-                <p className="font-arc-mono text-xs text-white/90 mt-4 max-w-xs font-semibold leading-relaxed">
+                <p className="font-sans text-xs text-white/90 mt-4 max-w-xs font-medium leading-relaxed">
                   Only verified club bhaiyas & dhanda founders receive this badge on campus.
                 </p>
               </div>
 
               {/* Bottom Feature Pill */}
-              <div className="relative z-10 pt-2 border-t border-white/20 flex items-center justify-between text-white/80 font-arc-mono text-[10.5px]">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck size={13} className="text-[#FEF08A]" />
+              <div className="relative z-10 pt-2 border-t border-white/20 flex items-center justify-between text-white/85 font-sans text-xs">
+                <span className="flex items-center gap-1.5 font-medium">
+                  <ShieldCheck size={14} className="text-[#FEF08A]" />
                   <span>Amity Kolkata Registry</span>
                 </span>
-                <span className="font-bold text-white">2026 EDITION</span>
+                <span className="font-bold text-white tracking-wide">2026 EDITION</span>
               </div>
 
             </div>
@@ -287,7 +287,7 @@ export default function ProfilePage() {
               
               {/* Centralized AFTERCLASS Wordmark Mention */}
               <div className="w-full flex flex-col items-center mb-4">
-                <span className="font-arc-mono text-[11px] font-bold text-[#E11D48] uppercase tracking-[0.22em] mb-1">
+                <span className="font-sans text-[11px] font-bold text-[#E11D48] uppercase tracking-[0.2em] mb-1">
                   OFFICIAL ONBOARDING
                 </span>
                 
@@ -296,7 +296,7 @@ export default function ProfilePage() {
                   afterclass
                 </h2>
                 
-                <span className="font-arc-mono text-xs font-semibold text-black/60 uppercase tracking-widest mt-1">
+                <span className="font-sans text-xs font-semibold text-black/60 uppercase tracking-widest mt-1">
                   for amity university kolkata
                 </span>
               </div>
@@ -306,7 +306,7 @@ export default function ProfilePage() {
               </p>
 
               {/* Centralized Role Switcher: Club Leader vs Dhanda Owner */}
-              <div className="w-full max-w-md grid grid-cols-2 gap-2.5 p-1.5 bg-black/5 rounded-2xl mb-5">
+              <div className="w-full max-w-md grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-2xl mb-5 border border-slate-200/60">
                 <button
                   type="button"
                   onClick={() => setProfileType('club')}
@@ -351,8 +351,8 @@ export default function ProfilePage() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
-                      Your Full Name *
+                    <label className="block font-sans text-xs font-bold text-black mb-1">
+                      Your Full Name <span className="text-[#E11D48]">*</span>
                     </label>
                     <input
                       type="text"
@@ -360,13 +360,13 @@ export default function ProfilePage() {
                       placeholder="e.g. Joydeep Das"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium focus:border-[#E11D48] focus:ring-2 focus:ring-[#E11D48]/10 outline-none transition-all shadow-2xs"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
-                      {profileType === 'club' ? 'Club Designation *' : 'Founder Role *'}
+                    <label className="block font-sans text-xs font-bold text-black mb-1">
+                      {profileType === 'club' ? 'Club Designation' : 'Founder Role'} <span className="text-[#E11D48]">*</span>
                     </label>
                     <input
                       type="text"
@@ -374,14 +374,14 @@ export default function ProfilePage() {
                       placeholder={profileType === 'club' ? "e.g. President" : "e.g. Founder"}
                       value={formData.role}
                       onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium focus:border-[#E11D48] focus:ring-2 focus:ring-[#E11D48]/10 outline-none transition-all shadow-2xs"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
-                    {profileType === 'club' ? 'Society / Club Name *' : 'Dhanda / Venture Name *'}
+                  <label className="block font-sans text-xs font-bold text-black mb-1">
+                    {profileType === 'club' ? 'Society / Club Name' : 'Dhanda / Venture Name'} <span className="text-[#E11D48]">*</span>
                   </label>
                   <input
                     type="text"
@@ -389,13 +389,13 @@ export default function ProfilePage() {
                     placeholder={profileType === 'club' ? "e.g. Turing Tech Club" : "e.g. Wyrcan Studio"}
                     value={formData.organization}
                     onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                    className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium focus:border-[#E11D48] focus:ring-2 focus:ring-[#E11D48]/10 outline-none transition-all shadow-2xs"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
+                    <label className="block font-sans text-xs font-bold text-black mb-1">
                       WhatsApp Number
                     </label>
                     <input
@@ -403,12 +403,12 @@ export default function ProfilePage() {
                       placeholder="+91 98765 43210"
                       value={formData.whatsapp}
                       onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium focus:border-[#E11D48] focus:ring-2 focus:ring-[#E11D48]/10 outline-none transition-all shadow-2xs"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-arc-mono text-[10.5px] font-bold text-black uppercase tracking-wider mb-1">
+                    <label className="block font-sans text-xs font-bold text-black mb-1">
                       Instagram Handle
                     </label>
                     <input
@@ -416,40 +416,77 @@ export default function ProfilePage() {
                       placeholder="@venture_or_club"
                       value={formData.instagram}
                       onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
-                      className="w-full bg-white border-2 border-black/20 rounded-xl px-3 py-2 text-xs font-medium focus:border-[#E11D48] outline-none"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium focus:border-[#E11D48] focus:ring-2 focus:ring-[#E11D48]/10 outline-none transition-all shadow-2xs"
                     />
                   </div>
                 </div>
 
-                {/* Secret Passcode Box with @jethalal.das Instagram instruction */}
-                <div className="bg-[#FEF08A]/70 p-4 rounded-2xl border-2 border-black/20 shadow-xs">
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <label className="font-arc-display font-black text-xs text-black flex items-center gap-1.5 tracking-tight">
-                      <Lock size={13} className="text-[#E11D48] stroke-[2.5]" />
-                      <span>Secret Verification Passcode *</span>
+                {/* Secret Passcode Box with Dedicated Square-Shaped Instagram Card */}
+                <div className="bg-amber-50/70 p-4 sm:p-5 rounded-2xl border border-amber-200/80 shadow-xs">
+                  
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <label className="font-arc-display font-black text-xs sm:text-sm text-black flex items-center gap-1.5 tracking-tight">
+                      <Lock size={15} className="text-[#E11D48] stroke-[2.5]" />
+                      <span>Council Verification Passcode</span>
+                      <span className="text-[#E11D48]">*</span>
                     </label>
+                    <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-black/70 bg-white px-2.5 py-0.5 rounded-full border border-black/10 shadow-2xs">
+                      Verified Only
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+                    
+                    {/* Square-Shaped Instagram Handle Card */}
                     <a
                       href="https://instagram.com/jethalal.das"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-sans text-xs font-bold text-[#E11D48] hover:text-[#881337] transition-colors flex items-center gap-1 bg-white/80 px-2.5 py-0.5 rounded-full border border-[#E11D48]/30 shadow-2xs"
+                      className="w-full sm:w-[130px] sm:h-[130px] aspect-square shrink-0 bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] p-[1.5px] rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all group flex flex-col cursor-pointer"
+                      title="DM @jethalal.das for Passcode"
                     >
-                      <span>DM @jethalal.das for code ↗</span>
+                      <div className="w-full h-full bg-[#FFFDF5] group-hover:bg-white rounded-[14px] p-2.5 flex flex-col justify-between items-center text-center">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex items-center justify-center text-white shadow-xs">
+                          <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <span className="block text-[9.5px] font-bold uppercase tracking-wider text-[#64748B]">Instagram DM</span>
+                          <span className="font-arc-display font-black text-xs text-black group-hover:text-[#E11D48] leading-tight block truncate">
+                            @jethalal.das
+                          </span>
+                        </div>
+                        <span className="inline-flex items-center gap-1 text-[9.5px] font-bold text-white bg-black group-hover:bg-[#E11D48] px-2.5 py-0.5 rounded-full uppercase tracking-wider transition-colors shadow-xs">
+                          <span>DM for Code</span>
+                          <span>↗</span>
+                        </span>
+                      </div>
                     </a>
+
+                    {/* Passcode Input Field & Description */}
+                    <div className="flex-1 flex flex-col justify-between gap-2 min-w-0">
+                      <div>
+                        <label className="block font-sans text-xs font-bold text-black mb-1">
+                          Passcode Key:
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="Enter passcode from @jethalal.das"
+                          value={formData.secretCode}
+                          onChange={(e) => setFormData({ ...formData, secretCode: e.target.value })}
+                          className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium text-black placeholder:text-slate-400 focus:border-[#E11D48] focus:ring-2 focus:ring-[#E11D48]/15 outline-none shadow-2xs transition-all"
+                        />
+                      </div>
+
+                      <p className="font-sans text-xs text-[#475569] font-medium leading-relaxed">
+                        For getting the passcode, you need to send a message on <a href="https://instagram.com/jethalal.das" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E11D48] hover:underline">@jethalal.das</a> Instagram handle.
+                      </p>
+                    </div>
+
                   </div>
 
-                  <input
-                    type="text"
-                    required
-                    placeholder="Enter passcode from @jethalal.das"
-                    value={formData.secretCode}
-                    onChange={(e) => setFormData({ ...formData, secretCode: e.target.value })}
-                    className="w-full bg-white border-2 border-black/40 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-sans font-medium text-black focus:border-[#E11D48] outline-none shadow-inner"
-                  />
-
-                  <p className="font-sans text-[11.5px] text-[#475569] font-medium mt-2 leading-relaxed">
-                    For getting the passcode, send a quick DM to <a href="https://instagram.com/jethalal.das" target="_blank" rel="noopener noreferrer" className="font-bold text-[#E11D48] hover:underline">@jethalal.das</a> on Instagram.
-                  </p>
                 </div>
 
                 {/* Buttons */}
@@ -457,14 +494,14 @@ export default function ProfilePage() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-5 py-2.5 rounded-xl font-arc-mono text-xs font-bold uppercase tracking-wider text-black/70 hover:text-black cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl font-sans text-xs font-bold uppercase tracking-wider text-black/60 hover:text-black cursor-pointer transition-colors"
                   >
                     Cancel
                   </button>
 
                   <button
                     type="submit"
-                    className="flex-1 py-3 px-5 rounded-xl bg-[#E11D48] hover:bg-[#881337] text-white font-arc-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-[3px_3px_0px_#000000] border-2 border-black active:translate-x-0.5 active:translate-y-0.5 cursor-pointer transition-all text-center"
+                    className="flex-1 py-3.5 px-6 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] text-white font-arc-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-[#E11D48]/25 hover:shadow-xl hover:shadow-[#E11D48]/35 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer transition-all text-center"
                   >
                     Verify & Create Profile →
                   </button>
