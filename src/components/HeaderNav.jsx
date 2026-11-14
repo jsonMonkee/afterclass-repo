@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 
 export default function HeaderNav() {
   const pathname = usePathname();
@@ -16,7 +16,6 @@ export default function HeaderNav() {
     { href: '/opportunities', label: 'Opportunities', comingSoon: true },
     { href: '/notices', label: 'Notices' },
     { href: '/developers', label: 'Developers' },
-    { href: '/profile', label: 'Profile' },
   ];
 
   return (
@@ -58,13 +57,27 @@ export default function HeaderNav() {
           })}
         </div>
 
-        {/* Right Action & Mobile Toggle */}
+        {/* Right Action & Profile Icon & Mobile Toggle */}
         <div className="flex items-center gap-3">
           <Link 
             href="/"
             className="hidden sm:inline-flex bg-white text-[#881337] hover:bg-[#FFFDF5] text-[11px] font-arc-mono font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all shadow-sm hover:shadow"
           >
             JOIN COMMUNITY
+          </Link>
+
+          {/* Profile Icon Link - Rightmost */}
+          <Link
+            href="/profile"
+            aria-label="Profile Dashboard"
+            title="Leader & Founder Profile"
+            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 ${
+              pathname === '/profile'
+                ? 'bg-white text-[#E11D48] shadow-md scale-105'
+                : 'bg-white/15 text-white hover:bg-white/25 hover:text-white border border-white/20'
+            }`}
+          >
+            <User size={17} className="stroke-[2.5]" />
           </Link>
 
           {/* Mobile hamburger menu toggle */}
