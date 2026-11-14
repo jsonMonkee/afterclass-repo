@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   ArrowRight, 
   Share2, 
@@ -17,6 +18,23 @@ import {
 export default function DhandaCard({ business }) {
   const [copied, setCopied] = useState(false);
   const [showExploreModal, setShowExploreModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scrolling when Explore modal is open
+  useEffect(() => {
+    if (showExploreModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showExploreModal]);
 
   const handleShare = (e) => {
     e.preventDefault();
@@ -116,14 +134,14 @@ export default function DhandaCard({ business }) {
         </button>
       </div>
 
-      {/* ================= 4. EXPLORE MODAL POP-UP (Left 9:16 Visual with Circular Logo + Right Details) ================= */}
-      {showExploreModal && (
+      {/* ================= 4. EXPLORE MODAL POP-UP (Portaled directly to document.body for true screen centering) ================= */}
+      {showExploreModal && mounted && typeof document !== 'undefined' && createPortal(
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
           onClick={() => setShowExploreModal(false)}
         >
           <div 
-            className="w-full max-w-4xl bg-[#FFFDF5] rounded-[32px] sm:rounded-[36px] shadow-2xl shadow-black/40 relative border border-slate-200/80 grid grid-cols-1 md:grid-cols-12 overflow-hidden animate-nav-pop my-auto max-h-[90vh] overflow-y-auto"
+            className="w-full max-w-4xl bg-[#FFFDF5] rounded-[32px] sm:rounded-[36px] shadow-2xl shadow-black/50 relative border border-slate-200/80 grid grid-cols-1 md:grid-cols-12 overflow-hidden animate-nav-pop my-auto max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Close Button */}
@@ -336,7 +354,8 @@ export default function DhandaCard({ business }) {
             </div>
 
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
     </div>

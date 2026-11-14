@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { 
   User, 
@@ -22,7 +23,24 @@ import Footer from '../../components/Footer';
 
 export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [profileType, setProfileType] = useState('club'); // 'club' | 'dhanda'
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll when modal open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
   const [formData, setFormData] = useState({
     name: '',
     role: '',
@@ -185,18 +203,18 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* 3. SPLIT POPUP MODAL DIALOGUE BOX (Left Pixelated Art + Right Centralized Form) */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+      {/* 3. SPLIT POPUP MODAL DIALOGUE BOX (Portaled to document.body for true screen centering) */}
+      {isModalOpen && mounted && typeof document !== 'undefined' && createPortal(
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
           
           {/* Backdrop Blur */}
           <div 
-            className="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity animate-in fade-in"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity animate-in fade-in"
             onClick={() => setIsModalOpen(false)}
           />
 
           {/* Dialog Container: 2-Column Split */}
-          <div className="relative w-full max-w-4xl bg-[#FFFDF5] rounded-[32px] sm:rounded-[36px] border border-slate-200/80 shadow-2xl shadow-black/25 z-10 my-6 overflow-hidden animate-nav-pop grid grid-cols-1 lg:grid-cols-12 max-h-[92vh] overflow-y-auto lg:overflow-visible">
+          <div className="relative w-full max-w-4xl bg-[#FFFDF5] rounded-[32px] sm:rounded-[36px] border border-slate-200/80 shadow-2xl shadow-black/40 z-10 my-auto overflow-hidden animate-nav-pop grid grid-cols-1 lg:grid-cols-12 max-h-[90vh] overflow-y-auto">
             
             {/* Top Close Button */}
             <button
@@ -512,7 +530,8 @@ export default function ProfilePage() {
             </div>
 
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       <Footer />
