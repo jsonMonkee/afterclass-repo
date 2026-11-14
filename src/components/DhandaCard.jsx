@@ -237,79 +237,99 @@ export default function DhandaCard({ business }) {
               <div className="w-full h-px bg-white/20 mb-4" />
 
               {/* 4. SQUARE-SHAPED INSTAGRAM & SOCIAL CARDS */}
-              <div className="w-full pb-6">
-                <span className="block text-[10.5px] font-bold uppercase tracking-wider text-white/80 text-center mb-3">
-                  Direct Contact & Social Handles
-                </span>
+              <div className="w-full pb-7">
+                <div className="flex items-center justify-between mb-3 px-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-white/90">
+                    Direct Contact & Socials
+                  </span>
+                  <span className="text-[10px] font-semibold text-white/60">
+                    Tap to connect
+                  </span>
+                </div>
 
-                <div className="grid grid-cols-3 gap-2.5">
+                <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
                   
-                  {/* Square Instagram Card */}
+                  {/* 1. Square Instagram Card */}
                   {business.instagram && (
                     <a 
                       href={`https://instagram.com/${business.instagram.replace('@', '')}`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="aspect-square bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] p-[1.5px] rounded-2xl shadow-md hover:scale-105 active:scale-95 transition-all group flex flex-col cursor-pointer"
+                      className="relative aspect-square bg-white hover:bg-slate-50 text-black rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-black/20 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white"
                       title={`Open ${business.instagram} on Instagram`}
                     >
-                      <div className="w-full h-full bg-[#FFFDF5] group-hover:bg-white rounded-[14px] p-2.5 flex flex-col justify-between items-center text-center">
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex items-center justify-center text-white shadow-xs">
-                          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                          </svg>
-                        </div>
-                        <span className="font-sans font-bold text-[10.5px] text-black truncate max-w-full px-1">
-                          {business.instagram}
+                      <span className="absolute top-2 right-2 text-slate-300 group-hover:text-[#E11D48] transition-colors text-xs font-bold leading-none">
+                        ↗
+                      </span>
+
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] flex items-center justify-center text-white shadow-sm mt-0.5">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-white" viewBox="0 0 24 24">
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                      </div>
+
+                      <div className="w-full">
+                        <span className="block font-arc-display font-black text-xs text-black group-hover:text-[#E11D48] transition-colors leading-tight">
+                          Instagram
                         </span>
-                        <span className="text-[9px] font-bold text-white bg-[#E11D48] group-hover:bg-[#881337] px-2 py-0.5 rounded-full uppercase tracking-wider transition-colors shadow-2xs">
-                          Open ↗
+                        <span className="block font-sans text-[10.5px] font-semibold text-[#E11D48] truncate max-w-full mt-0.5">
+                          {business.instagram}
                         </span>
                       </div>
                     </a>
                   )}
 
-                  {/* Square WhatsApp Card */}
+                  {/* 2. Square WhatsApp Card */}
                   {business.phone && (
                     <a 
                       href={`https://wa.me/${business.phone.replace(/[^0-9]/g, '')}?text=Hey!%20Saw%20${encodeURIComponent(business.name)}%20on%20Afterclass%20Dhanda.`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="aspect-square bg-emerald-400 p-[1.5px] rounded-2xl shadow-md hover:scale-105 active:scale-95 transition-all group flex flex-col cursor-pointer"
+                      className="relative aspect-square bg-white hover:bg-slate-50 text-black rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-black/20 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white"
                       title="Chat on WhatsApp"
                     >
-                      <div className="w-full h-full bg-[#FFFDF5] group-hover:bg-white rounded-[14px] p-2.5 flex flex-col justify-between items-center text-center">
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#25D366] flex items-center justify-center text-white shadow-xs">
-                          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" viewBox="0 0 24 24">
-                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
-                          </svg>
-                        </div>
-                        <span className="font-sans font-bold text-[10.5px] text-black">
+                      <span className="absolute top-2 right-2 text-slate-300 group-hover:text-emerald-600 transition-colors text-xs font-bold leading-none">
+                        ↗
+                      </span>
+
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#25D366] flex items-center justify-center text-white shadow-sm mt-0.5">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-white" viewBox="0 0 24 24">
+                          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+                        </svg>
+                      </div>
+
+                      <div className="w-full">
+                        <span className="block font-arc-display font-black text-xs text-black group-hover:text-emerald-600 transition-colors leading-tight">
                           WhatsApp
                         </span>
-                        <span className="text-[9px] font-bold text-white bg-[#25D366] group-hover:bg-[#1faa4f] px-2 py-0.5 rounded-full uppercase tracking-wider transition-colors shadow-2xs">
-                          Chat ↗
+                        <span className="block font-sans text-[10.5px] font-semibold text-emerald-600 truncate max-w-full mt-0.5">
+                          Direct Chat
                         </span>
                       </div>
                     </a>
                   )}
 
-                  {/* Square Phone Call Card */}
+                  {/* 3. Square Phone Call Card */}
                   {business.phone && (
                     <a 
                       href={`tel:${business.phone.replace(/[^0-9+]/g, '')}`}
-                      className="aspect-square bg-white p-[1.5px] rounded-2xl shadow-md hover:scale-105 active:scale-95 transition-all group flex flex-col cursor-pointer"
+                      className="relative aspect-square bg-white hover:bg-slate-50 text-black rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-black/20 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white"
                       title={`Call ${business.phone}`}
                     >
-                      <div className="w-full h-full bg-[#FFFDF5] group-hover:bg-white rounded-[14px] p-2.5 flex flex-col justify-between items-center text-center">
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-black flex items-center justify-center text-[#FEF08A] shadow-xs">
-                          <Phone size={14} />
-                        </div>
-                        <span className="font-sans font-bold text-[10.5px] text-black">
-                          Phone
+                      <span className="absolute top-2 right-2 text-slate-300 group-hover:text-[#E11D48] transition-colors text-xs font-bold leading-none">
+                        ↗
+                      </span>
+
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 flex items-center justify-center text-[#FEF08A] shadow-sm mt-0.5">
+                        <Phone size={17} />
+                      </div>
+
+                      <div className="w-full">
+                        <span className="block font-arc-display font-black text-xs text-black group-hover:text-[#E11D48] transition-colors leading-tight">
+                          Call Line
                         </span>
-                        <span className="text-[9px] font-bold text-white bg-black group-hover:bg-[#E11D48] px-2 py-0.5 rounded-full uppercase tracking-wider transition-colors shadow-2xs">
-                          Call ↗
+                        <span className="block font-sans text-[10.5px] font-semibold text-slate-500 truncate max-w-full mt-0.5">
+                          {business.phone}
                         </span>
                       </div>
                     </a>
