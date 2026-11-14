@@ -15,6 +15,7 @@ export default function HeaderNav() {
     { href: '/opportunities', label: 'Opportunities', comingSoon: true },
     { href: '/notices', label: 'Notices' },
     { href: '/developers', label: 'Developers' },
+    { href: '/profile', label: 'Profile' },
   ];
 
   return (
