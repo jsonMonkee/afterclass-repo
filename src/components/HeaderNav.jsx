@@ -12,6 +12,7 @@ export default function HeaderNav() {
   const navLinks = [
     { href: '/', label: 'Events' },
     { href: '/clubs', label: 'Clubs' },
+    { href: '/dhanda', label: 'Dhanda', iconMoney: true },
     { href: '/opportunities', label: 'Opportunities', comingSoon: true },
     { href: '/notices', label: 'Notices' },
     { href: '/developers', label: 'Developers' },
@@ -43,8 +44,9 @@ export default function HeaderNav() {
                   isActive ? 'text-white' : 'text-white/90'
                 }`}
               >
-                <span className={isActive ? 'underline underline-offset-8 decoration-2 font-black text-white' : ''}>
-                  {link.label}
+                <span className={isActive ? 'underline underline-offset-8 decoration-2 font-black text-white flex items-center gap-1.5' : 'flex items-center gap-1.5'}>
+                  {link.iconMoney && <span className="text-sm">💸</span>}
+                  <span>{link.label}</span>
                 </span>
                 {link.comingSoon && (
                   <span className="font-righteous font-normal text-[11px] uppercase tracking-wider bg-[#FEF08A] text-[#881337] px-2 py-0.5 rounded-md shadow-sm transform -rotate-3 hover:rotate-0 transition-transform no-underline select-none">
@@ -110,7 +112,10 @@ export default function HeaderNav() {
                     isActive ? 'bg-white text-[#881337]' : 'text-white hover:bg-white/10'
                   }`}
                 >
-                  <span>{link.label}</span>
+                  <span className="flex items-center gap-1.5">
+                    {link.iconMoney && <span className="text-xs">💸</span>}
+                    <span>{link.label}</span>
+                  </span>
                   {link.comingSoon && (
                     <span className="font-righteous text-[9px] uppercase bg-[#FEF08A] text-[#881337] px-1.5 py-0.5 rounded ml-1">
                       SOON

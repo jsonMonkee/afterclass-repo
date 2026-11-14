@@ -33,6 +33,11 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/dhanda" className="hover:text-white hover:underline underline-offset-4 transition-colors">
+                    Dhanda 💸
+                  </Link>
+                </li>
+                <li>
                   <Link href="/notices" className="hover:text-white hover:underline underline-offset-4 transition-colors">
                     Changelog
                   </Link>

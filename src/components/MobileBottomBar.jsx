@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Calendar, Users, Briefcase, FileText, User, Sparkles } from 'lucide-react';
+import { Calendar, Users, Briefcase, FileText, User, Sparkles, Coins } from 'lucide-react';
 
 export default function MobileBottomBar({ onOpenAi }) {
   const pathname = usePathname();
@@ -11,6 +11,7 @@ export default function MobileBottomBar({ onOpenAi }) {
   const navItems = [
     { href: '/', label: 'Events', icon: Calendar },
     { href: '/clubs', label: 'Clubs', icon: Users },
+    { href: '/dhanda', label: 'Dhanda', icon: Coins },
     { href: '/opportunities', label: 'Work', icon: Briefcase, comingSoon: true },
     { href: '/notices', label: 'Notices', icon: FileText },
     { href: '/profile', label: 'Profile', icon: User }
