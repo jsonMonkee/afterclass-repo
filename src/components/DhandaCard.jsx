@@ -75,9 +75,9 @@ export default function DhandaCard({ business }) {
         />
       </svg>
 
-      {/* 1. TOP COVER BANNER IMAGE (Deeply rounded squircle fitting harmoniously inside the Doodle Frame) */}
+      {/* 1. TOP COVER BANNER IMAGE (Ultra-rounded pillow/squircle curves) */}
       <div className="relative aspect-[16/10] w-full z-10 p-1">
-        <div className="relative w-full h-full rounded-[34px] sm:rounded-[38px] overflow-hidden shadow-inner">
+        <div className="relative w-full h-full rounded-[44px] sm:rounded-[50px] overflow-hidden shadow-inner">
           <img 
             src={business.image} 
             alt={business.name}
