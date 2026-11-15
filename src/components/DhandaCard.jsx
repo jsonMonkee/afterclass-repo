@@ -49,48 +49,35 @@ export default function DhandaCard({ business }) {
   return (
     <div 
       id={business.id}
-      className="relative w-full max-w-[420px] mx-auto p-4 sm:p-5 flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:-translate-y-1 group"
+      className="relative w-full max-w-[400px] mx-auto p-4 sm:p-5 pb-6 sm:pb-7 flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:-translate-y-1 group"
     >
-      {/* 0. DOODLE FRAME SVG BACKGROUND & BORDER (Smooth Organic Doodle Pillow/TV Silhouette) */}
+      {/* 0. DOODLE FRAME SVG BACKGROUND & BORDER (Tailored Portrait 400x580 Doodle TV/Pillow Silhouette) */}
       <svg 
         className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_16px_36px_rgba(225,29,72,0.14)]"
-        viewBox="0 0 442 314"
+        viewBox="0 0 400 580"
         preserveAspectRatio="none"
       >
-        {/* Outer Hand-Drawn Doodle Stroke (#E11D48 Crimson, smooth organic bezier) */}
+        {/* Outer Hand-Drawn Doodle Stroke (#E11D48 Crimson, natural ~12px stroke) */}
         <path 
-          d="M 40,14 C 130,2 250,0 360,6 C 395,8 420,16 432,38 C 442,56 441,120 441,180 C 441,230 436,260 424,282 C 412,302 385,308 340,312 C 260,316 140,310 70,298 C 35,292 18,278 8,252 C -2,226 0,150 1,110 C 2,65 10,28 40,14 Z" 
+          d="M 38,28 C 100,14 200,8 362,26 C 382,28 392,42 394,76 C 398,180 398,400 394,504 C 392,538 380,550 362,554 C 280,568 215,572 130,566 C 70,562 44,558 38,550 C 18,542 8,526 6,492 C 2,390 2,190 6,88 C 8,46 18,32 38,28 Z" 
           fill="#E11D48"
         />
-        {/* Inner Card Fill (Clean White, smooth organic bezier) */}
+        {/* Inner Card Fill (Clean White) */}
         <path 
-          d="M 48,24 C 135,14 250,12 355,18 C 388,20 410,26 422,46 C 430,62 431,120 431,180 C 431,228 426,252 414,272 C 404,288 378,296 335,298 C 260,302 145,296 78,286 C 45,280 30,268 20,244 C 11,220 12,150 13,115 C 14,72 22,36 48,24 Z" 
+          d="M 46,38 C 104,25 200,20 354,36 C 372,38 380,50 382,82 C 386,180 386,400 382,496 C 380,528 370,538 354,542 C 276,555 215,559 134,554 C 78,550 52,546 46,538 C 28,530 20,516 18,484 C 14,386 14,196 18,96 C 20,58 28,42 46,38 Z" 
           fill="#FFFFFF"
         />
         {/* Organic Hand-Drawn White Highlight Ribbon along bottom & right inner edge */}
         <path 
-          d="M 416,56 C 424,100 424,180 422,230 C 420,255 414,270 404,282 C 388,294 340,298 250,298 C 160,296 85,288 44,278 C 36,276 30,270 38,274 C 70,285 150,294 240,296 C 330,296 375,292 392,280 C 406,268 412,248 414,222 C 416,170 416,100 410,60 Z" 
+          d="M 374,90 C 378,190 378,400 374,488 C 372,518 364,528 350,532 C 274,544 215,548 138,543 C 84,540 60,536 54,530 C 48,525 44,522 52,525 C 76,532 140,538 215,538 C 290,538 344,532 358,522 C 368,514 372,498 373,476 C 375,390 375,190 370,95 Z" 
           fill="#FFFDF5"
           opacity="0.95"
         />
       </svg>
 
-      {/* SVG ClipPath Definition for the Smooth Doodle Image Frame */}
-      <svg className="absolute w-0 h-0" aria-hidden="true" focusable="false">
-        <defs>
-          <clipPath id="doodle-img-clip" clipPathUnits="objectBoundingBox">
-            <path d="M 0.1086 0.0764 C 0.3054 0.0446 0.5656 0.0382 0.8032 0.0573 C 0.8778 0.0637 0.9276 0.0828 0.9548 0.1465 C 0.9729 0.1975 0.9751 0.3822 0.9751 0.5732 C 0.9751 0.7261 0.9638 0.8025 0.9367 0.8662 C 0.9140 0.9172 0.8552 0.9427 0.7579 0.9490 C 0.5882 0.9618 0.3281 0.9427 0.1765 0.9108 C 0.1018 0.8917 0.0679 0.8535 0.0452 0.7771 C 0.0249 0.7006 0.0271 0.4777 0.0294 0.3662 C 0.0317 0.2293 0.0498 0.1146 0.1086 0.0764 Z" />
-          </clipPath>
-        </defs>
-      </svg>
-
-      {/* 1. TOP IMAGE (Smooth Organic Doodle Contour) */}
+      {/* 1. TOP COVER BANNER IMAGE (Clean Curved Squircle fitting harmoniously inside the Doodle Frame) */}
       <div className="relative aspect-[16/10] w-full z-10 p-1">
-        {/* Doodle Image Container clipped to smooth organic doodle silhouette */}
-        <div 
-          className="relative w-full h-full overflow-hidden"
-          style={{ clipPath: 'url(#doodle-img-clip)' }}
-        >
+        <div className="relative w-full h-full rounded-[24px] overflow-hidden shadow-inner">
           <img 
             src={business.image} 
             alt={business.name}
@@ -115,29 +102,13 @@ export default function DhandaCard({ business }) {
             </button>
           </div>
         </div>
-
-        {/* Doodle Stroke & Inset Highlight Overlay over image */}
-        <svg 
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 442 314"
-          preserveAspectRatio="none"
-        >
-          {/* Subtle dark-tint doodle border around image */}
-          <path 
-            d="M 40,14 C 130,2 250,0 360,6 C 395,8 420,16 432,38 C 442,56 441,120 441,180 C 441,230 436,260 424,282 C 412,302 385,308 340,312 C 260,316 140,310 70,298 C 35,292 18,278 8,252 C -2,226 0,150 1,110 C 2,65 10,28 40,14 Z" 
-            fill="none"
-            stroke="#000000"
-            strokeWidth="5"
-            opacity="0.10"
-          />
-        </svg>
       </div>
 
       {/* 2. MIDDLE & LOWER CONTENT: Centralized Logo (Enlarged), Startup Name, Handles & Action */}
-      <div className="relative z-10 flex flex-col items-center text-center mt-2 px-2">
+      <div className="relative z-10 flex flex-col items-center text-center mt-1 px-2 pb-1">
         
         {/* Centralized Circular Logo (Enlarged and shifted higher over the cover image) */}
-        <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[3.5px] border-[#E11D48] bg-white shadow-xl overflow-hidden flex items-center justify-center -mt-14 sm:-mt-16 mb-2 z-20">
+        <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[3.5px] border-[#E11D48] bg-white shadow-xl overflow-hidden flex items-center justify-center -mt-12 sm:-mt-14 mb-2 z-20">
           {business.logo ? (
             <img 
               src={business.logo} 
@@ -236,11 +207,11 @@ export default function DhandaCard({ business }) {
 
         </div>
 
-        {/* 3. BOTTOM ACTION BAR: Red "Explore" Pill Button */}
+        {/* 3. BOTTOM ACTION BAR: Red "Explore" Pill Button (Cleanly nested inside the card boundaries) */}
         <div className="w-full">
           <button 
             onClick={() => setShowExploreModal(true)}
-            className="w-full bg-[#E11D48] hover:bg-[#BE123C] active:scale-[0.98] text-white font-extrabold text-sm py-2 px-4 rounded-full flex items-center justify-center gap-2.5 shadow-md transition-all group cursor-pointer"
+            className="w-full bg-[#E11D48] hover:bg-[#BE123C] active:scale-[0.98] text-white font-extrabold text-sm py-2.5 px-4 rounded-full flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all group cursor-pointer"
           >
             <span>Explore</span>
             <span className="w-5 h-5 rounded-full bg-white text-[#E11D48] flex items-center justify-center group-hover:translate-x-1 transition-transform">
