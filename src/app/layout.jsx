@@ -1,4 +1,5 @@
 import './globals.css';
+import Script from 'next/script';
 import { AppProvider } from '../context/AppContext';
 import TopHeader from '../components/TopHeader';
 import DiaChatbot from '../components/DiaChatbot';
@@ -21,6 +22,12 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&family=Righteous&display=swap" rel="stylesheet" />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1669658018247873"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="bg-[#E11D48] text-[#000000] font-sans antialiased selection:bg-[#FFFDF5] selection:text-[#E11D48] min-h-screen flex flex-col">
         <SmoothScrollProvider>
