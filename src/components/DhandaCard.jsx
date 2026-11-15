@@ -83,13 +83,6 @@ export default function DhandaCard({ business }) {
             alt={business.name}
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           />
-          
-          {/* Badge */}
-          {business.badge && (
-            <div className="absolute top-2.5 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-white/20">
-              {business.badge}
-            </div>
-          )}
 
           {/* Share button */}
           <div className="absolute top-2.5 right-3">
