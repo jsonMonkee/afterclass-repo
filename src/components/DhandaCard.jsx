@@ -49,13 +49,34 @@ export default function DhandaCard({ business }) {
   return (
     <div 
       id={business.id}
-      className="relative w-full max-w-[420px] mx-auto bg-white rounded-[44px] p-4.5 border-[9px] border-[#E11D48] shadow-[0_16px_36px_rgba(225,29,72,0.12)] flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 overflow-hidden"
+      className="relative w-full max-w-[420px] mx-auto p-4 sm:p-5 flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:-translate-y-1 group"
     >
-      {/* Inner White Offset Highlight Contour (bottom & right highlight as measured from sticker reference) */}
-      <div className="absolute inset-0 rounded-[35px] border-b-[5px] border-r-[5px] border-white/90 pointer-events-none z-10" />
-      
+      {/* 0. DOODLE FRAME SVG BACKGROUND & BORDER (Exact organic doodle pillow/TV silhouette from reference) */}
+      <svg 
+        className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_16px_36px_rgba(225,29,72,0.14)]"
+        viewBox="0 0 442 314"
+        preserveAspectRatio="none"
+      >
+        {/* Outer Hand-Drawn Doodle Stroke (#E11D48 Crimson) */}
+        <path 
+          d="M 18 26 L 10 42 L 3 78 L 0 117 L 0 187 L 3 227 L 9 257 L 18 274 L 30 284 L 56 294 L 91 300 L 173 308 L 272 313 L 341 313 L 383 309 L 411 299 L 423 287 L 432 263 L 437 224 L 441 143 L 441 77 L 439 64 L 433 48 L 424 36 L 411 26 L 391 17 L 351 8 L 306 3 L 242 0 L 152 0 L 70 4 L 40 10 L 28 16 Z" 
+          fill="#E11D48"
+        />
+        {/* Inner Card Fill (Clean White) */}
+        <path 
+          d="M 24 36 L 37 23 L 59 16 L 104 12 L 168 10 L 263 11 L 333 16 L 378 24 L 407 36 L 415 42 L 423 52 L 428 63 L 431 79 L 428 209 L 423 255 L 420 269 L 415 280 L 408 288 L 400 293 L 381 299 L 337 303 L 280 303 L 191 299 L 101 291 L 58 284 L 35 275 L 25 266 L 19 255 L 14 231 L 11 198 L 10 128 L 12 92 L 17 56 Z" 
+          fill="#FFFFFF"
+        />
+        {/* Organic Hand-Drawn White Highlight Ribbon along bottom & right inner edge */}
+        <path 
+          d="M 422 53 L 416 46 L 422 57 L 425 74 L 424 159 L 420 227 L 413 266 L 407 277 L 398 285 L 375 293 L 351 296 L 241 296 L 144 290 L 88 284 L 49 277 L 39 274 L 29 268 L 38 275 L 50 280 L 84 287 L 136 293 L 220 299 L 341 301 L 387 296 L 404 289 L 413 280 L 418 269 L 422 251 L 426 211 L 429 146 L 429 77 L 426 62 Z" 
+          fill="#FFFDF5"
+          opacity="0.95"
+        />
+      </svg>
+
       {/* 1. TOP IMAGE */}
-      <div className="relative aspect-[16/10] w-full rounded-[28px] overflow-hidden">
+      <div className="relative aspect-[16/10] w-full rounded-[22px] overflow-hidden z-10">
         <img 
           src={business.image} 
           alt={business.name}
