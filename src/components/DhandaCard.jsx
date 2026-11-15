@@ -49,11 +49,13 @@ export default function DhandaCard({ business }) {
   return (
     <div 
       id={business.id}
-      className="w-full max-w-[420px] mx-auto bg-white rounded-[32px] p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-black/10 flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+      className="relative w-full max-w-[420px] mx-auto bg-white rounded-[44px] p-4.5 border-[9px] border-[#E11D48] shadow-[0_16px_36px_rgba(225,29,72,0.12)] flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 overflow-hidden"
     >
+      {/* Inner White Offset Highlight Contour (bottom & right highlight as measured from sticker reference) */}
+      <div className="absolute inset-0 rounded-[35px] border-b-[5px] border-r-[5px] border-white/90 pointer-events-none z-10" />
       
       {/* 1. TOP IMAGE */}
-      <div className="relative aspect-[16/10] w-full rounded-[24px] overflow-hidden">
+      <div className="relative aspect-[16/10] w-full rounded-[28px] overflow-hidden">
         <img 
           src={business.image} 
           alt={business.name}
@@ -134,48 +136,74 @@ export default function DhandaCard({ business }) {
         </button>
       </div>
 
-      {/* ================= 4. EXPLORE MODAL POP-UP (Clean Dark Portrait Profile) ================= */}
+      {/* ================= 4. EXPLORE MODAL POP-UP (Red Card + White Text Portrait Format) ================= */}
       {showExploreModal && mounted && typeof document !== 'undefined' && createPortal(
         <div 
           className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
           onClick={() => setShowExploreModal(false)}
         >
           <div 
-            className="w-full max-w-[390px] sm:max-w-[420px] bg-[#16171B] text-white rounded-[36px] shadow-2xl shadow-black/80 relative border border-white/10 overflow-hidden animate-nav-pop my-auto max-h-[92vh] overflow-y-auto flex flex-col font-arc-display"
+            className="w-full max-w-[390px] sm:max-w-[420px] bg-[#E11D48] text-white rounded-[36px] shadow-2xl shadow-black/60 relative border border-white/20 overflow-hidden animate-nav-pop my-auto max-h-[92vh] overflow-y-auto flex flex-col arc-grain-red"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Close Button */}
             <button
               onClick={() => setShowExploreModal(false)}
-              className="absolute top-3.5 right-3.5 z-30 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center cursor-pointer transition-colors border border-white/15 shadow-md"
+              className="absolute top-3.5 right-3.5 z-30 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center cursor-pointer transition-colors border border-white/20 shadow-md"
               aria-label="Close"
             >
               <X size={17} className="stroke-[2.5]" />
             </button>
 
-            {/* 1. TOP COVER BACKGROUND IMAGE (16:9) */}
-            <div className="relative w-full aspect-[16/9] shrink-0 overflow-hidden bg-black">
+            {/* 1. TOP 16:9 COVER BACKGROUND IMAGE WITH RED & WHITE SCALLOP PATTERN */}
+            <div className="relative w-full aspect-[16/9] shrink-0 overflow-hidden bg-slate-900">
               <img 
                 src={business.image} 
                 alt={business.name}
-                className="w-full h-full object-cover opacity-85"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#16171B] via-black/30 to-black/50 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40 pointer-events-none" />
 
               {/* Category Badge on Cover */}
               <div className="absolute top-3.5 left-3.5 z-20">
-                <span className="font-arc-mono text-[10.5px] font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-[#FEF08A] px-3 py-1 rounded-full border border-white/20 shadow-sm flex items-center gap-1.5">
+                <span className="font-sans text-[10.5px] font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-[#FEF08A] px-3 py-1 rounded-full border border-white/20 shadow-sm flex items-center gap-1.5">
                   <Sparkles size={11} className="text-[#FEF08A]" />
                   <span>{business.category}</span>
                 </span>
               </div>
+
+              {/* Red & White Scallop Ribbon at Banner End */}
+              <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none flex flex-col">
+                {/* Crisp White Scallop Line */}
+                <div 
+                  className="w-full h-2.5 bg-repeat-x"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 10' fill='%23FFFFFF'%3E%3Cpath d='M0 10 C 6 0, 18 0, 24 10 Z'/%3E%3C/svg%3E")`,
+                    backgroundSize: '20px 10px'
+                  }}
+                />
+                {/* Crimson Red Scallop Teeth blending into the card body */}
+                <div 
+                  className="w-full h-3 bg-repeat-x -mt-0.5"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12' fill='%23E11D48'%3E%3Cpath d='M0 12 C 6 0, 18 0, 24 12 Z'/%3E%3C/svg%3E")`,
+                    backgroundSize: '24px 12px'
+                  }}
+                />
+              </div>
             </div>
 
-            {/* 2. OVERLAPPING CIRCULAR AVATAR & PROFILE DETAILS */}
-            <div className="-mt-16 relative z-20 flex flex-col items-center px-5">
+            {/* 2. OVERLAPPING CIRCULAR LOGO AVATAR (Shifted high above banner end) */}
+            <div className="-mt-22 relative z-20 flex flex-col items-center px-4">
               
+              {/* Note Bubble above Avatar */}
+              <div className="bg-[#FFFDF5] text-[#881337] text-[11px] font-black px-3.5 py-1 rounded-full mb-1.5 shadow-lg border border-white/40 flex items-center gap-1.5">
+                <span>{business.icon || '🚀'}</span>
+                <span>{business.badge || 'VERIFIED VENTURE'}</span>
+              </div>
+
               {/* Circular Avatar */}
-              <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border-[4px] border-[#16171B] overflow-hidden bg-black shadow-2xl">
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full border-[4px] border-[#E11D48] overflow-hidden bg-white shadow-2xl">
                 <img 
                   src={business.logo || business.image} 
                   alt={`${business.name} Logo`} 
@@ -183,40 +211,40 @@ export default function DhandaCard({ business }) {
                 />
               </div>
 
-              {/* Company / Brand Name */}
+              {/* 3. CENTERED RED CARD WHITE TEXT PROFILE DETAILS */}
               <h3 className="font-arc-display font-black text-2xl sm:text-[26px] text-white text-center leading-tight mt-3 mb-1">
                 {business.name}
               </h3>
 
               {/* Founder & Business Type Subtitle */}
-              <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-slate-300 mb-2.5 text-center">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-white/90 mb-2 text-center">
                 <span>By <strong className="text-white font-extrabold">{business.founder}</strong></span>
-                <span className="text-white/30">·</span>
-                <span className="text-[#FEF08A] font-bold bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10">
+                <span className="text-white/40">·</span>
+                <span className="text-[#FEF08A] font-bold bg-white/15 px-2.5 py-0.5 rounded-full border border-white/20">
                   {business.businessType || 'Tech Startup'}
                 </span>
               </div>
 
               {/* Price Range Pill */}
-              <div className="text-[11px] font-bold text-slate-300 bg-white/5 border border-white/10 px-3 py-0.5 rounded-full mb-3">
+              <div className="text-[11px] font-bold text-white/95 bg-black/20 border border-white/15 px-3 py-0.5 rounded-full mb-3">
                 Starting from <span className="text-[#FEF08A] font-extrabold">{business.priceRange}</span>
               </div>
 
-              {/* Bio / Tagline */}
-              <p className="font-sans text-xs sm:text-[13px] text-slate-300 font-medium text-center leading-relaxed px-2 mb-5 max-w-sm">
+              {/* Bio / Tagline in Crisp White */}
+              <p className="font-sans text-xs sm:text-[13px] text-white/90 font-medium text-center leading-relaxed px-3 mb-5 max-w-sm">
                 {business.tagline}
               </p>
 
               {/* Divider */}
-              <div className="w-full h-px bg-white/10 mb-4" />
+              <div className="w-full h-px bg-white/20 mb-4" />
 
-              {/* 3. SQUARE-SHAPED INSTAGRAM & SOCIAL CARDS */}
+              {/* 4. SQUARE-SHAPED INSTAGRAM & SOCIAL CARDS */}
               <div className="w-full pb-7">
                 <div className="flex items-center justify-between mb-3 px-1">
-                  <span className="font-arc-mono text-[10.5px] font-bold uppercase tracking-wider text-slate-400">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-white/90">
                     Direct Contact & Socials
                   </span>
-                  <span className="font-sans text-[10px] font-semibold text-slate-400">
+                  <span className="text-[10px] font-semibold text-white/60">
                     Tap to connect
                   </span>
                 </div>
@@ -229,10 +257,10 @@ export default function DhandaCard({ business }) {
                       href={`https://instagram.com/${business.instagram.replace('@', '')}`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="relative aspect-square bg-[#202126] hover:bg-[#282930] text-white rounded-2xl p-2.5 sm:p-3 shadow-md hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white/10"
+                      className="relative aspect-square bg-white hover:bg-slate-50 text-black rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-black/20 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white"
                       title={`Open ${business.instagram} on Instagram`}
                     >
-                      <span className="absolute top-2 right-2 text-white/30 group-hover:text-[#FD5949] transition-colors text-xs font-bold leading-none">
+                      <span className="absolute top-2 right-2 text-slate-300 group-hover:text-[#E11D48] transition-colors text-xs font-bold leading-none">
                         ↗
                       </span>
 
@@ -243,10 +271,10 @@ export default function DhandaCard({ business }) {
                       </div>
 
                       <div className="w-full">
-                        <span className="block font-arc-display font-black text-xs text-white group-hover:text-[#FD5949] transition-colors leading-tight">
+                        <span className="block font-arc-display font-black text-xs text-black group-hover:text-[#E11D48] transition-colors leading-tight">
                           Instagram
                         </span>
-                        <span className="block font-sans text-[10.5px] font-semibold text-slate-400 group-hover:text-slate-300 truncate max-w-full mt-0.5">
+                        <span className="block font-sans text-[10.5px] font-semibold text-[#E11D48] truncate max-w-full mt-0.5">
                           {business.instagram}
                         </span>
                       </div>
@@ -259,10 +287,10 @@ export default function DhandaCard({ business }) {
                       href={`https://wa.me/${business.phone.replace(/[^0-9]/g, '')}?text=Hey!%20Saw%20${encodeURIComponent(business.name)}%20on%20Afterclass%20Dhanda.`}
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="relative aspect-square bg-[#202126] hover:bg-[#282930] text-white rounded-2xl p-2.5 sm:p-3 shadow-md hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white/10"
+                      className="relative aspect-square bg-white hover:bg-slate-50 text-black rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-black/20 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white"
                       title="Chat on WhatsApp"
                     >
-                      <span className="absolute top-2 right-2 text-white/30 group-hover:text-emerald-400 transition-colors text-xs font-bold leading-none">
+                      <span className="absolute top-2 right-2 text-slate-300 group-hover:text-emerald-600 transition-colors text-xs font-bold leading-none">
                         ↗
                       </span>
 
@@ -273,10 +301,10 @@ export default function DhandaCard({ business }) {
                       </div>
 
                       <div className="w-full">
-                        <span className="block font-arc-display font-black text-xs text-white group-hover:text-emerald-400 transition-colors leading-tight">
+                        <span className="block font-arc-display font-black text-xs text-black group-hover:text-emerald-600 transition-colors leading-tight">
                           WhatsApp
                         </span>
-                        <span className="block font-sans text-[10.5px] font-semibold text-emerald-400 truncate max-w-full mt-0.5">
+                        <span className="block font-sans text-[10.5px] font-semibold text-emerald-600 truncate max-w-full mt-0.5">
                           Direct Chat
                         </span>
                       </div>
@@ -287,22 +315,22 @@ export default function DhandaCard({ business }) {
                   {business.phone && (
                     <a 
                       href={`tel:${business.phone.replace(/[^0-9+]/g, '')}`}
-                      className="relative aspect-square bg-[#202126] hover:bg-[#282930] text-white rounded-2xl p-2.5 sm:p-3 shadow-md hover:-translate-y-1 hover:shadow-lg active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white/10"
+                      className="relative aspect-square bg-white hover:bg-slate-50 text-black rounded-2xl p-2.5 sm:p-3 shadow-lg shadow-black/20 hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-200 flex flex-col justify-between items-center text-center group cursor-pointer border border-white"
                       title={`Call ${business.phone}`}
                     >
-                      <span className="absolute top-2 right-2 text-white/30 group-hover:text-[#FEF08A] transition-colors text-xs font-bold leading-none">
+                      <span className="absolute top-2 right-2 text-slate-300 group-hover:text-[#E11D48] transition-colors text-xs font-bold leading-none">
                         ↗
                       </span>
 
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/15 flex items-center justify-center text-[#FEF08A] shadow-sm mt-0.5">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 flex items-center justify-center text-[#FEF08A] shadow-sm mt-0.5">
                         <Phone size={17} />
                       </div>
 
                       <div className="w-full">
-                        <span className="block font-arc-display font-black text-xs text-white group-hover:text-[#FEF08A] transition-colors leading-tight">
+                        <span className="block font-arc-display font-black text-xs text-black group-hover:text-[#E11D48] transition-colors leading-tight">
                           Call Line
                         </span>
-                        <span className="block font-sans text-[10.5px] font-semibold text-slate-400 group-hover:text-slate-300 truncate max-w-full mt-0.5">
+                        <span className="block font-sans text-[10.5px] font-semibold text-slate-500 truncate max-w-full mt-0.5">
                           {business.phone}
                         </span>
                       </div>
