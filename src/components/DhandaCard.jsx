@@ -107,8 +107,8 @@ export default function DhandaCard({ business }) {
       {/* 2. MIDDLE & LOWER CONTENT: Centralized Logo (Enlarged), Startup Name, Handles & Action */}
       <div className="relative z-10 flex flex-col items-center text-center mt-1 px-2 pb-1">
         
-        {/* Centralized Circular Logo (Enlarged and shifted higher over the cover image) */}
-        <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[3.5px] border-[#E11D48] bg-white shadow-xl overflow-hidden flex items-center justify-center -mt-12 sm:-mt-14 mb-2 z-20">
+        {/* Centralized Circular DP: Exactly 50% overlapping cover photo, 50% on white card */}
+        <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[4px] border-white ring-2 ring-[#E11D48] bg-white shadow-[0_8px_20px_rgba(0,0,0,0.18)] overflow-hidden flex items-center justify-center -mt-10 sm:-mt-11 mb-2.5 z-20 transition-transform duration-300 hover:scale-105">
           {business.logo ? (
             <img 
               src={business.logo} 
