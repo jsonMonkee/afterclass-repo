@@ -133,59 +133,122 @@ export default function DhandaCard({ business }) {
         </svg>
       </div>
 
-      {/* 2. MIDDLE CONTENT: Left Icon/Company Box + Right Details */}
-      <div className="flex items-center gap-4 mt-4 mb-3 px-1">
+      {/* 2. MIDDLE & LOWER CONTENT: Centralized Logo, Startup Name, Handles & Action */}
+      <div className="relative z-10 flex flex-col items-center text-center mt-3 px-2">
         
-        {/* Left Stacked Company Icon Badge */}
-        <div className="w-[72px] shrink-0 flex flex-col items-center">
-          {/* Crimson Icon Box */}
-          <div className="w-full bg-[#E11D48] text-white rounded-2xl py-2.5 flex flex-col items-center justify-center shadow-sm">
-            <span className="text-2xl leading-none">{business.icon || '💼'}</span>
-            <span className="text-[9px] font-bold tracking-wider mt-1 uppercase text-white/90">VENTURE</span>
-          </div>
-          {/* Soft Price Pill */}
-          <div className="w-full bg-[#FFF1F2] text-[#E11D48] text-[10px] font-extrabold py-1 rounded-xl text-center mt-1 border border-[#FFE4E6] truncate px-1">
-            {business.priceRange || 'FREE'}
-          </div>
+        {/* Centralized Circular Logo */}
+        <div className="relative w-16 h-16 sm:w-18 sm:h-18 rounded-full border-[3px] border-[#E11D48] bg-white shadow-md overflow-hidden flex items-center justify-center -mt-8 sm:-mt-9 mb-2">
+          {business.logo ? (
+            <img 
+              src={business.logo} 
+              alt={business.name} 
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-2xl sm:text-3xl">{business.icon || '💼'}</span>
+          )}
         </div>
 
-        {/* Right Business Info */}
-        <div className="flex-1 min-w-0 flex flex-col justify-center">
-          {/* Category Tag */}
-          <span className="font-arc-mono text-[10.5px] font-bold text-[#E11D48] uppercase tracking-wider mb-0.5">
+        {/* Category & Badge */}
+        <div className="flex items-center gap-1.5 mb-1">
+          <span className="font-arc-mono text-[10px] font-bold text-[#E11D48] uppercase tracking-wider bg-[#FFF1F2] px-2 py-0.5 rounded-full border border-[#FFE4E6]">
             {business.category}
           </span>
-
-          {/* Company Name */}
-          <h3 className="font-extrabold text-[19px] text-[#000000] leading-snug truncate hover:text-[#E11D48] transition-colors">
-            {business.name}
-          </h3>
-
-          {/* Founder line */}
-          <p className="text-[#EA580C] text-xs font-bold flex items-center gap-1.5 mt-1 truncate">
-            <span>🚀</span>
-            <span className="truncate">By {business.founder}</span>
-          </p>
+          {business.priceRange && (
+            <span className="font-sans text-[10px] font-extrabold text-[#475569] bg-slate-100 px-2 py-0.5 rounded-full">
+              {business.priceRange}
+            </span>
+          )}
         </div>
 
-      </div>
+        {/* Startup Name */}
+        <h3 className="font-extrabold text-xl sm:text-[22px] text-[#000000] leading-snug truncate max-w-full hover:text-[#E11D48] transition-colors mb-0.5">
+          {business.name}
+        </h3>
 
-      {/* Tagline / Brief Description */}
-      <p className="font-sans text-xs text-[#475569] font-medium leading-relaxed px-1 mb-3 line-clamp-2">
-        {business.tagline}
-      </p>
+        {/* Founder Line */}
+        <p className="text-[#EA580C] text-xs font-bold flex items-center justify-center gap-1 mb-2 truncate max-w-full">
+          <span>🚀</span>
+          <span>By {business.founder}</span>
+        </p>
 
-      {/* 3. BOTTOM ACTION BAR: Red "Explore" Pill Button */}
-      <div className="pt-2 px-1">
-        <button 
-          onClick={() => setShowExploreModal(true)}
-          className="w-full bg-[#E11D48] hover:bg-[#BE123C] active:scale-[0.98] text-white font-extrabold text-sm py-2.5 px-4 rounded-full flex items-center justify-center gap-3 shadow-md transition-all group cursor-pointer"
-        >
-          <span>Explore</span>
-          <span className="w-6 h-6 rounded-full bg-white text-[#E11D48] flex items-center justify-center group-hover:translate-x-1 transition-transform">
-            <ArrowRight size={13} className="stroke-[3]" />
-          </span>
-        </button>
+        {/* Tagline / Brief Description */}
+        <p className="font-sans text-xs text-[#475569] font-medium leading-relaxed mb-3 line-clamp-2 px-1 max-w-sm">
+          {business.tagline}
+        </p>
+
+        {/* 2 Buttons With Handle: WhatsApp + Instagram */}
+        <div className="w-full grid grid-cols-2 gap-2 mb-3">
+          
+          {/* 1. WhatsApp Button with Handle/Number */}
+          {business.phone ? (
+            <a 
+              href={`https://wa.me/${business.phone.replace(/[^0-9]/g, '')}?text=Hey!%20Saw%20${encodeURIComponent(business.name)}%20on%20Afterclass%20Dhanda.`}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-[#25D366]/10 hover:bg-[#25D366]/20 active:scale-95 border border-[#25D366]/30 text-[#128C7E] transition-all cursor-pointer group/wa min-w-0"
+              title="Chat on WhatsApp"
+            >
+              <div className="w-5 h-5 rounded-lg bg-[#25D366] flex items-center justify-center shrink-0 shadow-xs">
+                <svg className="w-3 h-3 fill-white" viewBox="0 0 24 24">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+                </svg>
+              </div>
+              <div className="flex flex-col text-left min-w-0">
+                <span className="text-[10px] font-bold leading-tight text-[#128C7E]">WhatsApp</span>
+                <span className="text-[9.5px] font-semibold text-slate-600 truncate leading-tight">
+                  {business.phone}
+                </span>
+              </div>
+            </a>
+          ) : (
+            <div className="py-2 px-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-400 text-center text-[10px] font-bold flex items-center justify-center">
+              No WhatsApp
+            </div>
+          )}
+
+          {/* 2. Instagram Button with Handle */}
+          {business.instagram ? (
+            <a 
+              href={`https://instagram.com/${business.instagram.replace('@', '')}`}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-gradient-to-r from-[#FD5949]/10 to-[#D6249F]/10 hover:from-[#FD5949]/20 hover:to-[#D6249F]/20 active:scale-95 border border-[#D6249F]/30 text-[#C13584] transition-all cursor-pointer group/ig min-w-0"
+              title={`Open ${business.instagram} on Instagram`}
+            >
+              <div className="w-5 h-5 rounded-lg bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] flex items-center justify-center shrink-0 shadow-xs">
+                <svg className="w-3 h-3 fill-white" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </div>
+              <div className="flex flex-col text-left min-w-0">
+                <span className="text-[10px] font-bold leading-tight text-[#C13584]">Instagram</span>
+                <span className="text-[9.5px] font-semibold text-slate-600 truncate leading-tight">
+                  {business.instagram}
+                </span>
+              </div>
+            </a>
+          ) : (
+            <div className="py-2 px-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-400 text-center text-[10px] font-bold flex items-center justify-center">
+              No Instagram
+            </div>
+          )}
+
+        </div>
+
+        {/* 3. BOTTOM ACTION BAR: Red "Explore" Pill Button */}
+        <div className="w-full">
+          <button 
+            onClick={() => setShowExploreModal(true)}
+            className="w-full bg-[#E11D48] hover:bg-[#BE123C] active:scale-[0.98] text-white font-extrabold text-sm py-2 px-4 rounded-full flex items-center justify-center gap-2.5 shadow-md transition-all group cursor-pointer"
+          >
+            <span>Explore</span>
+            <span className="w-5 h-5 rounded-full bg-white text-[#E11D48] flex items-center justify-center group-hover:translate-x-1 transition-transform">
+              <ArrowRight size={11} className="stroke-[3]" />
+            </span>
+          </button>
+        </div>
+
       </div>
 
       {/* ================= 4. EXPLORE MODAL POP-UP (Red Card + White Text Portrait Format) ================= */}
