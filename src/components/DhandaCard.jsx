@@ -75,31 +75,62 @@ export default function DhandaCard({ business }) {
         />
       </svg>
 
-      {/* 1. TOP IMAGE */}
-      <div className="relative aspect-[16/10] w-full rounded-[22px] overflow-hidden z-10">
-        <img 
-          src={business.image} 
-          alt={business.name}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-        />
-        
-        {/* Badge */}
-        {business.badge && (
-          <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-white/20">
-            {business.badge}
-          </div>
-        )}
+      {/* SVG ClipPath Definition for the Organic Doodle Image Frame */}
+      <svg className="absolute w-0 h-0" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="doodle-img-clip" clipPathUnits="objectBoundingBox">
+            <path d="M 0.0640 0.0442 L 0.1161 0.0204 L 0.2227 0.0068 L 0.5995 0.0034 L 0.8294 0.0340 L 0.9076 0.0646 L 0.9408 0.0884 L 0.9787 0.1429 L 0.9976 0.2347 L 0.9858 0.7585 L 0.9716 0.8810 L 0.9431 0.9456 L 0.9076 0.9728 L 0.8223 0.9932 L 0.5640 0.9932 L 0.1967 0.9524 L 0.1137 0.9320 L 0.0521 0.8946 L 0.0213 0.8333 L 0.0118 0.7755 L 0.0000 0.4014 L 0.0213 0.1293 L 0.0379 0.0782 Z" />
+          </clipPath>
+        </defs>
+      </svg>
 
-        {/* Share button */}
-        <div className="absolute top-3 right-3">
-          <button 
-            onClick={handleShare}
-            aria-label="Share business link"
-            className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center text-[#E11D48] hover:bg-white shadow-sm cursor-pointer transition-transform hover:scale-110 active:scale-95"
-          >
-            {copied ? <Check size={14} className="text-emerald-600 stroke-[2.5]" /> : <Share2 size={14} className="stroke-[2.2]" />}
-          </button>
+      {/* 1. TOP IMAGE (Organic Doodle Contour with matching stroke & highlight) */}
+      <div className="relative aspect-[16/10] w-full z-10 p-1">
+        {/* Doodle Image Container clipped to exact organic doodle silhouette */}
+        <div 
+          className="relative w-full h-full overflow-hidden"
+          style={{ clipPath: 'url(#doodle-img-clip)' }}
+        >
+          <img 
+            src={business.image} 
+            alt={business.name}
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          />
+          
+          {/* Badge */}
+          {business.badge && (
+            <div className="absolute top-2.5 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-white/20">
+              {business.badge}
+            </div>
+          )}
+
+          {/* Share button */}
+          <div className="absolute top-2.5 right-3">
+            <button 
+              onClick={handleShare}
+              aria-label="Share business link"
+              className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center text-[#E11D48] hover:bg-white shadow-sm cursor-pointer transition-transform hover:scale-110 active:scale-95"
+            >
+              {copied ? <Check size={14} className="text-emerald-600 stroke-[2.5]" /> : <Share2 size={14} className="stroke-[2.2]" />}
+            </button>
+          </div>
         </div>
+
+        {/* Doodle Stroke & Inset Highlight Overlay over image */}
+        <svg 
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 442 314"
+          preserveAspectRatio="none"
+        >
+          {/* Subtle dark-tint doodle border around image */}
+          <path 
+            d="M 18 26 L 10 42 L 3 78 L 0 117 L 0 187 L 3 227 L 9 257 L 18 274 L 30 284 L 56 294 L 91 300 L 173 308 L 272 313 L 341 313 L 383 309 L 411 299 L 423 287 L 432 263 L 437 224 L 441 143 L 441 77 L 439 64 L 433 48 L 424 36 L 411 26 L 391 17 L 351 8 L 306 3 L 242 0 L 152 0 L 70 4 L 40 10 L 28 16 Z" 
+            fill="none"
+            stroke="#000000"
+            strokeWidth="5"
+            opacity="0.12"
+          />
+        </svg>
       </div>
 
       {/* 2. MIDDLE CONTENT: Left Icon/Company Box + Right Details */}
