@@ -75,8 +75,8 @@ export default function DhandaCard({ business }) {
         />
       </svg>
 
-      {/* 1. TOP COVER BANNER IMAGE (Shifted a bit down with pt-2.5) */}
-      <div className="relative aspect-[16/10] w-full z-10 p-1 pt-2.5 sm:pt-3">
+      {/* 1. TOP COVER BANNER IMAGE (Shifted down with pt-4 sm:pt-5) */}
+      <div className="relative aspect-[16/10] w-full z-10 p-1 pt-4 sm:pt-5">
         <div className="relative w-full h-full rounded-[44px] sm:rounded-[50px] overflow-hidden shadow-inner">
           <img 
             src={business.image} 
@@ -107,8 +107,8 @@ export default function DhandaCard({ business }) {
       {/* 2. MIDDLE & LOWER CONTENT: Centralized Logo (Enlarged), Startup Name, Handles & Action */}
       <div className="relative z-10 flex flex-col items-center text-center mt-1 px-2 pb-1">
         
-        {/* Centralized Circular DP: Shifted a bit higher up (-mt-12 sm:-mt-14) */}
-        <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[4px] border-white ring-2 ring-[#E11D48] bg-white shadow-[0_8px_20px_rgba(0,0,0,0.18)] overflow-hidden flex items-center justify-center -mt-12 sm:-mt-14 mb-2.5 z-20 transition-transform duration-300 hover:scale-105">
+        {/* Centralized Circular DP: Shifted significantly higher up (-mt-15 sm:-mt-17) */}
+        <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[4px] border-white ring-2 ring-[#E11D48] bg-white shadow-[0_8px_20px_rgba(0,0,0,0.18)] overflow-hidden flex items-center justify-center -mt-15 sm:-mt-17 mb-2.5 z-20 transition-transform duration-300 hover:scale-105">
           {business.logo ? (
             <img 
               src={business.logo} 
