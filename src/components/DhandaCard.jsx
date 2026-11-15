@@ -49,58 +49,48 @@ export default function DhandaCard({ business }) {
   return (
     <div 
       id={business.id}
-      className="relative w-full max-w-[400px] mx-auto p-4 sm:p-5 pb-6 sm:pb-7 flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:-translate-y-1 group"
+      className="relative w-full max-w-[400px] mx-auto bg-white p-3.5 sm:p-4 pb-5 sm:pb-6 border-[6.5px] border-[#E11D48] shadow-[0_16px_36px_rgba(225,29,72,0.12)] flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group"
+      style={{
+        borderRadius: '42px 38px 46px 40px / 36px 44px 38px 48px'
+      }}
     >
-      {/* 0. DOODLE FRAME SVG BACKGROUND & BORDER (Tailored Portrait 400x580 Doodle TV/Pillow Silhouette) */}
-      <svg 
-        className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_16px_36px_rgba(225,29,72,0.14)]"
-        viewBox="0 0 400 580"
-        preserveAspectRatio="none"
+      {/* Hand-drawn organic white highlight line along bottom and right inner edge */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10 border-b-[4px] border-r-[4px] border-white/80"
+        style={{
+          borderRadius: '35px 32px 39px 34px / 30px 38px 32px 42px'
+        }}
+      />
+
+      {/* 1. TOP COVER BANNER IMAGE (16:9 ratio with organic matching corners) */}
+      <div 
+        className="relative aspect-[16/9] w-full overflow-hidden shadow-inner z-10"
+        style={{
+          borderRadius: '28px 26px 20px 20px / 24px 30px 18px 22px'
+        }}
       >
-        {/* Outer Hand-Drawn Doodle Stroke (#E11D48 Crimson, natural ~12px stroke) */}
-        <path 
-          d="M 38,28 C 100,14 200,8 362,26 C 382,28 392,42 394,76 C 398,180 398,400 394,504 C 392,538 380,550 362,554 C 280,568 215,572 130,566 C 70,562 44,558 38,550 C 18,542 8,526 6,492 C 2,390 2,190 6,88 C 8,46 18,32 38,28 Z" 
-          fill="#E11D48"
+        <img 
+          src={business.image} 
+          alt={business.name}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
         />
-        {/* Inner Card Fill (Clean White) */}
-        <path 
-          d="M 46,38 C 104,25 200,20 354,36 C 372,38 380,50 382,82 C 386,180 386,400 382,496 C 380,528 370,538 354,542 C 276,555 215,559 134,554 C 78,550 52,546 46,538 C 28,530 20,516 18,484 C 14,386 14,196 18,96 C 20,58 28,42 46,38 Z" 
-          fill="#FFFFFF"
-        />
-        {/* Organic Hand-Drawn White Highlight Ribbon along bottom & right inner edge */}
-        <path 
-          d="M 374,90 C 378,190 378,400 374,488 C 372,518 364,528 350,532 C 274,544 215,548 138,543 C 84,540 60,536 54,530 C 48,525 44,522 52,525 C 76,532 140,538 215,538 C 290,538 344,532 358,522 C 368,514 372,498 373,476 C 375,390 375,190 370,95 Z" 
-          fill="#FFFDF5"
-          opacity="0.95"
-        />
-      </svg>
-
-      {/* 1. TOP COVER BANNER IMAGE (Clean Curved Squircle fitting harmoniously inside the Doodle Frame) */}
-      <div className="relative aspect-[16/10] w-full z-10 p-1">
-        <div className="relative w-full h-full rounded-[24px] overflow-hidden shadow-inner">
-          <img 
-            src={business.image} 
-            alt={business.name}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-          />
-          
-          {/* Badge */}
-          {business.badge && (
-            <div className="absolute top-2.5 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-white/20">
-              {business.badge}
-            </div>
-          )}
-
-          {/* Share button */}
-          <div className="absolute top-2.5 right-3">
-            <button 
-              onClick={handleShare}
-              aria-label="Share business link"
-              className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center text-[#E11D48] hover:bg-white shadow-sm cursor-pointer transition-transform hover:scale-110 active:scale-95"
-            >
-              {copied ? <Check size={14} className="text-emerald-600 stroke-[2.5]" /> : <Share2 size={14} className="stroke-[2.2]" />}
-            </button>
+        
+        {/* Badge */}
+        {business.badge && (
+          <div className="absolute top-2.5 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-white/20">
+            {business.badge}
           </div>
+        )}
+
+        {/* Share button */}
+        <div className="absolute top-2.5 right-3">
+          <button 
+            onClick={handleShare}
+            aria-label="Share business link"
+            className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center text-[#E11D48] hover:bg-white shadow-sm cursor-pointer transition-transform hover:scale-110 active:scale-95"
+          >
+            {copied ? <Check size={14} className="text-emerald-600 stroke-[2.5]" /> : <Share2 size={14} className="stroke-[2.2]" />}
+          </button>
         </div>
       </div>
 
