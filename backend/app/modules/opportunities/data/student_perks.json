@@ -1,0 +1,323 @@
+{
+  "items": [
+    {
+      "id": "perk-github-pack",
+      "title": "GitHub Student Developer Pack",
+      "provider": "GitHub Education",
+      "category": "Developer Tools",
+      "badge": "MUST HAVE",
+      "discount": "100% Free (Worth $200k+)",
+      "savingsEstimate": "₹15,000/yr",
+      "description": "The ultimate student developer arsenal. Includes free GitHub Copilot, 100+ developer tools, free domain names, DigitalOcean credits, and premium tiers.",
+      "verificationType": "student_id_or_email",
+      "verificationMethod": "Amity ID Card upload or @amity.edu email",
+      "link": "https://education.github.com/pack",
+      "source": "Resourceify & GitHub Education",
+      "highlights": [
+        "Free GitHub Copilot",
+        "Free .me Domain",
+        "$200 DigitalOcean Credits",
+        "Namecheap SSL Certificate"
+      ],
+      "howToClaim": [
+        "Go to education.github.com/pack with your GitHub account logged in.",
+        "Upload a clear photo of your Amity Student ID card or connect your Amity email.",
+        "Approval takes 2-24 hours. Enjoy lifetime access while enrolled."
+      ],
+      "featured": true
+    },
+    {
+      "id": "perk-jetbrains",
+      "title": "JetBrains All Products Pack",
+      "provider": "JetBrains",
+      "category": "Developer Tools",
+      "badge": "100% FREE",
+      "discount": "Free Pro Licenses (Worth $289/yr)",
+      "savingsEstimate": "₹24,000/yr",
+      "description": "Get free licenses for WebStorm, IntelliJ IDEA Ultimate, PyCharm Professional, CLion, GoLand, and Rider for your university coursework and projects.",
+      "verificationType": "edu_email",
+      "verificationMethod": "Official college email or ISIC card",
+      "link": "https://www.jetbrains.com/community/education/#students",
+      "source": "Resourceify",
+      "highlights": [
+        "IntelliJ Ultimate",
+        "WebStorm",
+        "PyCharm Pro",
+        "CLion for C/C++"
+      ],
+      "howToClaim": [
+        "Visit the JetBrains Student Program portal.",
+        "Enter your university email address or submit Amity enrollment proof.",
+        "Renew annually with one click until graduation."
+      ],
+      "featured": true
+    },
+    {
+      "id": "perk-spotify",
+      "title": "Spotify Premium Student Plan",
+      "provider": "Spotify India",
+      "category": "Streaming & Entertainment",
+      "badge": "50% OFF",
+      "discount": "₹59 / month (Regular ₹119)",
+      "savingsEstimate": "₹720/yr",
+      "description": "Ad-free music, unlimited song skips, offline downloads, and high-fidelity audio at half price for registered university students in India.",
+      "verificationType": "sheerid",
+      "verificationMethod": "Instant SheerID verification via Student Portal / ID upload",
+      "link": "https://www.spotify.com/in-en/student/",
+      "source": "Resourceify",
+      "highlights": [
+        "Ad-free music",
+        "Offline downloads",
+        "Unlimited skips",
+        "Lossless playback"
+      ],
+      "howToClaim": [
+        "Open Spotify Student portal and log in to your account.",
+        "Select Amity University Kolkata from the SheerID drop-down.",
+        "Verify using student portal credentials or upload your student ID."
+      ],
+      "featured": true
+    },
+    {
+      "id": "perk-apple",
+      "title": "Apple Education Store & Back-to-School",
+      "provider": "Apple India",
+      "category": "Hardware & Tech",
+      "badge": "UP TO ₹25,000 OFF",
+      "discount": "Student Discount + Free AirPods/Pencil",
+      "savingsEstimate": "₹12,000 - ₹25,000",
+      "description": "Special pricing on MacBook Air, MacBook Pro, and iPad Air/Pro. Annual back-to-school offer includes free AirPods or Apple Pencil, plus 20% off AppleCare+.",
+      "verificationType": "unidays",
+      "verificationMethod": "UNiDAYS student verification",
+      "link": "https://www.apple.com/in-edu/store",
+      "source": "Resourceify & Apple",
+      "highlights": [
+        "Special MacBook pricing",
+        "Free AirPods during promo",
+        "20% off AppleCare+",
+        "Free custom engraving"
+      ],
+      "howToClaim": [
+        "Sign up on UNiDAYS India with your Amity student details.",
+        "Once verified, access the Apple India Education Store.",
+        "Discounts are applied directly at checkout with official Apple warranty."
+      ],
+      "featured": true
+    },
+    {
+      "id": "perk-notion",
+      "title": "Notion Plus with Unlimited Blocks",
+      "provider": "Notion Labs",
+      "category": "Productivity",
+      "badge": "100% FREE",
+      "discount": "Free Plus Plan (Worth $120/yr)",
+      "savingsEstimate": "₹10,000/yr",
+      "description": "Full Notion Plus plan free for students and educators. Unlimited page blocks, 5MB+ file uploads, 30-day version history, and collaborative workspace.",
+      "verificationType": "edu_email",
+      "verificationMethod": "College email verification in account settings",
+      "link": "https://www.notion.so/product/notion-for-education",
+      "source": "Resourceify",
+      "highlights": [
+        "Unlimited blocks",
+        "Unlimited file uploads",
+        "Collaborative workspaces",
+        "Student templates"
+      ],
+      "howToClaim": [
+        "Create or switch your Notion account email to your student email.",
+        "Go to Settings & Members > Upgrade > Get free education plan.",
+        "Activated instantly."
+      ],
+      "featured": false
+    },
+    {
+      "id": "perk-figma",
+      "title": "Figma & FigJam Professional Education",
+      "provider": "Figma",
+      "category": "Design & Creative",
+      "badge": "100% FREE",
+      "discount": "Free Pro Tier (Worth $180/yr)",
+      "savingsEstimate": "₹15,000/yr",
+      "description": "Unlock unlimited Figma design files, team libraries, shared design systems, audio chat, and FigJam boards for your UI/UX and product designs.",
+      "verificationType": "sheerid",
+      "verificationMethod": "SheerID university verification",
+      "link": "https://www.figma.com/education/",
+      "source": "Resourceify",
+      "highlights": [
+        "Unlimited Figma files",
+        "Shared team design systems",
+        "Unlimited version history",
+        "Dev mode access"
+      ],
+      "howToClaim": [
+        "Visit figma.com/education and click Apply as Student.",
+        "Select Amity University and your expected graduation year.",
+        "Instant access granted for 2 years."
+      ],
+      "featured": true
+    },
+    {
+      "id": "perk-canva",
+      "title": "Canva Pro for Students",
+      "provider": "Canva",
+      "category": "Design & Creative",
+      "badge": "FREE ACCESS",
+      "discount": "Free Pro Features (Worth $120/yr)",
+      "savingsEstimate": "₹10,000/yr",
+      "description": "Premium presentation templates, 100M+ stock assets, magic background remover, and brand kit generators for college fest posters and club decks.",
+      "verificationType": "student_id_or_email",
+      "verificationMethod": "GitHub Pack integration or student email",
+      "link": "https://www.canva.com/education/students/",
+      "source": "Resourceify",
+      "highlights": [
+        "1-click background remover",
+        "100M+ premium assets",
+        "100GB cloud storage",
+        "Brand kit creator"
+      ],
+      "howToClaim": [
+        "Claim through GitHub Student Developer Pack with 1 click.",
+        "Enjoy 1 year of free Canva Pro access directly."
+      ],
+      "featured": false
+    },
+    {
+      "id": "perk-aws",
+      "title": "AWS Educate & Cloud Credits",
+      "provider": "Amazon Web Services",
+      "category": "Cloud & DevOps",
+      "badge": "NO CREDIT CARD",
+      "discount": "$100+ Free AWS Credits",
+      "savingsEstimate": "₹8,500",
+      "description": "Build backend APIs, train machine learning models on EC2, host static web apps on S3/CloudFront without requiring a credit card.",
+      "verificationType": "student_id_or_email",
+      "verificationMethod": "Student portal enrollment check",
+      "link": "https://aws.amazon.com/education/awseducate/",
+      "source": "Resourceify & AWS",
+      "highlights": [
+        "No credit card needed",
+        "Free hands-on cloud labs",
+        "Badges & credentials",
+        "Free EC2/S3 access"
+      ],
+      "howToClaim": [
+        "Register on AWS Educate using your college details.",
+        "Claim your student starter credits and launch instances in the sandbox."
+      ],
+      "featured": false
+    },
+    {
+      "id": "perk-azure",
+      "title": "Microsoft Azure for Students",
+      "provider": "Microsoft",
+      "category": "Cloud & DevOps",
+      "badge": "$100 CREDIT",
+      "discount": "$100 Free Credit + 55+ Services",
+      "savingsEstimate": "₹8,500",
+      "description": "Free $100 credit for 12 months with no credit card required. Free access to Linux VMs, App Services, Cosmos DB, and OpenAI cognitive services.",
+      "verificationType": "edu_email",
+      "verificationMethod": "University email validation",
+      "link": "https://azure.microsoft.com/en-in/free/students/",
+      "source": "Resourceify & Microsoft",
+      "highlights": [
+        "$100 Azure credit",
+        "55+ always-free services",
+        "No credit card needed",
+        "Free GitHub Actions"
+      ],
+      "howToClaim": [
+        "Sign in to Azure portal with your student account.",
+        "Verify via OTP sent to university email.",
+        "Credits activated immediately."
+      ],
+      "featured": false
+    },
+    {
+      "id": "perk-youtube",
+      "title": "YouTube Premium Student Membership",
+      "provider": "Google / YouTube",
+      "category": "Streaming & Entertainment",
+      "badge": "40% OFF",
+      "discount": "₹79 / month (Regular ₹129)",
+      "savingsEstimate": "₹600/yr",
+      "description": "Ad-free YouTube videos, background play while using other apps, offline downloads, and YouTube Music streaming app included.",
+      "verificationType": "sheerid",
+      "verificationMethod": "SheerID university verification",
+      "link": "https://www.youtube.com/premium/student",
+      "source": "Resourceify",
+      "highlights": [
+        "Ad-free YouTube videos",
+        "Background play",
+        "YouTube Music Premium included",
+        "Offline video downloads"
+      ],
+      "howToClaim": [
+        "Open YouTube Premium Student page.",
+        "Enter Amity University details on the SheerID screen.",
+        "Complete payment using UPI or student debit card."
+      ],
+      "featured": false
+    },
+    {
+      "id": "perk-autodesk",
+      "title": "Autodesk Education Suite",
+      "provider": "Autodesk",
+      "category": "3D & Engineering",
+      "badge": "100% FREE ($1,800/YR VALUE)",
+      "discount": "Full Professional Suite Free",
+      "savingsEstimate": "₹1,50,000/yr",
+      "description": "AutoCAD, Fusion 360, Revit, Maya, and 3ds Max available free of cost for architecture, biotechnology, and engineering students.",
+      "verificationType": "student_id_or_email",
+      "verificationMethod": "Official ID card or admission transcript upload",
+      "link": "https://www.autodesk.com/education/edu-software/overview",
+      "source": "Resourceify",
+      "highlights": [
+        "AutoCAD full suite",
+        "Fusion 360 Pro",
+        "Maya & 3ds Max",
+        "Revit Architectural"
+      ],
+      "howToClaim": [
+        "Create an Autodesk Education account.",
+        "Upload a picture of your current semester Amity ID card or fee receipt.",
+        "Verification takes less than 30 minutes."
+      ],
+      "featured": false
+    },
+    {
+      "id": "perk-samsung",
+      "title": "Samsung Student Advantage India",
+      "provider": "Samsung India",
+      "category": "Hardware & Tech",
+      "badge": "UP TO 30% OFF",
+      "discount": "Extra 10-30% Off Galaxy & Tablets",
+      "savingsEstimate": "₹5,000 - ₹18,000",
+      "description": "Exclusive student pricing on Galaxy S/Z series, Galaxy Book laptops, and Galaxy Tab S9. Free accidental and liquid damage protection for 1 year.",
+      "verificationType": "edu_email",
+      "verificationMethod": "Student email verification",
+      "link": "https://www.samsung.com/in/microsite/student-advantage/",
+      "source": "Resourceify & Samsung",
+      "highlights": [
+        "Up to 30% off Galaxy devices",
+        "Free 1-year damage insurance",
+        "No-cost EMI",
+        "Special student trade-in bonuses"
+      ],
+      "howToClaim": [
+        "Enter your student email ID to receive a verification OTP.",
+        "Browse the Samsung Corporate & Student store with instant discounts."
+      ],
+      "featured": false
+    }
+  ],
+  "categories": [
+    "All",
+    "Developer Tools",
+    "Productivity",
+    "Design & Creative",
+    "Hardware & Tech",
+    "Streaming & Entertainment",
+    "Cloud & DevOps",
+    "3D & Engineering"
+  ]
+}

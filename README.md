@@ -20,7 +20,9 @@ Made with pure adrenaline, Red Arc energy (`#E11D48`), and zero corporate BS by 
 
 ## 🛠️ Tech Stack (Khaandaani Setup)
 
-- **Framework:** Next.js 16 (App Router + Turbopack)
+- **Frontend:** Next.js 16 (App Router + Turbopack), in `frontend/`
+- **Backend:** FastAPI (Python), in `backend/`
+- **Database:** Supabase Postgres, accessed by the backend using a server-only key
 - **Styling:** Tailwind CSS + Custom Arc Design Tokens (`#E11D48`, `#881337`, `#FFFDF5`)
 - **Animation:** GSAP (`ScrollTrigger`), Lenis Smooth Scroll
 - **Icons:** Lucide React
@@ -32,7 +34,7 @@ Made with pure adrenaline, Red Arc energy (`#E11D48`), and zero corporate BS by 
 
 Clone karo, install maaro, aur chalao:
 
-```bash
+```powershell
 # 1. Clone repository
 git clone https://github.com/Wyrcan-io/afterclass.git
 cd afterclass
@@ -40,11 +42,29 @@ cd afterclass
 # 2. Dependencies install karo (node_modules ka vajan 300MB+)
 npm install
 
-# 3. Dev server chalao
+# 3. Configure the frontend
+Copy-Item frontend/.env.example frontend/.env.local
+# 4. Configure the backend
+Copy-Item backend/.env.example backend/.env
+# Add Supabase URL and server secret key to backend/.env.
+# Replace the AUTH_SESSION_SECRET placeholder in backend/.env with a long random value.
+# Run backend/db/migrations/202611140001_initial_afterclass.sql in Supabase SQL Editor.
+# Seed the starter campus/clubs/listings after the migration:
+npm run db:seed
+
+# 5. Install and run the API in one terminal
+python -m venv backend/.venv
+backend/.venv/Scripts/python.exe -m pip install -e "backend[dev]"
+npm run backend:dev
+
+# 6. Run the frontend in another terminal
 npm run dev
 ```
 
-Browser kholo: `http://localhost:3000`
+Frontend: `http://localhost:3000`
+FastAPI docs: `http://localhost:8100/docs`
+
+The root `npm install` installs the frontend workspace. All server credentials belong in `backend/.env`; only the Supabase publishable key, Supabase URL, backend path, and Razorpay checkout public key belong in `frontend/.env.local`. Every API request is handled by FastAPI and proxied by Next.js rewrites. For a direct API write/read check, follow [`backend/db/README.md`](backend/db/README.md). Razorpay can be configured later; Supabase Auth email delivery is required for Dhanda business verification. See [`HANDOFF.md`](HANDOFF.md) for feature details.
 
 ---
 

@@ -1,0 +1,1 @@
+"""Signed upload authorization endpoints."""

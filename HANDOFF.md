@@ -4,12 +4,44 @@ Welcome to the **Afterclass** codebase. This document outlines everything that h
 
 ---
 
+## Current implementation update (November 2026)
+
+The Dhanda launch work now has production-oriented persistence and provider integration points. The project uses a separate Next.js frontend and FastAPI backend:
+
+- `frontend/` contains the Next.js application. `backend/` contains FastAPI modules, database migrations, and Python dependencies.
+- `backend/db/migrations/202611140001_initial_afterclass.sql` creates campus, club, Dhanda business, registration, listing, promotion, payment-event, and API smoke-test tables; enables RLS; creates the launch campaign; and provisions a public-read `afterclass-images` bucket with signed uploads.
+- Auth, clubs, Dhanda businesses/listings/promotions, opportunities, uploads, and payment webhooks are handled by FastAPI under `/api/v1`. The Next.js frontend contains no API route handlers; rewrites preserve existing frontend URLs.
+- The business-promotion flow verifies the owner email through Supabase Auth. A verified business registered during the first calendar month automatically receives one selected promotion tier for the following full calendar month. The database enforces one launch bonus per business; scheduled promotions activate on the first live promotion read during the reward month.
+- Paid weekly promotion orders are created server-side through Razorpay, verified against Razorpay’s payment API and checkout signature, and activated only after capture. `/api/payments/webhook` verifies the raw-body signature and records events idempotently.
+- Club leads and verified Dhanda businesses can upload JPG, PNG, or WebP images (10 MB maximum) through two-hour signed Supabase Storage upload URLs. The service role key is kept in server-only code.
+- Auth session tokens are HMAC-signed. The legacy demo accounts are disabled in production unless `AFTERCLASS_ENABLE_DEMO_ACCOUNTS=true` is explicitly set.
+
+### Supabase setup
+
+1. Copy `frontend/.env.example` to `frontend/.env.local` and `backend/.env.example` to `backend/.env`.
+2. Put `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, and `SUPABASE_PUBLISHABLE_KEY` in `backend/.env`. Replace the `AUTH_SESSION_SECRET` placeholder with a long random value.
+3. Run `backend/db/migrations/202611140001_initial_afterclass.sql` once in the Supabase SQL Editor. The launch campaign dates are based on the calendar month when the migration runs; run it before launch and adjust the date values if the public launch month differs.
+4. From the repository root run `npm install`, create a Python virtual environment, and install `python -m pip install -e "backend[dev]"`.
+5. Run `npm run db:seed` to import starter campus, clubs, listings, and showcase promotions.
+6. Start FastAPI with `npm run backend:dev` and Next.js with `npm run dev` in a second terminal. The API docs are at `http://localhost:8100/docs`.
+
+### Razorpay and uploads
+
+Razorpay can be configured later by adding `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`, and `NEXT_PUBLIC_RAZORPAY_KEY_ID`. Configure the dashboard webhook URL as `/api/payments/webhook` and subscribe to `order.paid` and `payment.captured`. Until these values are set, paid checkout fails with a clear “not configured” response; registrations and launch-month offers continue to work.
+
+Supabase Storage is the selected image provider to reuse the configured Supabase project. The migration creates the bucket, but the upload flow still requires both the server secret and the public URL/publishable key in the local and deployed environment.
+
+The migration and seed were added to the repository but have not been applied to the remote Supabase project from this workspace. Do not enable production traffic until the migration, Auth email delivery, and environment variables are configured.
+
+---
+
 ## ⚡ 1. Architecture & Tech Stack
 
-- **Framework:** Next.js 16 (App Router in `src/app/`) + React 19
+- **Frontend framework:** Next.js 16 (App Router in `frontend/src/app/`) + React 19
+- **Backend framework:** FastAPI modules in `backend/app/modules/`
 - **Styling:** Tailwind CSS v4 + Arc Brutalist Design System (`#E11D48` crimson, `#881337` burgundy, `#FFFDF5` warm cream, bold 2.5px black borders, `shadow-[5px_5px_0px_#000000]`)
 - **Animations & Physics:** GSAP (ScrollTrigger) & Lenis smooth scrolling
-- **State & Data Layer:** React Context (`AppContext.jsx`) with local hydration, centralized data mocks in `src/data/`, and modular API route handlers in `src/app/api/`
+- **State & Data Layer:** React Context (`frontend/src/context/AppContext.jsx`) with local hydration, UI fixtures in `frontend/src/data/`, and domain APIs in FastAPI (`backend/app/modules/`)
 - **Testing:** Native Node.js ESM test suite (`tests/api.test.mjs`) runnable via `npm test`
 
 ---
@@ -21,11 +53,11 @@ Welcome to the **Afterclass** codebase. This document outlines everything that h
   - Aggregator & scraper API serving verified student discounts (GitHub Student Developer Pack, JetBrains All Products, Spotify Student 50% off, Apple Education Store, Notion Plus 100% free, Figma Pro, Canva Pro, AWS Educate, Autodesk).
   - Search, category filter pills, estimated savings tracker, and "How to Claim" walkthrough modals.
 - **Internal Product 1 — Job Hunter Portal:**
-  - Interactive full-screen workbench drawer (`JobHunterModal.jsx`) displaying curated tech and creative internships (`src/data/jobPortalData.js`) with stipends, tech stack requirements, and 1-click apply action.
+  - Interactive full-screen workbench drawer (`JobHunterModal.jsx`) displaying curated tech and creative internships (`frontend/src/data/jobPortalData.js`) with stipends, tech stack requirements, and 1-click apply action.
 - **Internal Product 2 — AI Resume Tailor:**
   - Interactive ATS workbench (`ResumeTailorModal.jsx`) featuring target role ATS score simulation, keyword density checks, and an AI Quantified Bullet Enhancer using Google's XYZ framework.
 - **Collegiate Hackathons Radar (`/api/opportunities/hackathons`):**
-  - Live feed aggregating collegiate hackathons from Unstop, Devfolio, and MLH (`src/data/hackathonsData.js`) with prize pools, eligibility tags, deadline countdowns, and direct registration links.
+  - Live feed aggregating collegiate hackathons from Unstop, Devfolio, and MLH (`frontend/src/data/hackathonsData.js`) with prize pools, eligibility tags, deadline countdowns, and direct registration links.
 
 ### B. Afterclass Dhanda Marketplace (`/dhanda`)
 - **Campus Freelance & Commerce Commons:**
@@ -61,7 +93,7 @@ Welcome to the **Afterclass** codebase. This document outlines everything that h
   - **Emergency Dialer:** Quick contact numbers for Security, Medical Room, and the Proctorial Board.
 
 ### F. Multi-College Architecture & Community Hub
-- **Campus Subdomain Registry (`src/config/campuses.js` & `src/utils/campusResolver.js`):** Scalable architecture for `auk.afterclass.com`, `delhi.afterclass.com`, `jnu.afterclass.com`.
+- **Campus Subdomain Registry (`frontend/src/config/campuses.js` & `frontend/src/utils/campusResolver.js`):** Scalable architecture for `auk.afterclass.com`, `delhi.afterclass.com`, `jnu.afterclass.com`.
 - **Free-Tier Community Setup (`CommunityModal.jsx`):** Offloads real-time chatter to official WhatsApp, Discord, and Telegram groups to keep server hosting 100% free with zero memory leaks.
 
 ---
@@ -95,30 +127,27 @@ npm run build
 
 ---
 
-## 📋 5. Next Tasks / Backlog for You
+## 📋 5. Setup remaining after code
 
-Here are the highest-impact items ready for you to build:
+### Supabase persistence
 
-### Task 1: Supabase / PostgreSQL Persistence
-- **Current State:** API handlers currently use in-memory runtime arrays and local data files (`src/data/`).
-- **Goal:** Connect a Supabase project or PostgreSQL database using Prisma or Drizzle ORM.
-- **Reference:** The complete SQL schema is already defined in `FUTURE_ROADMAP.md` (tables for `campuses`, `clubs`, `dhanda_listings`, and `sponsored_ads`).
+The application code and migration are ready. Apply `backend/db/migrations/202611140001_initial_afterclass.sql` in the configured Supabase project, copy the frontend and backend environment examples, then run `npm run db:seed`. Follow `backend/db/README.md` to verify API writes. API fixture reads are development-only; production database reads/writes fail closed if Supabase is not configured.
 
-### Task 2: Razorpay / Cashfree Ad Checkout
-- **Current State:** The "Promote Your Business" modal books slots with a simulated approval.
-- **Goal:** Implement `POST /api/payments/create-order` and `POST /api/payments/webhook` using Razorpay standard checkout so student businesses can pay ₹299/week via UPI directly on-site.
+### Razorpay
 
-### Task 3: Wildcard Subdomain Routing Deployment
-- **Current State:** `src/utils/campusResolver.js` handles subdomain parsing from request headers.
-- **Goal:** Add Next.js Edge Middleware (`middleware.js`) and configure `*.afterclass.com` on Vercel / Cloudflare DNS to automatically route subdomains to their campus context.
+The server order creation, payment verification, and webhook receiver are implemented. Add the Razorpay test keys first, set the Dashboard webhook URL to `/api/payments/webhook`, configure `order.paid` and `payment.captured`, and test a full payment before switching to live keys.
 
-### Task 4: Image Upload Integration (Cloudinary or S3)
-- **Current State:** Image URLs are entered via text inputs or use Unsplash placeholders.
-- **Goal:** Add an upload widget in the Club Lead studio (`/admin`) and Dhanda post modal to allow student leads to upload posters and product photos directly.
+### Supabase Storage
 
-### Task 5: Campus Whisper Board
-- **Current State:** Community links route to Discord / WhatsApp / Telegram.
-- **Goal:** Build an anonymous, rate-limited student confessions & query feed on `/whispers` with automated toxicity filtering.
+The migration provisions the public-read `afterclass-images` bucket. Apply it and set the Supabase URL, publishable key, and server secret in local/deployment environments before testing club and Dhanda image uploads.
+
+### Still on the product roadmap
+
+- Wildcard subdomain deployment for `*.afterclass.com`.
+- Campus Whisper Board with rate limits and moderation.
+- Real student order escrow and payouts; the current Escrow Shield interface is still a pilot concept, not a payment escrow implementation.
+
+The API suite currently contains 18 checks. It passed locally during the implementation turn; no remote Supabase migration or live Razorpay charge was run because project credentials were not present in this workspace.
 
 ---
 
