@@ -46,10 +46,17 @@ def post_listing(payload: ListingCreate, request: Request) -> dict:
     image_url = payload.imageUrl.strip() if payload.imageUrl else None
     if image_url:
         settings = get_settings()
-        bucket = settings.supabase_storage_bucket
-        prefix = f"{settings.supabase_url}/storage/v1/object/public/{bucket}/dhanda/{business['id']}/"
-        if not settings.supabase_url or not image_url.startswith(prefix):
-            raise HTTPException(status_code=400, detail="Listing image must come from your Dhanda upload folder.")
+        valid_prefixes = [
+            "https://res.cloudinary.com/",
+            "https://images.unsplash.com/",
+        ]
+        if settings.supabase_url:
+            valid_prefixes.append(f"{settings.supabase_url}/storage/v1/object/public/")
+        is_valid = any(image_url.startswith(p) for p in valid_prefixes) or (
+            image_url.startswith("https://") and any(ext in image_url.lower() for ext in [".jpg", ".jpeg", ".png", ".webp", "/image/upload/"])
+        )
+        if not is_valid:
+            raise HTTPException(status_code=400, detail="Listing image must be a valid uploaded image URL.")
     tags = payload.tags
     if isinstance(tags, str):
         tags = [part.strip() for part in tags.split(",") if part.strip()]

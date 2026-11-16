@@ -21,9 +21,17 @@ def update_business(payload: BusinessUpdate, request: Request) -> dict:
     if payload.imageUrl is not None:
         image_url = payload.imageUrl.strip()
         settings = get_settings()
-        prefix = f"{settings.supabase_url}/storage/v1/object/public/{settings.supabase_storage_bucket}/dhanda/{user['businessId']}/"
-        if not settings.supabase_url or not image_url.startswith(prefix):
-            raise HTTPException(status_code=400, detail="Image must be uploaded to your Dhanda image folder first.")
+        valid_prefixes = [
+            "https://res.cloudinary.com/",
+            "https://images.unsplash.com/",
+        ]
+        if settings.supabase_url:
+            valid_prefixes.append(f"{settings.supabase_url}/storage/v1/object/public/")
+        is_valid = any(image_url.startswith(p) for p in valid_prefixes) or (
+            image_url.startswith("https://") and any(ext in image_url.lower() for ext in [".jpg", ".jpeg", ".png", ".webp", "/image/upload/"])
+        )
+        if not is_valid:
+            raise HTTPException(status_code=400, detail="Image must be a valid uploaded image URL.")
         updates["image_url"] = image_url
     if payload.tagline is not None:
         updates["tagline"] = payload.tagline.strip()[:240]

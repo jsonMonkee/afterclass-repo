@@ -24,6 +24,14 @@ class Settings(BaseSettings):
     razorpay_webhook_secret: str | None = None
     razorpay_public_key_id: str | None = None
     supabase_storage_bucket: str = "afterclass-images"
+    cloudinary_cloud_name: str | None = None
+    cloudinary_upload_preset: str = "afterclass_uploads"
+    smtp_host: str | None = None
+    smtp_port: int = 587
+    smtp_user: str | None = None
+    smtp_password: str | None = None
+    smtp_from_email: str | None = None
+    smtp_from_name: str = "Afterclass Amity"
 
     model_config = SettingsConfigDict(
         env_file=Path(__file__).resolve().parents[2] / ".env",

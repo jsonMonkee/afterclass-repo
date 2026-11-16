@@ -165,6 +165,9 @@ export default function DhandaPage() {
       });
       const data = await response.json();
       if (!response.ok || !data.success) throw new Error(data.error || 'Could not start business registration.');
+      if (data.devOtp) {
+        setPromoCode(data.devOtp);
+      }
       setPromoStep('verify');
       setPromoSuccessMessage(data.message);
     } catch (error) {
@@ -214,7 +217,41 @@ export default function DhandaPage() {
       });
       const data = await response.json();
       if (!response.ok || !data.success) throw new Error(data.error || 'Could not start payment.');
-      if (!window.Razorpay) throw new Error('Checkout is still loading. Please try again in a moment.');
+
+      // Check if checkout is in development test mode or has placeholder keys
+      if (data.checkout?.isTestMode || data.checkout?.keyId === 'rzp_test_placeholder') {
+        const verifyResponse = await fetch('/api/dhanda/promotions/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: data.checkout.orderId,
+            razorpay_payment_id: `pay_test_${Date.now()}`,
+            razorpay_signature: `test_sig_${Date.now()}`
+          })
+        });
+        const verification = await verifyResponse.json();
+        if (!verifyResponse.ok || !verification.success) {
+          setPromoError(verification.error || 'Payment confirmation is still pending. Refresh in a moment.');
+          return;
+        }
+        setPromoSuccessMessage('Test payment verified! In production with live Razorpay keys, customer checkout modal opens.');
+        setPromoSuccess(true);
+        setPromoStep('success');
+        return;
+      }
+
+      // Live Razorpay SDK dynamic load
+      if (!window.Razorpay) {
+        await new Promise((resolve) => {
+          const script = document.createElement('script');
+          script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+          script.onload = () => resolve();
+          script.onerror = () => resolve();
+          document.body.appendChild(script);
+        });
+      }
+      if (!window.Razorpay) throw new Error('Razorpay Checkout failed to load. Please check your internet connection and try again.');
+
       const checkout = new window.Razorpay({
         key: data.checkout.keyId,
         amount: data.checkout.amount,

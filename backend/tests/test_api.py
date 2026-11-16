@@ -374,3 +374,44 @@ def test_register_validates_email_and_phone(monkeypatch) -> None:
     ))
     assert bad_email.status_code == 400
     assert "Invalid email address" in bad_email.json()["error"]
+
+
+def test_razorpay_fallback_in_development() -> None:
+    from app.integrations import razorpay
+    assert razorpay.is_test_fallback_enabled() is True
+    order = razorpay.create_order(amount=29900, receipt="test_rcpt_123", notes={"test": True})
+    assert order["is_test_mode"] is True
+    assert order["id"].startswith("order_test_")
+    assert razorpay.verify_checkout_signature(order["id"], "pay_test_123", "dummy_sig") is True
+
+
+def test_smtp_module_helpers(monkeypatch) -> None:
+    from app.integrations import smtp
+    monkeypatch.setattr(smtp, "get_settings", lambda: SimpleNamespace(
+        smtp_host=None, smtp_port=587, smtp_user=None, smtp_password=None,
+        smtp_from_email=None, smtp_from_name="Afterclass"
+    ))
+    assert smtp.is_smtp_configured() is False
+    assert smtp.send_email(to_email="test@example.com", subject="Test", body_text="Test") is False
+
+
+def test_upload_sign_with_mock_or_cloudinary(monkeypatch) -> None:
+    from app.core.security import sign_session
+
+    session_token = sign_session({
+        "id": "user-123",
+        "businessId": "biz-123",
+        "role": "dhanda_vendor",
+        "exp": int(time.time() * 1000) + 60000,
+    })
+
+    resp = asyncio.run(request(
+        "POST", "/api/v1/uploads/sign",
+        cookies={"afterclass_session": session_token},
+        json={"scope": "dhanda", "fileType": "image/jpeg", "fileSize": 1024},
+    ))
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["success"] is True
+    assert data["provider"] in {"mock", "cloudinary", "supabase"}
+
