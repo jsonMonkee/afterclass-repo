@@ -141,14 +141,20 @@ export default function DhandaCard({ business }) {
           {business.tagline}
         </p>
 
-        {/* 3. BOTTOM ACTION BAR: Red "Explore" Organic Wobble Button */}
-        <div className="w-full">
+        {/* 3. BOTTOM ACTION BAR: Red "Explore" Button with Hand-Drawn Wobble Contour */}
+        <div className="w-full pt-1">
           <button 
             onClick={() => setShowExploreModal(true)}
-            className="w-full bg-[#E11D48] hover:bg-[#BE123C] active:scale-[0.97] text-white font-extrabold text-sm py-2.5 px-4 rounded-full explore-wobble-shape animate-wobble-hover flex items-center justify-center gap-2.5 shadow-md hover:shadow-xl transition-all group cursor-pointer border border-white/20"
+            style={{
+              borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px'
+            }}
+            className="w-full bg-[#E11D48] hover:bg-[#BE123C] active:scale-[0.97] hover:rotate-[-0.5deg] text-white font-extrabold text-sm py-3 px-5 flex items-center justify-center gap-2.5 shadow-[0_4px_14px_rgba(225,29,72,0.3)] hover:shadow-[0_6px_20px_rgba(225,29,72,0.4)] border-2 border-[#BE123C]/40 transition-all duration-200 group cursor-pointer select-none"
           >
             <span className="tracking-wide">Explore</span>
-            <span className="w-5 h-5 rounded-full bg-white text-[#E11D48] flex items-center justify-center group-hover:translate-x-1 group-hover:rotate-12 transition-transform shadow-xs">
+            <span 
+              style={{ borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px' }}
+              className="w-5 h-5 bg-white text-[#E11D48] flex items-center justify-center group-hover:translate-x-1 group-hover:rotate-6 transition-transform shadow-xs"
+            >
               <ArrowRight size={11} className="stroke-[3]" />
             </span>
           </button>
