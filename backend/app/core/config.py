@@ -26,6 +26,8 @@ class Settings(BaseSettings):
     supabase_storage_bucket: str = "afterclass-images"
     cloudinary_cloud_name: str | None = None
     cloudinary_upload_preset: str = "afterclass_uploads"
+    cloudinary_api_key: str | None = None
+    cloudinary_api_secret: str | None = None
     smtp_host: str | None = None
     smtp_port: int = 587
     smtp_user: str | None = None

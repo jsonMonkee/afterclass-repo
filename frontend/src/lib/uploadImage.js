@@ -25,8 +25,15 @@ export async function uploadImage(file, scope, options = {}) {
   if (signed.provider === 'cloudinary') {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', signed.uploadPreset);
-    if (signed.folder) formData.append('folder', signed.folder);
+    if (signed.apiKey && signed.signature && signed.timestamp) {
+      formData.append('api_key', signed.apiKey);
+      formData.append('timestamp', signed.timestamp);
+      formData.append('signature', signed.signature);
+      if (signed.folder) formData.append('folder', signed.folder);
+    } else {
+      formData.append('upload_preset', signed.uploadPreset);
+      if (signed.folder) formData.append('folder', signed.folder);
+    }
 
     const cloudRes = await fetch(
       `https://api.cloudinary.com/v1_1/${signed.cloudName}/image/upload`,

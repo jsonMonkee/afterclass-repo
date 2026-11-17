@@ -376,8 +376,9 @@ def test_register_validates_email_and_phone(monkeypatch) -> None:
     assert "Invalid email address" in bad_email.json()["error"]
 
 
-def test_razorpay_fallback_in_development() -> None:
+def test_razorpay_fallback_in_development(monkeypatch) -> None:
     from app.integrations import razorpay
+    monkeypatch.setattr(razorpay, "is_configured", lambda: False)
     assert razorpay.is_test_fallback_enabled() is True
     order = razorpay.create_order(amount=29900, receipt="test_rcpt_123", notes={"test": True})
     assert order["is_test_mode"] is True

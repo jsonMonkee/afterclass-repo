@@ -1,4 +1,6 @@
+import hashlib
 import logging
+import time
 from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException, Request
@@ -57,13 +59,23 @@ def sign_upload(payload: UploadSignRequest, request: Request) -> dict:
 
     # 1. Cloudinary Direct CDN Upload (Zero server load, generous 25 GB free storage)
     if settings.cloudinary_cloud_name:
-        return {
+        payload = {
             "success": True,
             "provider": "cloudinary",
             "cloudName": settings.cloudinary_cloud_name,
             "uploadPreset": settings.cloudinary_upload_preset,
             "folder": folder,
         }
+        if settings.cloudinary_api_key and settings.cloudinary_api_secret:
+            timestamp = int(time.time())
+            to_sign = f"folder={folder}&timestamp={timestamp}{settings.cloudinary_api_secret}"
+            signature = hashlib.sha1(to_sign.encode("utf-8")).hexdigest()
+            payload.update({
+                "apiKey": settings.cloudinary_api_key,
+                "timestamp": timestamp,
+                "signature": signature,
+            })
+        return payload
 
     # 2. Supabase Storage Signed Upload
     bucket = settings.supabase_storage_bucket
