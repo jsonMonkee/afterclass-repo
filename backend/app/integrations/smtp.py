@@ -34,15 +34,16 @@ def send_email(
     if body_html:
         msg.add_alternative(body_html, subtype="html")
 
+    password = settings.smtp_password.replace(" ", "") if settings.smtp_password else ""
     try:
         if settings.smtp_port == 465:
             with smtplib.SMTP_SSL(settings.smtp_host, settings.smtp_port, timeout=10) as server:
-                server.login(settings.smtp_user, settings.smtp_password)
+                server.login(settings.smtp_user, password)
                 server.send_message(msg)
         else:
             with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=10) as server:
                 server.starttls()
-                server.login(settings.smtp_user, settings.smtp_password)
+                server.login(settings.smtp_user, password)
                 server.send_message(msg)
         logger.info("Successfully sent email to %s via SMTP %s", to_email, settings.smtp_host)
         return True
