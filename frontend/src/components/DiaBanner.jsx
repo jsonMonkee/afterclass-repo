@@ -13,7 +13,7 @@ export default function DiaBanner() {
       {/* Deep crimson textured band */}
       <div className="arc-grain-crimson py-2.5 sm:py-3.5 px-3 sm:px-4 relative flex items-center justify-center overflow-visible">
         <Link 
-          href="/events"
+          href="/"
           className="group flex items-center justify-center gap-2 sm:gap-3 text-white hover:text-[#FFFDF5] transition-colors max-w-full"
         >
           <span className="font-arc-display text-xs sm:text-base md:text-xl font-bold tracking-tight text-white drop-shadow-sm text-center leading-snug truncate sm:overflow-visible flex items-center gap-2 sm:gap-2.5">

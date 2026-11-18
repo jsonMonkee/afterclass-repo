@@ -21,8 +21,10 @@ import {
   Download
 } from 'lucide-react';
 import { dhandaListings, dhandaCategories, sponsoredBanners, promotionPricing } from '../../data/dhandaData';
+import { studentBusinesses } from '../../data/amityData';
 import { uploadImage } from '../../lib/uploadImage';
 import Footer from '../../components/Footer';
+import DhandaCard from '../../components/DhandaCard';
 
 export default function DhandaPage() {
   const [listings, setListings] = useState(dhandaListings);
@@ -435,6 +437,39 @@ export default function DhandaPage() {
             <div className="absolute top-0 right-0 w-80 h-80 bg-[#E11D48]/20 rounded-full blur-3xl pointer-events-none"></div>
           </div>
 
+        </div>
+      </section>
+
+      {/* 2.5 ACTIVE CAMPUS VENTURES DIRECTORY (DOODLE CARDS) */}
+      <section id="ventures" className="bg-[#FFFDF5] py-14 px-4 sm:px-8 md:px-12 border-b border-black/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 mb-10 border-b border-black/10">
+            <div>
+              <span className="font-arc-mono text-xs font-bold text-[#E11D48] uppercase tracking-wider block mb-2 flex items-center gap-1.5">
+                <Store size={14} />
+                <span>VERIFIED STUDENT FOUNDERS · 2026</span>
+              </span>
+              <h2 className="font-arc-display text-3xl sm:text-4xl text-[#000000] font-black tracking-tight">
+                Active campus ventures.
+              </h2>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsPromoModalOpen(true)}
+                className="bg-[#E11D48] text-white hover:bg-[#BE123C] text-xs font-arc-mono font-bold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-sm transition-all hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
+              >
+                <PlusCircle size={14} />
+                <span>List / Promote Your Venture</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {studentBusinesses.map(biz => (
+              <DhandaCard key={biz.id} business={biz} />
+            ))}
+          </div>
         </div>
       </section>
 

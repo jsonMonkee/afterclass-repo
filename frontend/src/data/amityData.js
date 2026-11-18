@@ -275,7 +275,7 @@ export const testimonials = [
     handle: "@srijita_cadence"
   },
   {
-    quote: "“The electric simplicity reminds me of Arc browser itself. Everything feels instant, tactile, and strictly about campus culture without the bureaucratic noise of old university portals.”",
+    quote: "“The electric simplicity is unmatched. Everything feels instant, tactile, and strictly about campus culture without the bureaucratic noise of old university portals.”",
     author: "DEBJIT MUKHERJEE",
     role: "HEAD OF TECH, TURING CLUB",
     dept: "B.TECH CSE '27",
@@ -294,6 +294,105 @@ export const testimonials = [
     role: "LEAD CURATOR, APERTURE MEDIA",
     dept: "B.DES '26",
     handle: "@ananya_lens"
+  }
+];
+
+export const studentBusinesses = [
+  {
+    id: 'dhanda-1',
+    name: 'Flat Z Kolkata',
+    founder: 'Joydeep & Abhirup (B.Tech CSE)',
+    businessType: 'Tech Startup',
+    category: 'Software & Design',
+    badge: 'FEATURED',
+    icon: '⚡',
+    tagline: 'High-energy campus web apps, sleek UI/UX & full-stack software built for modern brands.',
+    priceRange: '₹3,000 onwards',
+    instagram: '@wyrcan.io',
+    phone: '+91 98300 12345',
+    image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=800&q=80',
+    logo: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80',
+    verified: true
+  },
+  {
+    id: 'dhanda-2',
+    name: 'Munchies Dorm Kitchen',
+    founder: 'Tanmay & Rahul (BBA 2026)',
+    businessType: 'Personal Business',
+    category: 'Food & Bakery',
+    badge: 'CAMPUS HIT',
+    icon: '🍔',
+    tagline: 'Late-night gourmet smash burgers, loaded fries & peri-peri maggi delivered right to hostel gates.',
+    priceRange: '₹80 - ₹220',
+    instagram: '@munchies_newtown',
+    phone: '+91 98311 23456',
+    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80',
+    logo: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80',
+    verified: true
+  },
+  {
+    id: 'dhanda-3',
+    name: 'Aperture Lens Lab',
+    founder: 'Debarghya Sen (BA J&MC)',
+    businessType: 'Creative Agency',
+    category: 'Photography & Film',
+    badge: 'VERIFIED',
+    icon: '📸',
+    tagline: 'Campus portraits, fest coverage, model portfolios and cinematic reels for creators & societies.',
+    priceRange: '₹500 / shoot',
+    instagram: '@lenslab_kolkata',
+    phone: '+91 98322 34567',
+    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80',
+    logo: 'https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?auto=format&fit=crop&w=200&q=80',
+    verified: true
+  },
+  {
+    id: 'dhanda-4',
+    name: 'StreetKulture Thrift',
+    founder: 'Rhea & Ananya (B.Des Fashion)',
+    businessType: 'Personal Business',
+    category: 'Fashion & Merch',
+    badge: 'TRENDING',
+    icon: '👕',
+    tagline: 'Curated Y2K vintage tees, anime oversized hoodies and custom hand-painted denim jackets.',
+    priceRange: '₹350 - ₹1,200',
+    instagram: '@streetkulture.amity',
+    phone: '+91 98333 45678',
+    image: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=800&q=80',
+    logo: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=200&q=80',
+    verified: true
+  },
+  {
+    id: 'dhanda-5',
+    name: 'CodeKicks Tutoring',
+    founder: 'Md Affan (B.Tech IT 2027)',
+    businessType: 'Startup / EdTech',
+    category: 'EdTech & Tutoring',
+    badge: 'POPULAR',
+    icon: '💻',
+    tagline: 'Semester exam crash courses in Data Structures, Java, C++ & Python taught by your top college seniors.',
+    priceRange: '₹200 / session',
+    instagram: '@codekicks_amity',
+    phone: '+91 98344 56789',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80',
+    logo: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=200&q=80',
+    verified: true
+  },
+  {
+    id: 'dhanda-6',
+    name: 'GreenLeaf Herbal Tea Co.',
+    founder: 'Shreya Roy (B.Sc Biotech)',
+    businessType: 'Personal Business',
+    category: 'Beverages & Wellness',
+    badge: 'ORGANIC',
+    icon: '🍵',
+    tagline: 'Fresh Darjeeling blends, iced hibiscus tea and exam-stress-buster matcha prepared fresh daily.',
+    priceRange: '₹60 - ₹140',
+    instagram: '@greenleaf_kolkata',
+    phone: '+91 98355 67890',
+    image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80',
+    logo: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80',
+    verified: true
   }
 ];
 
