@@ -43,7 +43,17 @@ export default function DhandaPage() {
       
       {/* 1. HERO SECTION */}
       <section className="arc-grain-red text-white pb-16 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto pt-8 pb-12 text-center flex flex-col items-center px-4">
+        {/* Blended Dhanda Hero Background Image */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <img
+            src="/images/dhanda-hero-bg.jpg"
+            alt=""
+            className="w-full h-full object-cover object-bottom opacity-35"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#E11D48] via-[#E11D48]/65 to-[#E11D48]/90" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto pt-8 pb-12 text-center flex flex-col items-center px-4">
           
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-[#881337] px-4 py-1.5 rounded-full font-arc-mono text-xs uppercase tracking-wider text-[#FFFDF5] mb-4 border border-white/15">
@@ -130,23 +140,33 @@ export default function DhandaPage() {
           </div>
 
           {/* Promotion Callout Banner */}
-          <div className="mt-20 bg-gradient-to-br from-[#1E222A] via-[#151820] to-[#0D0F14] text-white rounded-[36px] p-8 sm:p-12 border-2 border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col items-center text-center gap-6">
-            <div className="inline-flex items-center gap-2 bg-white/10 text-[#FEF08A] border border-white/10 px-4 py-1 rounded-full font-arc-mono text-xs uppercase tracking-wider">
+          <div className="mt-20 bg-[#0D0F14] text-white rounded-[36px] p-8 sm:p-12 border-2 border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col items-center text-center gap-6">
+            {/* Blended Hostel & Map Pin Background Image */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <img
+                src="/images/hostel-card-bg.jpg"
+                alt=""
+                className="w-full h-full object-cover object-center opacity-65"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D0F14]/85 via-[#0D0F14]/45 to-[#0D0F14]/75" />
+            </div>
+
+            <div className="relative z-10 inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs text-[#FEF08A] border border-white/15 px-4 py-1 rounded-full font-arc-mono text-xs uppercase tracking-wider">
               <span>💰</span>
               <span>EARLY LAUNCH OFFER</span>
             </div>
 
-            <h3 className="font-arc-display text-2xl sm:text-4xl text-white font-black tracking-tight max-w-2xl">
+            <h3 className="relative z-10 font-arc-display text-2xl sm:text-4xl text-white font-black tracking-tight max-w-2xl drop-shadow-sm">
               Hostel se dhanda chalate ho? Put it on the map.
             </h3>
 
-            <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-medium max-w-xl">
+            <p className="relative z-10 font-sans text-sm sm:text-base text-white/90 leading-relaxed font-medium max-w-xl">
               Graphic design, homemade cakes, fashion thrifting, coding projects ya campus photography — register your venture today for free before promotion slots fill up.
             </p>
 
             <Link
               href="/profile"
-              className="inline-flex items-center justify-center gap-3 bg-[#E11D48] hover:bg-[#BE123C] text-white font-arc-display font-black text-sm uppercase tracking-wide px-8 py-4 rounded-full shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
+              className="relative z-10 inline-flex items-center justify-center gap-3 bg-[#E11D48] hover:bg-[#BE123C] text-white font-arc-display font-black text-sm uppercase tracking-wide px-8 py-4 rounded-full shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
             >
               <span>SUBMIT YOUR DHANDA PROFILE</span>
               <span>→</span>

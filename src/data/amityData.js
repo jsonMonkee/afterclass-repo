@@ -310,7 +310,7 @@ export const studentBusinesses = [
     priceRange: '₹3,000 onwards',
     instagram: '@wyrcan.io',
     phone: '+91 98300 12345',
-    image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
     logo: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80',
     verified: true
   },
@@ -327,7 +327,7 @@ export const studentBusinesses = [
     instagram: '@munchies_newtown',
     phone: '+91 98311 23456',
     image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80',
-    logo: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png',
     verified: true
   },
   {
@@ -391,7 +391,7 @@ export const studentBusinesses = [
     instagram: '@greenleaf_kolkata',
     phone: '+91 98355 67890',
     image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80',
-    logo: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png',
     verified: true
   }
 ];

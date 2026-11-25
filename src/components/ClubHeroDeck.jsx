@@ -1,154 +1,253 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Zap, Users } from 'lucide-react';
+import { ArrowRight, Zap, Users, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const CARD_THEMES = [
+  {
+    badge: 'TECH',
+    badgeIcon: '💻',
+    dark: '#0C4A6E',
+    accent: '#0284C7',
+    pillBg: '#E0F2FE',
+    pillText: '#0C4A6E',
+    softBlob: 'rgba(186, 230, 253, 0.75)',
+    iconBg: '#F0F9FF'
+  },
+  {
+    badge: 'MUSIC',
+    badgeIcon: '🎵',
+    dark: '#881337',
+    accent: '#E11D48',
+    pillBg: '#FEF08A',
+    pillText: '#881337',
+    softBlob: 'rgba(255, 228, 230, 0.75)',
+    iconBg: '#FFF1F2'
+  },
+  {
+    badge: 'STARTUP',
+    badgeIcon: '🚀',
+    dark: '#4C1D95',
+    accent: '#7C3AED',
+    pillBg: '#EDE9FE',
+    pillText: '#4C1D95',
+    softBlob: 'rgba(237, 233, 254, 0.75)',
+    iconBg: '#F5F3FF'
+  }
+];
 
 export default function ClubHeroDeck({ clubs = [] }) {
-  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(1);
+  const dragStartX = useRef(null);
 
   if (!clubs || clubs.length < 3) return null;
 
-  // 3 featured clubs configured with:
-  // 1. Sky Blue Card (Left, Tech/Turing)
-  // 2. Pure White Card with soft subtle accents (Center, Music/Cadence)
-  // 3. White & Red Mixture Card (Right, Startup/E-Cell)
-  const deckClubs = [
-    {
-      ...clubs[0],
-      badge: 'TECH',
-      badgeIcon: '💻',
-      theme: 'sky-blue',
-      bgClass: 'bg-gradient-to-br from-[#0284C7] via-[#0369A1] to-[#075985] text-white border border-sky-300/40 shadow-[0_30px_60px_rgba(2,132,199,0.45)]',
-      iconBg: 'bg-gradient-to-tr from-[#0284C7] to-[#38BDF8] shadow-lg shadow-sky-400/40',
-      pillBg: 'bg-white/20 text-white border border-white/25',
-      boxBg: 'bg-[#034D75]/60 border border-sky-300/25',
-      btnBg: 'bg-[#38BDF8] hover:bg-[#0284C7] text-[#082F49] font-black shadow-lg shadow-sky-400/35',
-      blobColor: 'radial-gradient(circle at 85% 15%, rgba(125, 211, 252, 0.45) 0%, rgba(3, 105, 161, 0.2) 60%, transparent 80%)'
-    },
-    {
-      ...clubs[1],
-      badge: 'MUSIC',
-      badgeIcon: '🎵',
-      theme: 'white',
-      bgClass: 'bg-white text-[#0F172A] shadow-[0_35px_80px_rgba(0,0,0,0.35)] border border-black/5',
-      iconBg: 'bg-gradient-to-br from-[#4338CA] via-[#6366F1] to-[#8B5CF6] shadow-xl shadow-indigo-500/40',
-      pillBg: 'bg-[#EEF2FF] text-[#4338CA] border border-indigo-200/80',
-      boxBg: 'bg-[#F8FAFC] border border-slate-200/80',
-      btnBg: 'bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-xl shadow-blue-600/35',
-      blobColor: 'radial-gradient(circle at 85% 15%, rgba(165, 180, 252, 0.45) 0%, rgba(224, 231, 255, 0.2) 60%, transparent 80%)'
-    },
-    {
-      ...clubs[2],
-      badge: 'STARTUP',
-      badgeIcon: '🚀',
-      theme: 'white-red-mix',
-      bgClass: 'bg-[#FFF5F6] text-[#881337] border-2 border-[#FECDD3] shadow-[0_30px_60px_rgba(225,29,72,0.25)]',
-      iconBg: 'bg-gradient-to-tr from-[#E11D48] to-[#FB7185] shadow-lg shadow-rose-500/35 text-white',
-      pillBg: 'bg-white text-[#E11D48] border border-rose-300 shadow-xs',
-      boxBg: 'bg-white border border-rose-200/80',
-      btnBg: 'bg-[#E11D48] hover:bg-[#BE123C] text-white shadow-lg shadow-rose-500/35',
-      blobColor: 'radial-gradient(circle at 85% 15%, rgba(254, 205, 211, 0.6) 0%, rgba(255, 241, 242, 0.3) 60%, transparent 80%)'
-    }
-  ];
+  const deckClubs = clubs.slice(0, 3).map((club, i) => ({
+    ...club,
+    ...CARD_THEMES[i % CARD_THEMES.length]
+  }));
+
+  const total = deckClubs.length;
+
+  const handlePrev = () => setActiveIndex((prev) => (prev - 1 + total) % total);
+  const handleNext = () => setActiveIndex((prev) => (prev + 1) % total);
+
+  const handlePointerDown = (e) => {
+    dragStartX.current = e.clientX;
+  };
+
+  const handlePointerUp = (e) => {
+    if (dragStartX.current === null) return;
+    const diff = e.clientX - dragStartX.current;
+    dragStartX.current = null;
+    if (diff > 45) handlePrev();
+    else if (diff < -45) handleNext();
+  };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto h-[460px] sm:h-[490px] flex items-center justify-center my-2 overflow-visible select-none px-4">
-      <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center my-0 select-none px-4">
+      {/* Interactive 3D Card Stack */}
+      <div
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        className="relative w-full h-[370px] sm:h-[395px] flex items-center justify-center overflow-visible touch-pan-y cursor-grab active:cursor-grabbing"
+      >
         {deckClubs.map((club, idx) => {
-          const isCenter = idx === 1;
-          const isLeft = idx === 0;
-          const isRight = idx === 2;
-          const isHovered = hoveredIdx === idx;
+          // Relative position: 0 = center/active, -1 (or 2) = left, 1 (or -2) = right
+          const rel = (idx - activeIndex + total) % total;
+          const isCenter = rel === 0;
+          const isLeft = rel === total - 1;
+          const isRight = rel === 1;
 
-          const zIndex = isHovered ? 40 : isCenter ? 30 : 10;
+          const transformStyle = isCenter
+            ? 'translate3d(0px, -6px, 0px) rotate(0deg) scale(1)'
+            : isLeft
+            ? 'translate3d(clamp(-140px, -17vw, -55px), 16px, 0px) rotate(-6.5deg) scale(0.9)'
+            : 'translate3d(clamp(55px, 17vw, 140px), 16px, 0px) rotate(6.5deg) scale(0.9)';
 
           return (
             <div
               key={club.id || idx}
-              onMouseEnter={() => setHoveredIdx(idx)}
-              onMouseLeave={() => setHoveredIdx(null)}
-              className={`absolute w-[300px] sm:w-[370px] md:w-[410px] rounded-[38px] p-6 sm:p-7 text-left transition-all duration-500 ease-out cursor-pointer font-arc-display ${club.bgClass}`}
+              onClick={() => {
+                if (!isCenter) setActiveIndex(idx);
+              }}
+              className={`absolute w-[300px] sm:w-[370px] md:w-[410px] bg-[#FFFDF5] rounded-[24px] border-[2.5px] p-5 sm:p-6 text-left transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] font-arc-display ${
+                isCenter ? 'cursor-default' : 'cursor-pointer opacity-95 hover:opacity-100'
+              }`}
               style={{
-                transform: isHovered
-                  ? `translate3d(${isLeft ? 'clamp(-130px, -18vw, -60px)' : isRight ? 'clamp(60px, 18vw, 130px)' : '0px'}, -14px, 0px) rotate(0deg) scale(1.04)`
-                  : isCenter
-                  ? 'translate3d(0px, -4px, 0px) rotate(0deg) scale(1)'
-                  : isLeft
-                  ? 'translate3d(clamp(-130px, -16vw, -65px), 14px, 0px) rotate(-6.5deg) scale(0.92)'
-                  : 'translate3d(clamp(65px, 16vw, 130px), 14px, 0px) rotate(6.5deg) scale(0.92)',
+                transform: transformStyle,
                 transformOrigin: 'bottom center',
-                zIndex: zIndex
+                zIndex: isCenter ? 30 : isRight ? 20 : 10,
+                borderColor: club.dark,
+                boxShadow: `5px 5px 0px ${club.dark}`
               }}
             >
-              {/* Decorative top-right organic flow blob backdrop */}
-              <div 
-                className="absolute top-0 right-0 w-48 h-40 rounded-tr-[38px] rounded-bl-[110px] pointer-events-none"
-                style={{ background: club.blobColor }}
-              />
+              {/* Decorative Background Accents */}
+              <div className="absolute inset-0 rounded-[22px] overflow-hidden pointer-events-none">
+                <div className="absolute -top-8 -right-8 w-44 h-44 rounded-full" style={{ backgroundColor: club.softBlob }} />
+                <div
+                  className="absolute bottom-0 left-0 w-14 h-10 opacity-20"
+                  style={{
+                    backgroundImage:
+                      `linear-gradient(45deg, ${club.accent} 25%, transparent 25%), linear-gradient(-45deg, ${club.accent} 25%, transparent 25%), linear-gradient(45deg, transparent 75%, ${club.accent} 75%), linear-gradient(-45deg, transparent 75%, ${club.accent} 75%)`,
+                    backgroundSize: '12px 12px',
+                    backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0'
+                  }}
+                />
+              </div>
 
-              {/* Top Row: App-like squircle icon & Category Pill */}
-              <div className="flex items-center justify-between mb-5 relative z-10">
-                {/* 3D App Squircle Icon */}
-                <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-[22px] ${club.iconBg} flex items-center justify-center text-white text-3xl sm:text-4xl shadow-inner relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-white/25 pointer-events-none" />
-                  <span className="relative z-10 drop-shadow-sm">{club.avatar}</span>
+              {/* Top Row: Pop-out Squircle Icon & Category Pill */}
+              <div className="flex items-start justify-between mb-3 relative z-10">
+                <div className="relative -mt-9 -ml-2 -rotate-[4deg] shrink-0">
+                  <div
+                    className="bg-white p-1.5 rounded-[20px] border-[2.5px]"
+                    style={{ borderColor: club.dark, boxShadow: `4px 4px 0px ${club.dark}` }}
+                  >
+                    <div
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-[14px] flex items-center justify-center text-white text-3xl sm:text-4xl relative overflow-hidden"
+                      style={{ backgroundColor: club.accent }}
+                    >
+                      <span className="relative z-10 drop-shadow-sm">{club.avatar}</span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Category Pill with Icon */}
-                <span className={`font-arc-display text-xs font-extrabold uppercase tracking-wider ${club.pillBg} px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-xs`}>
+                <span
+                  className="font-arc-mono text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3.5 py-1.5 rounded-full border-2 flex items-center gap-1.5"
+                  style={{
+                    backgroundColor: club.pillBg,
+                    color: club.pillText,
+                    borderColor: club.dark,
+                    boxShadow: `3px 3px 0px ${club.dark}`
+                  }}
+                >
                   <span>{club.badgeIcon}</span>
                   <span>{club.badge}</span>
                 </span>
               </div>
 
-              {/* Club Title */}
-              <h3 className="font-extrabold text-2xl sm:text-[26px] mb-1.5 leading-tight tracking-tight">
-                {club.name}
-              </h3>
+              {/* Club Title & Underline */}
+              <div className="relative z-10 mb-2">
+                <h3 className="font-black text-2xl sm:text-[26px] text-[#140508] leading-tight tracking-tight">
+                  {club.name}
+                </h3>
+                <div className="w-24 h-1 rounded-full mt-1.5 opacity-85" style={{ backgroundColor: club.accent }} />
+              </div>
 
               {/* Tagline */}
-              <p className="font-sans text-xs sm:text-[13.5px] opacity-75 font-medium leading-relaxed mb-5 line-clamp-1 sm:line-clamp-none">
+              <p className="relative z-10 font-sans text-xs sm:text-[13px] text-[#475569] font-semibold leading-relaxed mb-4 line-clamp-2">
                 {club.tagline}
               </p>
 
               {/* Currently Recruiting Card Box */}
-              <div className={`${club.boxBg} rounded-2xl p-4 mb-6 shadow-xs`}>
-                <div className="flex items-center gap-1.5 text-amber-500 font-extrabold text-[11px] uppercase tracking-wider mb-1">
-                  <Zap size={13} className="fill-amber-400 stroke-amber-500" />
-                  <span>CURRENTLY RECRUITING:</span>
+              <div
+                className="relative z-10 bg-white border-2 rounded-[22px] px-4 py-3 mb-5 flex items-center gap-3"
+                style={{ borderColor: club.dark, boxShadow: `3px 3px 0px ${club.dark}` }}
+              >
+                <div
+                  className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: club.iconBg, color: club.accent }}
+                >
+                  <Zap size={16} className="stroke-[2.4]" />
                 </div>
-                <p className="font-sans text-xs sm:text-[13px] font-bold leading-snug line-clamp-2 sm:line-clamp-none opacity-90">
-                  {club.openRoles}
-                </p>
+                <div className="w-px h-7 bg-black/10 shrink-0" />
+                <div className="min-w-0 text-left flex-1">
+                  <span className="block font-arc-mono text-[10px] font-black uppercase tracking-wider" style={{ color: club.accent }}>
+                    CURRENTLY RECRUITING:
+                  </span>
+                  <p className="font-sans text-xs font-bold leading-snug line-clamp-1 text-[#140508]">
+                    {club.openRoles}
+                  </p>
+                </div>
               </div>
 
               {/* Bottom Row: Active Members & Explore Club Pill */}
               <div className="flex items-center justify-between pt-1 relative z-10">
-                <span className="text-xs sm:text-[13px] font-bold opacity-80 flex items-center gap-1.5 font-sans">
-                  <Users size={15} className="opacity-70" />
+                <span className="text-xs sm:text-[13px] font-bold flex items-center gap-1.5 font-sans" style={{ color: club.dark }}>
+                  <Users size={15} style={{ color: club.accent }} />
                   <span>{club.membersCount} Active Members</span>
                 </span>
 
                 <Link
                   href={`#${club.id}`}
                   onClick={(e) => {
+                    e.stopPropagation();
                     const target = document.getElementById(club.id);
                     if (target) {
                       e.preventDefault();
                       target.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className={`inline-flex items-center gap-2 ${club.btnBg} px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold uppercase tracking-wide transition-all duration-200 active:scale-95`}
+                  style={{
+                    backgroundColor: club.accent,
+                    borderColor: club.dark,
+                    boxShadow: `4px 4px 0px ${club.dark}`
+                  }}
+                  className="inline-flex items-center gap-1.5 text-white px-4 sm:px-5 py-2.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px]"
                 >
                   <span>EXPLORE CLUB</span>
                   <ArrowRight size={14} className="stroke-[2.8]" />
                 </Link>
               </div>
-
             </div>
           );
         })}
+      </div>
+
+      {/* Interactive Controls: Prev / Dots / Next */}
+      <div className="flex items-center gap-3 mt-2 z-30">
+        <button
+          type="button"
+          onClick={handlePrev}
+          aria-label="Previous club card"
+          className="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/20 flex items-center justify-center transition-all active:scale-90 cursor-pointer backdrop-blur-sm"
+        >
+          <ChevronLeft size={18} />
+        </button>
+
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/20 border border-white/15 backdrop-blur-sm">
+          {deckClubs.map((club, idx) => (
+            <button
+              key={club.id || idx}
+              type="button"
+              onClick={() => setActiveIndex(idx)}
+              aria-label={`Show ${club.name}`}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                idx === activeIndex ? 'w-6 bg-[#FEF08A]' : 'w-2 bg-white/40 hover:bg-white/70'
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={handleNext}
+          aria-label="Next club card"
+          className="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/20 flex items-center justify-center transition-all active:scale-90 cursor-pointer backdrop-blur-sm"
+        >
+          <ChevronRight size={18} />
+        </button>
       </div>
     </div>
   );

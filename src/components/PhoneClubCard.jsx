@@ -1,10 +1,40 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { Sparkles, Users, ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { Sparkles, Users, ArrowUpRight, X, Check } from 'lucide-react';
 
-export default function PhoneClubCard({ club }) {
+const CLUB_PALETTES = [
+  { dark: '#881337', accent: '#E11D48', pillBg: '#FEF08A', pillText: '#881337', softBlob: 'rgba(255, 228, 230, 0.75)', iconBg: '#FFF1F2' },
+  { dark: '#1E1B4B', accent: '#4F46E5', pillBg: '#E0E7FF', pillText: '#1E1B4B', softBlob: 'rgba(224, 231, 255, 0.75)', iconBg: '#EEF2FF' },
+  { dark: '#064E3B', accent: '#059669', pillBg: '#D1FAE5', pillText: '#064E3B', softBlob: 'rgba(209, 250, 229, 0.75)', iconBg: '#ECFDF5' },
+  { dark: '#7C2D12', accent: '#EA580C', pillBg: '#FFEDD5', pillText: '#7C2D12', softBlob: 'rgba(255, 237, 213, 0.75)', iconBg: '#FFF7ED' },
+  { dark: '#4C1D95', accent: '#7C3AED', pillBg: '#EDE9FE', pillText: '#4C1D95', softBlob: 'rgba(237, 233, 254, 0.75)', iconBg: '#F5F3FF' },
+  { dark: '#134E4A', accent: '#0D9488', pillBg: '#CCFBF1', pillText: '#134E4A', softBlob: 'rgba(204, 251, 241, 0.75)', iconBg: '#F0FDFA' }
+];
+
+export default function PhoneClubCard({ club, isFollowed, onToggleFollow }) {
+  const [showModal, setShowModal] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  const hash = String(club?.id || club?.name || '').split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  const p = CLUB_PALETTES[hash % CLUB_PALETTES.length];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showModal]);
   // Dynamic aesthetic themes per club type matching the clean iOS squircle card design
   const getCardTheme = () => {
     switch (club.id) {
@@ -66,66 +96,327 @@ export default function PhoneClubCard({ club }) {
   };
 
   const theme = getCardTheme();
+  const clubBgImage =
+    club.image ||
+    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80';
 
   return (
-    <div className={`relative w-full rounded-[38px] p-6 sm:p-7 border ${theme.bgClass} flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl overflow-hidden group select-none`}>
+    <div className="relative w-full pt-5 pb-3 px-1 font-arc-display select-none group">
       
-      {/* Soft gradient ambient bloom at top-right */}
-      <div 
-        className="absolute top-0 right-0 w-52 h-44 rounded-tr-[38px] rounded-bl-[120px] pointer-events-none"
-        style={{ background: theme.blobBg }}
+      {/* Layered Tilted Backing Cards */}
+      <div
+        aria-hidden="true"
+        style={{ backgroundColor: p.dark }}
+        className="absolute inset-x-2 top-6 bottom-3 rounded-[24px] -rotate-[2.2deg] -translate-x-1 translate-y-1 pointer-events-none transition-transform duration-300 group-hover:-rotate-[3.2deg]"
+      />
+      <div
+        aria-hidden="true"
+        style={{ backgroundColor: p.accent }}
+        className="absolute inset-x-2 top-6 bottom-3 rounded-[24px] rotate-[1.6deg] translate-y-2 pointer-events-none transition-transform duration-300 group-hover:rotate-[2.4deg]"
       />
 
-      <div className="relative z-10">
-        {/* Top Row: 3D Squircle Icon + Category Pill */}
-        <div className="flex items-center justify-between mb-5">
-          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-[22px] ${theme.iconBg} text-white text-3xl flex items-center justify-center overflow-hidden relative shadow-md`}>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-white/25 pointer-events-none" />
-            <span className="relative z-10 drop-shadow-sm">{club.avatar}</span>
+      {/* 3D Flip Container (Click once to flip) */}
+      <div
+        onClick={() => setIsFlipped((prev) => !prev)}
+        className="relative cursor-pointer transition-transform duration-300 group-hover:-translate-y-1"
+        style={{ perspective: '1200px' }}
+      >
+        <div
+          className="relative transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{
+            transformStyle: 'preserve-3d',
+            WebkitTransformStyle: 'preserve-3d',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+          }}
+        >
+          {/* FRONT FACE */}
+          <div
+            className={`relative bg-[#FFFDF5] rounded-[24px] border-[2.5px] p-5 sm:p-6 flex flex-col justify-between overflow-visible transition-opacity duration-150 ${isFlipped ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: 'rotateY(0deg)',
+              borderColor: p.dark,
+              boxShadow: `4px 4px 0px ${p.dark}`
+            }}
+          >
+        {/* Subtle Decorative Background Accents */}
+        <div className="absolute inset-0 rounded-[22px] overflow-hidden pointer-events-none">
+          <div className="absolute -top-8 -right-8 w-44 h-44 rounded-full" style={{ backgroundColor: p.softBlob }} />
+          <div
+            className="absolute bottom-0 left-0 w-14 h-10 opacity-20"
+            style={{
+              backgroundImage:
+                `linear-gradient(45deg, ${p.accent} 25%, transparent 25%), linear-gradient(-45deg, ${p.accent} 25%, transparent 25%), linear-gradient(45deg, transparent 75%, ${p.accent} 75%), linear-gradient(-45deg, transparent 75%, ${p.accent} 75%)`,
+              backgroundSize: '12px 12px',
+              backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0'
+            }}
+          />
+        </div>
+
+        <div className="relative z-10">
+          {/* Top Row: Pop-Out Club Logo Sticker + Category Pill */}
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <div className="relative -mt-10 -ml-2 -rotate-[4deg] shrink-0">
+              <svg className="absolute -top-3 -left-3 w-6 h-6 pointer-events-none" style={{ color: p.accent }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round">
+                <path d="M12 2v5M4 6l4 3M2 14h5" />
+              </svg>
+              <div
+                className="bg-white p-1.5 rounded-[20px] border-[2.5px]"
+                style={{ borderColor: p.dark, boxShadow: `4px 4px 0px ${p.dark}` }}
+              >
+                <div
+                  className="w-15 h-15 sm:w-16 sm:h-16 rounded-[14px] text-white text-3xl flex items-center justify-center overflow-hidden relative"
+                  style={{ backgroundColor: p.accent }}
+                >
+                  {club.logo ? (
+                    <img src={club.logo} alt={club.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="drop-shadow-sm">{club.avatar}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <span
+              className="font-arc-mono text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3.5 py-1.5 rounded-full border-2 truncate max-w-[175px]"
+              style={{
+                backgroundColor: p.pillBg,
+                color: p.pillText,
+                borderColor: p.dark,
+                boxShadow: `3px 3px 0px ${p.dark}`
+              }}
+            >
+              {club.category}
+            </span>
           </div>
 
-          <span className={`font-arc-display text-[11px] sm:text-xs font-extrabold uppercase tracking-wider ${theme.pillBg} px-3.5 sm:px-4 py-1.5 rounded-full shadow-xs`}>
-            {club.category}
-          </span>
+          {/* Club Title & Brush Underline */}
+          <div className="mb-2">
+            <h3 className="font-black text-xl sm:text-[24px] text-[#140508] leading-[1.15] tracking-tight line-clamp-2">
+              {club.name}
+            </h3>
+            <div className="w-24 h-1 rounded-full mt-1.5 opacity-85" style={{ backgroundColor: p.accent }} />
+          </div>
+          
+          {/* Tagline */}
+          <p className="font-sans text-xs sm:text-[13px] text-[#475569] font-semibold leading-snug mb-4 line-clamp-2">
+            {club.tagline}
+          </p>
+
+          {/* Currently Recruiting Pill Box */}
+          <div
+            className="bg-white border-2 rounded-[22px] px-4 py-3 flex items-center gap-3 mb-5"
+            style={{ borderColor: p.dark, boxShadow: `3px 3px 0px ${p.dark}` }}
+          >
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+              style={{ backgroundColor: p.iconBg, color: p.accent }}
+            >
+              <Sparkles size={17} className="stroke-[2.4]" />
+            </div>
+            <div className="w-px h-8 bg-black/10 shrink-0" />
+            <div className="min-w-0 text-left flex-1">
+              <span className="block font-arc-mono text-[10px] font-black uppercase tracking-wider" style={{ color: p.accent }}>
+                CURRENTLY RECRUITING:
+              </span>
+              <span className="block font-sans text-xs font-bold text-[#140508] leading-snug line-clamp-2">
+                {club.openRoles || 'Executive members, Outreach, Media team'}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Club Title */}
-        <h3 className="font-extrabold text-xl sm:text-[23px] text-[#0F172A] mb-1.5 leading-snug tracking-tight group-hover:text-[#E11D48] transition-colors">
-          {club.name}
-        </h3>
-        
-        {/* Tagline */}
-        <p className="font-sans text-xs sm:text-[13px] text-[#475569] font-medium leading-relaxed mb-5">
-          {club.tagline}
-        </p>
-
-        {/* Currently Recruiting Box */}
-        <div className={`p-4 rounded-2xl ${theme.boxBg} shadow-xs mb-5`}>
-          <span className="text-[10.5px] font-extrabold text-amber-500 flex items-center gap-1.5 uppercase tracking-wider mb-1">
-            <Sparkles size={12} className="fill-amber-400 stroke-amber-500" />
-            <span>CURRENTLY RECRUITING:</span>
-          </span>
-          <span className="text-xs sm:text-[12.5px] font-sans text-[#1E293B] font-bold block leading-snug">
-            {club.openRoles || 'Executive members, Outreach, Media team'}
-          </span>
+        {/* Bottom Row: Active Members & Explore Club CTA */}
+        <div className="relative z-10 flex items-center justify-between gap-3 pt-1">
+          <div className="min-w-0">
+            <span className="text-xs font-bold flex items-center gap-1.5 font-sans truncate" style={{ color: p.dark }}>
+              <Users size={15} style={{ color: p.accent }} className="shrink-0" />
+              <span className="truncate">{club.membersCount} Active Members</span>
+            </span>
+            <div className="w-20 h-0.5 rounded-full mt-1 opacity-60" style={{ backgroundColor: p.accent }} />
+          </div>
+          
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowModal(true);
+            }}
+            style={{
+              backgroundColor: p.accent,
+              borderColor: p.dark,
+              boxShadow: `4px 4px 0px ${p.dark}`
+            }}
+            className="shrink-0 text-white font-arc-display font-black text-xs uppercase tracking-wider px-4 sm:px-5 py-2.5 rounded-xl border-2 hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] flex items-center gap-1.5 transition-all cursor-pointer"
+          >
+            <span>EXPLORE CLUB</span>
+            <ArrowUpRight size={14} className="stroke-[2.8]" />
+          </button>
         </div>
       </div>
 
-      {/* Bottom Row: Active Members & Explore Club Pill */}
-      <div className="relative z-10 pt-3 border-t border-black/5 flex items-center justify-between">
-        <span className="font-sans text-xs sm:text-[13px] text-[#64748B] font-bold flex items-center gap-1.5">
-          <Users size={15} className="opacity-70" />
-          <span>{club.membersCount} Active Members</span>
-        </span>
-        
-        <Link
-          href={`/clubs/${club.id}`}
-          className={`inline-flex items-center gap-1.5 ${theme.btnBg} px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wide transition-all duration-200 active:scale-95 cursor-pointer`}
+          {/* BACK FACE (Club Details + Recruiting & Members) */}
+          <div
+            className={`absolute inset-0 bg-[#FFFDF5] rounded-[24px] border-[2.5px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden transition-opacity duration-150 ${isFlipped ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)',
+              borderColor: p.dark,
+              boxShadow: `4px 4px 0px ${p.dark}`
+            }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span
+                  className="font-arc-mono text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full border-2"
+                  style={{ backgroundColor: p.pillBg, color: p.pillText, borderColor: p.dark }}
+                >
+                  ABOUT THIS CLUB
+                </span>
+                <span className="font-arc-mono text-[10px] font-bold opacity-60 uppercase" style={{ color: p.dark }}>
+                  Tap to flip back ↺
+                </span>
+              </div>
+
+              <p className="font-sans text-xs sm:text-[13.5px] text-[#140508] font-medium leading-relaxed mb-4 line-clamp-4">
+                {club.description || club.tagline || `Join ${club.name} at Amity University Kolkata for campus activities, workshops, and community meetups.`}
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div
+                className="bg-white border-2 rounded-2xl px-4 py-3"
+                style={{ borderColor: p.dark, boxShadow: `3px 3px 0px ${p.dark}` }}
+              >
+                <span className="block font-arc-mono text-[10px] font-black uppercase tracking-wider mb-0.5" style={{ color: p.accent }}>
+                  OPEN ROLES & COMMUNITY
+                </span>
+                <span className="block font-sans text-xs font-bold text-[#140508] line-clamp-2">
+                  {club.openRoles || 'Executive members, Outreach, Media team'}
+                </span>
+                <span className="block font-sans text-xs font-semibold text-[#475569] mt-0.5">
+                  👥 {club.membersCount} Active Members · {club.category}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-xs font-bold truncate font-sans" style={{ color: p.dark }}>
+                  ✨ {club.name}
+                </span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowModal(true);
+                  }}
+                  style={{
+                    backgroundColor: p.accent,
+                    borderColor: p.dark,
+                    boxShadow: `4px 4px 0px ${p.dark}`
+                  }}
+                  className="shrink-0 text-white font-arc-display font-black text-xs uppercase tracking-wider px-4 sm:px-5 py-2.5 rounded-xl border-2 hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] flex items-center gap-1.5 transition-all cursor-pointer"
+                >
+                  <span>EXPLORE CLUB</span>
+                  <ArrowUpRight size={14} className="stroke-[2.8]" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Club Explore Pop-Up Dialog */}
+      {showModal && mounted && typeof document !== 'undefined' && createPortal(
+        <div
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto"
+          onClick={() => setShowModal(false)}
         >
-          <span>EXPLORE CLUB</span>
-          <ArrowUpRight size={14} className="stroke-[2.8]" />
-        </Link>
-      </div>
+          <div
+            className="relative w-full max-w-[440px] bg-white rounded-[32px] p-6 sm:p-7 shadow-2xl border-2 border-[#E11D48]/20 text-[#0F172A] font-arc-display my-auto animate-nav-pop"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowModal(false)}
+              aria-label="Close"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#FFF1F2] hover:bg-[#E11D48] text-[#E11D48] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <X size={17} className="stroke-[2.5]" />
+            </button>
+
+            <div className="flex items-center gap-4 mb-5 pr-8">
+              <div className={`w-16 h-16 rounded-[20px] ${theme.iconBg} text-white text-3xl flex items-center justify-center overflow-hidden shrink-0 shadow-md`}>
+                {club.logo ? (
+                  <img src={club.logo} alt={club.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span>{club.avatar}</span>
+                )}
+              </div>
+              <div>
+                <span className={`inline-block font-arc-mono text-[10px] font-bold uppercase tracking-wider ${theme.pillBg} px-2.5 py-0.5 rounded-full mb-1`}>
+                  {club.category}
+                </span>
+                <h3 className="font-extrabold text-xl sm:text-2xl text-[#0F172A] leading-tight">
+                  {club.name}
+                </h3>
+              </div>
+            </div>
+
+            <p className="font-sans text-xs sm:text-sm text-[#475569] leading-relaxed mb-4">
+              {club.tagline}
+            </p>
+
+            <div className="bg-[#FFFDF5] border border-rose-100 rounded-2xl p-4 mb-5">
+              <span className="text-[10.5px] font-extrabold text-amber-500 flex items-center gap-1.5 uppercase tracking-wider mb-1">
+                <Sparkles size={12} className="fill-amber-400 stroke-amber-500" />
+                <span>CURRENTLY RECRUITING:</span>
+              </span>
+              <p className="font-sans text-xs sm:text-[13px] font-bold text-[#1E293B]">
+                {club.openRoles || 'Executive members, Outreach, Media team'}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-black/10">
+              <span className="font-sans text-xs font-bold text-[#64748B] flex items-center gap-1.5">
+                <Users size={15} />
+                <span>{club.membersCount} Active Members</span>
+              </span>
+
+              <div className="flex items-center gap-2">
+                <a
+                  href={club.whatsappGroup || `https://wa.me/?text=${encodeURIComponent(`Hi! I'd like to join the ${club.name} WhatsApp group on Afterclass.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white px-4 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all active:scale-95 shadow-sm cursor-pointer"
+                >
+                  <svg className="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+                  </svg>
+                  <span>Join WhatsApp Group</span>
+                </a>
+
+                {onToggleFollow && (
+                  <button
+                    type="button"
+                    onClick={() => onToggleFollow(club.id)}
+                    className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+                      isFollowed
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-[#E11D48] hover:bg-[#BE123C] text-white'
+                    }`}
+                  >
+                    {isFollowed && <Check size={14} className="stroke-[2.8]" />}
+                    <span>{isFollowed ? 'Following' : 'Follow'}</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

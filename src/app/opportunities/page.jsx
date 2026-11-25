@@ -30,7 +30,17 @@ export default function OpportunitiesPage() {
       
       {/* 1. HERO SECTION */}
       <section className="arc-grain-red text-white pb-16 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto pt-8 pb-12 text-center flex flex-col items-center">
+        {/* Blended Opportunities Hero Background Image */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <img
+            src="/images/opportunities-hero-bg.jpg"
+            alt=""
+            className="w-full h-full object-cover object-bottom opacity-70"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#E11D48] via-[#E11D48]/40 to-[#E11D48]/80" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto pt-8 pb-12 text-center flex flex-col items-center px-4">
           <div className="inline-flex items-center gap-2 bg-[#881337] px-4 py-1.5 rounded-full font-arc-mono text-xs uppercase tracking-wider text-[#FFFDF5] mb-4 border border-white/15">
             <Briefcase size={13} />
             <span>CAREER & AUDITIONS</span>

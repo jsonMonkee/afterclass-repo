@@ -1,16 +1,28 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default function SmoothScrollProvider({ children }) {
+  const pathname = usePathname();
+  const disableLenis = pathname?.startsWith('/clubs') || pathname?.startsWith('/dhanda');
+
   useEffect(() => {
     // Register ScrollTrigger with GSAP
     if (typeof window !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
     }
+
+    if (disableLenis) return;
+
+    // Use native hardware-accelerated scrolling on touch/mobile devices to prevent scroll lag
+    const isTouchDevice =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window);
+    if (isTouchDevice) return;
 
     // Initialize Lenis smooth scroll
     const lenis = new Lenis({
@@ -37,7 +49,7 @@ export default function SmoothScrollProvider({ children }) {
       gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
-  }, []);
+  }, [disableLenis]);
 
   return <>{children}</>;
 }

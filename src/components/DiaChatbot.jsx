@@ -6,21 +6,19 @@ import {
   X, 
   Send, 
   Sparkles, 
-  Zap, 
   Calendar, 
-  Users, 
-  HelpCircle, 
-  ChevronRight,
-  Maximize2,
-  Minimize2,
-  RotateCcw
+  RotateCcw,
+  Star,
+  Trophy,
+  Utensils,
+  Ticket
 } from 'lucide-react';
 
 const SUGGESTED_QUESTIONS = [
-  "Auditions kab aur kahan hain?",
-  "Best coding club kaunsa hai?",
-  "AmiFIESTA passes kaise milenge?",
-  "Major Arterial Rd campus canteen menu"
+  { text: "Auditions kab aur kahan hain?", icon: Star },
+  { text: "Best coding club kaunsa hai?", icon: Trophy },
+  { text: "Major Arterial Rd campus canteen menu", icon: Utensils },
+  { text: "AmiFIESTA passes kaise milenge?", icon: Ticket }
 ];
 
 const INITIAL_MESSAGES = [
@@ -111,194 +109,212 @@ export default function DiaChatbot() {
   return (
     <div className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 select-none">
       
-      {/* 1. CHAT WINDOW POPUP (Outward-Facing Scalloped Outer Edge with Thin Inner Red Border & Curved Corners) */}
+      {/* 1. CHAT WINDOW POPUP (Playful Campus Magazine & Sticker Card Design) */}
       {isOpen && (
-        <div 
-          className="mb-4 w-[calc(100vw-2rem)] sm:w-[410px] h-[550px] max-h-[82vh] bg-[#FFFDF5] rounded-[32px] flex flex-col overflow-visible animate-nav-pop backdrop-blur-2xl right-0 relative"
-          style={{
-            boxShadow: '0 30px 70px -10px rgba(0, 0, 0, 0.4), 0 15px 35px -5px rgba(225, 29, 72, 0.35)'
-          }}
-        >
-          {/* Outward-facing Scallop Perimeter Edge (Joined seamlessly with corner caps) */}
-          <div className="scallop-chat-top" />
-          <div className="scallop-chat-bottom" />
-          <div className="scallop-chat-left" />
-          <div className="scallop-chat-right" />
+        <div className="mb-4 w-[calc(100vw-2rem)] sm:w-[410px] h-[560px] max-h-[82vh] relative animate-nav-pop overflow-visible">
+          {/* Crimson Offset Backing Layer */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[#E11D48] rounded-[34px] translate-y-1.5 -translate-x-1 rotate-[-1.5deg] shadow-[0_25px_60px_rgba(0,0,0,0.45)] pointer-events-none"
+          />
 
-          {/* Seamless Curved Corner Scallop Caps */}
-          <div className="scallop-corner-tl" />
-          <div className="scallop-corner-tr" />
-          <div className="scallop-corner-bl" />
-          <div className="scallop-corner-br" />
-
-          {/* Inner content wrapper with Curved Rounded Corners and Thin Red Border */}
-          <div className="w-full h-full rounded-[32px] border-[1.5px] border-[#E11D48] overflow-hidden flex flex-col relative z-20 bg-[#FFFDF5]">
-
-            {/* Top Bar with Scallop & Red Gradient */}
-          <div className="bg-gradient-to-r from-[#E11D48] via-[#881337] to-[#E11D48] text-white p-4.5 relative shrink-0">
-            <div className="flex items-center justify-between">
-              
-              {/* Bot Identity */}
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 relative shrink-0">
-                  <Image 
-                    src="/dia-banana.png" 
-                    alt="Choto Bantu AI" 
-                    width={36} 
-                    height={36}
-                    className="w-full h-full object-contain drop-shadow"
-                  />
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-arc-display font-extrabold text-base tracking-tight text-white">
-                      Choto Bantu
-                    </span>
-                    <span className="bg-[#FEF08A] text-[#881337] text-[9.5px] font-arc-mono font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider">
-                      AI 2.0
-                    </span>
-                  </div>
-                  <p className="text-[11px] font-arc-mono text-white/80">
-                    Amity Kolkata Companion
-                  </p>
-                </div>
-              </div>
-
-              {/* Action buttons */}
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setMessages(INITIAL_MESSAGES)}
-                  title="Reset conversation"
-                  className="p-1.5 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  <RotateCcw size={15} />
-                </button>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  title="Close chat"
-                  className="p-1.5 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-
+          {/* Main Cream/Blush Paper Card with Organic Wavy Paper-Cut SVG Silhouette */}
+          <div className="relative w-full h-full flex flex-col overflow-visible">
+            <svg
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
+              viewBox="0 0 410 560"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M 34,14 C 120,4 290,6 378,16 C 398,18 404,34 402,70 C 397,140 407,230 404,320 C 401,400 407,470 400,520 C 397,542 384,548 362,550 C 260,556 140,554 38,548 C 16,546 8,534 8,508 C 8,430 2,330 8,240 C 13,160 4,90 10,42 C 12,22 20,16 34,14 Z"
+                fill="#FFF6F2"
+                stroke="#FECDD3"
+                strokeWidth="2"
+              />
+            </svg>
+            
+            {/* Decorative Background Doodles (Soft pink wave + dashed paper plane + sparkle) */}
+            <div className="absolute inset-0 rounded-[32px] overflow-hidden pointer-events-none">
+              <div className="absolute -bottom-10 -left-10 w-64 h-44 bg-[#FECDD3]/45 rounded-full blur-xs" />
+              <svg className="absolute top-[52%] right-4 w-16 h-16 text-[#E11D48]/25" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.8" strokeDasharray="3 3">
+                <path d="M6 52 C 20 48, 30 34, 48 16" />
+                <path d="M48 16 L 34 20 L 44 30 Z" fill="currentColor" fillOpacity="0.25" strokeDasharray="none" />
+              </svg>
+              <Sparkles size={18} className="absolute bottom-36 left-10 text-[#FACC15]/70 fill-[#FACC15]/50" />
             </div>
 
-            {/* Scallop transition inside header */}
-            <div className="absolute -bottom-1 left-0 right-0 h-2 bg-repeat-x bg-[length:24px_8px] bg-[radial-gradient(circle_at_bottom,transparent_4px,#E11D48_4px)]"></div>
-          </div>
+            {/* Floating Top-Right Close & Reset Buttons */}
+            <div className="absolute -top-3 -right-2.5 z-40 flex items-center gap-1.5">
+              <button
+                onClick={() => setMessages(INITIAL_MESSAGES)}
+                title="Reset conversation"
+                aria-label="Reset conversation"
+                className="w-8 h-8 rounded-full bg-white hover:bg-[#FEF08A] text-[#881337] shadow-md border border-rose-100 flex items-center justify-center transition-all cursor-pointer active:scale-90"
+              >
+                <RotateCcw size={14} className="stroke-[2.4]" />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                title="Close chat"
+                aria-label="Close chat"
+                className="w-10 h-10 rounded-full bg-white hover:bg-[#FFF1F2] text-[#0F172A] shadow-lg border border-rose-100 flex items-center justify-center transition-all cursor-pointer active:scale-90"
+              >
+                <X size={18} className="stroke-[2.5]" />
+              </button>
+            </div>
 
-          {/* Quick Notice Pill Banner in Chatbot (Yellow/Red) */}
-          <div className="bg-[#FEF08A] px-4 py-2 flex items-center justify-between text-[#881337] text-[11px] font-arc-mono font-bold">
-            <span className="flex items-center gap-1.5 truncate">
-              <Zap size={12} className="text-[#E11D48] shrink-0" />
-              <span>Campus live: 3 fests & auditions active</span>
-            </span>
-            <span className="text-[10px] uppercase tracking-wider text-[#881337]/80 shrink-0">
-              Today
-            </span>
-          </div>
+            {/* Tilted Crimson Header Sticker */}
+            <div className="relative z-30 -mt-4 mx-3 sm:mx-4 mr-14 -rotate-[1.5deg] bg-gradient-to-r from-[#E11D48] via-[#D41840] to-[#BE123C] text-white rounded-2xl px-3.5 py-2.5 shadow-[0_10px_25px_rgba(225,29,72,0.35)] border border-white/20 flex items-center gap-3 shrink-0">
+              <div className="w-11 h-11 relative shrink-0 -my-1">
+                <Image 
+                  src="/dia-banana.png" 
+                  alt="Choto Bantu AI" 
+                  width={44} 
+                  height={44}
+                  className="w-full h-full object-contain drop-shadow-md"
+                />
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="font-arc-display font-black text-base sm:text-lg tracking-tight text-white leading-none">
+                    Choto Bantu
+                  </span>
+                </div>
+                <p className="text-[11px] font-sans font-medium text-white/85 mt-0.5 truncate">
+                  Amity Kolkata Companion
+                </p>
+              </div>
+            </div>
 
-          {/* Messages Feed with Banana + "What's up?" Watermark Pattern */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 chat-pattern-bananas relative">
-            {messages.map((msg, index) => {
-              const isBot = msg.sender === 'bot';
-              return (
-                <div 
-                  key={index}
-                  className={`flex items-end gap-2 relative z-10 ${isBot ? 'justify-start' : 'justify-end'}`}
-                >
-                  {isBot && (
-                    <div className="w-6 h-6 shrink-0 relative mb-1">
-                      <Image 
-                        src="/dia-banana.png" 
-                        alt="Dia" 
-                        width={24} 
-                        height={24}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  )}
+            {/* Announcement Ticker + Yellow TODAY Sticky Note */}
+            <div className="relative z-20 px-4 pt-3.5 pb-2 flex items-center justify-between gap-2 shrink-0">
+              <div className="flex-1 min-w-0 bg-white/75 border border-[#E11D48]/30 rounded-full px-3 py-1.5 flex items-center gap-2 shadow-2xs">
+                <Calendar size={13} className="text-[#E11D48] shrink-0" />
+                <span className="text-[11px] font-sans font-bold text-[#881337] truncate">
+                  Campus live: 3 fests & auditions active
+                </span>
+              </div>
+              <span className="shrink-0 bg-[#FDE047] text-[#881337] font-arc-mono font-black text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md shadow-sm rotate-[3deg] border border-[#FACC15]">
+                TODAY
+              </span>
+            </div>
 
+            {/* Messages Feed (Magazine / Sticker Cards) */}
+            <div className="flex-1 px-4 py-2 overflow-y-auto space-y-3.5 relative z-20">
+              {messages.map((msg, index) => {
+                const isBot = msg.sender === 'bot';
+                return (
                   <div 
-                    className={`max-w-[78%] rounded-2xl px-4 py-2.5 text-xs font-sans leading-relaxed shadow-sm ${
-                      isBot 
-                        ? 'bg-white/95 text-[#140508] border border-black/10 rounded-bl-xs backdrop-blur-xs' 
-                        : 'bg-[#E11D48] text-white font-medium rounded-br-xs'
-                    }`}
+                    key={index}
+                    className={`flex items-start gap-2.5 ${isBot ? 'justify-start' : 'justify-end'}`}
                   >
-                    <p>{msg.text}</p>
-                    <span 
-                      className={`block text-[9px] font-arc-mono mt-1 ${
-                        isBot ? 'text-black/40' : 'text-white/70'
+                    {isBot && (
+                      <div className="w-9 h-9 rounded-full bg-[#FFE4E6] border border-[#FECDD3] p-1 shrink-0 mt-1 shadow-xs">
+                        <Image 
+                          src="/dia-banana.png" 
+                          alt="Choto Bantu" 
+                          width={32} 
+                          height={32}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
+
+                    <div 
+                      className={`max-w-[82%] rounded-[22px] px-4 py-3 text-xs sm:text-[13px] font-sans leading-relaxed ${
+                        isBot 
+                          ? 'bg-white/95 text-[#1E293B] border border-rose-100/80 shadow-[0_8px_24px_rgba(225,29,72,0.08)]' 
+                          : 'bg-[#E11D48] text-white font-medium shadow-[0_6px_16px_rgba(225,29,72,0.25)]'
                       }`}
                     >
-                      {msg.time}
-                    </span>
+                      <p>{msg.text}</p>
+                      <span 
+                        className={`block text-[10px] font-sans mt-1.5 ${
+                          isBot ? 'text-slate-400' : 'text-white/75'
+                        }`}
+                      >
+                        {msg.time}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {isTyping && (
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#FFE4E6] p-1 shrink-0">
+                    <Image 
+                      src="/dia-banana.png" 
+                      alt="Choto Bantu" 
+                      width={28} 
+                      height={28}
+                      className="w-full h-full object-contain animate-bounce"
+                    />
+                  </div>
+                  <div className="bg-white/95 px-4 py-2.5 rounded-[20px] border border-rose-100 flex items-center gap-1.5 shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E11D48] animate-pulse"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E11D48] animate-pulse delay-150"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FACC15] animate-pulse delay-300"></span>
                   </div>
                 </div>
-              );
-            })}
+              )}
 
-            {isTyping && (
-              <div className="flex items-center gap-2 relative z-10">
-                <div className="w-6 h-6 shrink-0 relative">
-                  <Image 
-                    src="/dia-banana.png" 
-                    alt="Dia" 
-                    width={24} 
-                    height={24}
-                    className="w-full h-full object-contain animate-bounce"
-                  />
-                </div>
-                <div className="bg-white/95 px-3.5 py-2 rounded-2xl rounded-bl-xs border border-black/10 flex items-center gap-1 shadow-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E11D48] animate-pulse"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E11D48] animate-pulse delay-150"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FEF08A] animate-pulse delay-300"></span>
-                </div>
-              </div>
-            )}
+              <div ref={messagesEndRef} />
+            </div>
 
-            <div ref={messagesEndRef} />
-          </div>
+            {/* Quick-Question Sticker Cards */}
+            <div className="px-4 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar relative z-20 shrink-0">
+              {SUGGESTED_QUESTIONS.map((q, i) => {
+                const IconComp = q.icon;
+                return (
+                  <button
+                    key={i}
+                    onClick={() => handleSend(q.text)}
+                    className="shrink-0 bg-[#FFE4E6]/90 hover:bg-[#FECDD3] text-[#881337] border border-[#FDA4AF]/40 px-3 py-2 rounded-2xl text-[11px] font-sans font-bold flex items-center gap-2 transition-all cursor-pointer shadow-2xs active:scale-95"
+                  >
+                    <IconComp size={13} className="text-[#E11D48] shrink-0 fill-[#E11D48]/15" />
+                    <span className="max-w-[145px] truncate">{q.text}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-          {/* Prompt Suggestions */}
-          <div className="px-3 py-2 bg-[#FFFDF5]/90 border-t border-black/5 flex items-center gap-1.5 overflow-x-auto no-scrollbar relative z-10">
-            {SUGGESTED_QUESTIONS.map((q, i) => (
-              <button
-                key={i}
-                onClick={() => handleSend(q)}
-                className="shrink-0 bg-[#FFFDF5] hover:bg-[#FEF08A]/60 text-[#881337] border border-[#E11D48]/25 hover:border-[#E11D48] px-2.5 py-1 rounded-full text-[10.5px] font-arc-mono transition-colors cursor-pointer shadow-xs"
+            {/* Input Bar with Decorative Megaphone */}
+            <div className="px-4 pb-4 pt-1.5 relative z-20 shrink-0">
+              {/* Cute Megaphone Sticker peeking bottom-left */}
+              <div
+                aria-hidden="true"
+                className="hidden sm:flex absolute -left-4 bottom-2 w-9 h-9 rounded-full bg-[#E11D48] text-white items-center justify-center shadow-md -rotate-12 border-2 border-white pointer-events-none z-30"
               >
-                {q}
-              </button>
-            ))}
-          </div>
+                <span className="text-base leading-none">📣</span>
+              </div>
 
-          {/* Input Box (Red / Yellow accent) */}
-          <div className="p-3 bg-white border-t border-black/10 flex items-center gap-2 relative z-10">
-            <input 
-              ref={inputRef}
-              type="text"
-              value={inputVal}
-              onChange={(e) => setInputVal(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Poocho Choto Bantu se kuch bhi... (e.g. fests, clubs)"
-              className="flex-1 bg-[#FFFDF5] border border-black/15 focus:border-[#E11D48] focus:ring-2 focus:ring-[#E11D48]/15 rounded-full px-4 py-2 text-xs text-[#000000] placeholder:text-black/40 outline-none transition-all shadow-inner"
-            />
-            <button
-              onClick={() => handleSend()}
-              disabled={!inputVal.trim()}
-              className="bg-[#E11D48] hover:bg-[#881337] disabled:opacity-40 text-white p-2.5 rounded-full transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
-            >
-              <Send size={15} />
-            </button>
-          </div>
+              <div className="bg-white border-[1.5px] border-[#E11D48]/40 focus-within:border-[#E11D48] rounded-full p-1.5 pl-3.5 flex items-center gap-2 shadow-sm">
+                <Sparkles size={14} className="text-[#E11D48] shrink-0" />
+                <input 
+                  ref={inputRef}
+                  type="text"
+                  value={inputVal}
+                  onChange={(e) => setInputVal(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Poocho Choto Bantu se kuch bhi..."
+                  className="flex-1 bg-transparent text-xs text-[#0F172A] placeholder:text-slate-400 outline-none min-w-0"
+                />
+                <button
+                  onClick={() => handleSend()}
+                  disabled={!inputVal.trim()}
+                  aria-label="Send message"
+                  className="bg-[#E11D48] hover:bg-[#BE123C] disabled:opacity-40 text-white w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95 shrink-0"
+                >
+                  <Send size={14} />
+                </button>
+              </div>
+            </div>
 
+          </div>
         </div>
-
-      </div>
-    )}
+      )}
 
       {/* 2. FLOATING TRIGGER BUTTON (Bare pixel banana icon - desktop / hidden on mobile if navbar action is present, or positioned above bottom bar) */}
       <div className="hidden sm:flex flex-col items-end">

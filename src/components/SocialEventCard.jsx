@@ -2,11 +2,61 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Share2, Check, X } from 'lucide-react';
+import { ArrowUpRight, Share2, Check, X, Calendar, Users } from 'lucide-react';
+
+const EVENT_THEMES = [
+  // 1. Red-colored card
+  {
+    dark: '#881337',
+    accent: '#E11D48',
+    accentHover: '#BE123C',
+    pillBg: '#FEF08A',
+    pillText: '#881337',
+    softBlob: 'rgba(255, 228, 230, 0.75)',
+    iconBg: '#FFF1F2'
+  },
+  // 2. Pink theme
+  {
+    dark: '#831843',
+    accent: '#EC4899',
+    accentHover: '#DB2777',
+    pillBg: '#FCE7F3',
+    pillText: '#831843',
+    softBlob: 'rgba(251, 207, 232, 0.75)',
+    iconBg: '#FDF2F8'
+  },
+  // 3. Sky blue theme
+  {
+    dark: '#0C4A6E',
+    accent: '#0284C7',
+    accentHover: '#0369A1',
+    pillBg: '#E0F2FE',
+    pillText: '#0C4A6E',
+    softBlob: 'rgba(186, 230, 253, 0.75)',
+    iconBg: '#F0F9FF'
+  },
+  // 4. Emerald theme
+  {
+    dark: '#064E3B',
+    accent: '#059669',
+    accentHover: '#047857',
+    pillBg: '#D1FAE5',
+    pillText: '#064E3B',
+    softBlob: 'rgba(209, 250, 229, 0.75)',
+    iconBg: '#ECFDF5'
+  }
+];
 
 export default function SocialEventCard({ event }) {
   const [copied, setCopied] = useState(false);
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const idNum = parseInt(String(event?.id || '').replace(/\D/g, ''), 10);
+  const themeIdx = Number.isFinite(idNum) && idNum > 0
+    ? (idNum - 1) % EVENT_THEMES.length
+    : String(event?.title || '').split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % EVENT_THEMES.length;
+  const t = EVENT_THEMES[themeIdx];
 
   const handleShare = (e) => {
     e.preventDefault();
@@ -43,78 +93,242 @@ export default function SocialEventCard({ event }) {
   const startTime = parseTime(event.time);
 
   return (
-    <div className="w-full max-w-[420px] mx-auto bg-white rounded-[32px] p-4 shadow-[0_15px_35px_rgba(0,0,0,0.08)] border border-black/10 flex flex-col justify-between font-arc-display select-none transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="relative w-full max-w-[420px] mx-auto pt-5 pb-3 px-2 font-arc-display select-none group">
       
-      {/* 1. TOP IMAGE */}
-      <div className="relative aspect-[16/10] w-full rounded-[24px] overflow-hidden">
-        <img 
-          src={event.image} 
-          alt={event.title}
-          className="w-full h-full object-cover"
-        />
-        {/* Subtle Badge */}
-        {event.badge && (
-          <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-white/20">
-            {event.badge}
-          </div>
-        )}
-        {/* Share button (replaces wishlist/bookmark) */}
-        <div className="absolute top-3 right-3">
-          <button 
-            onClick={handleShare}
-            aria-label="Share event link"
-            className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-md flex items-center justify-center text-[#E11D48] hover:bg-white shadow-sm cursor-pointer transition-transform hover:scale-110 active:scale-95"
-          >
-            {copied ? <Check size={14} className="text-emerald-600 stroke-[2.5]" /> : <Share2 size={14} className="stroke-[2.2]" />}
-          </button>
-        </div>
-      </div>
+      {/* Layered Tilted Backing Cards */}
+      <div
+        aria-hidden="true"
+        style={{ backgroundColor: t.dark }}
+        className="absolute inset-x-3 top-6 bottom-3 rounded-[24px] -rotate-[2.5deg] -translate-x-1.5 translate-y-1 pointer-events-none transition-transform duration-300 group-hover:-rotate-[3.5deg]"
+      />
+      <div
+        aria-hidden="true"
+        style={{ backgroundColor: t.accent }}
+        className="absolute inset-x-3 top-6 bottom-3 rounded-[24px] rotate-[1.8deg] translate-y-2 pointer-events-none transition-transform duration-300 group-hover:rotate-[2.5deg]"
+      />
 
-      {/* 2. MIDDLE CONTENT: Left Date Pill + Right Details */}
-      <div className="flex items-center gap-4 mt-4 mb-3 px-1">
-        
-        {/* Left Stacked Date Badge */}
-        <div className="w-[72px] shrink-0 flex flex-col items-center">
-          {/* Red Date Box */}
-          <div className="w-full bg-[#E11D48] text-white rounded-2xl py-2 flex flex-col items-center justify-center shadow-sm">
-            <span className="text-2xl font-black leading-none">{day}</span>
-            <span className="text-[10.5px] font-bold tracking-wider mt-0.5 uppercase">{month}</span>
-          </div>
-          {/* Soft Red Time Pill */}
-          <div className="w-full bg-[#FFF1F2] text-[#E11D48] text-[11px] font-extrabold py-1 rounded-xl text-center mt-1 border border-[#FFE4E6]">
-            {startTime}
-          </div>
-        </div>
-
-        {/* Right Event Info */}
-        <div className="flex-1 min-w-0 flex flex-col justify-center">
-          {/* Title */}
-          <Link href={`/events/${event.id}`}>
-            <h3 className="font-extrabold text-[18px] text-[#000000] leading-snug line-clamp-2 hover:text-[#E11D48] transition-colors">
-              {event.title}
-            </h3>
-          </Link>
-
-          {/* Organiser line with party popper / badge */}
-          <p className="text-[#EA580C] text-xs font-bold flex items-center gap-1.5 mt-1.5 truncate">
-            <span>🎉</span>
-            <span className="truncate">Organised by {event.club}</span>
-          </p>
-        </div>
-
-      </div>
-
-      {/* 3. BOTTOM ACTION BAR: Red Join Pill Button */}
-      <div className="pt-2 px-1">
-        <button 
-          onClick={() => setShowWhatsAppModal(true)}
-          className="w-full bg-[#E11D48] hover:bg-[#BE123C] active:scale-[0.98] text-white font-extrabold text-sm py-2.5 px-4 rounded-full flex items-center justify-center gap-3 shadow-md transition-all group cursor-pointer"
+      {/* 3D Flip Container (Click once to flip) */}
+      <div
+        onClick={() => setIsFlipped((prev) => !prev)}
+        className="relative cursor-pointer transition-transform duration-300 group-hover:-translate-y-1"
+        style={{ perspective: '1200px' }}
+      >
+        <div
+          className="relative transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{
+            transformStyle: 'preserve-3d',
+            WebkitTransformStyle: 'preserve-3d',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+          }}
         >
-          <span>Join</span>
-          <span className="w-6 h-6 rounded-full bg-white text-[#E11D48] flex items-center justify-center group-hover:translate-x-1 transition-transform">
-            <ArrowRight size={13} className="stroke-[3]" />
-          </span>
-        </button>
+          {/* FRONT FACE */}
+          <div
+            className={`relative bg-[#FFFDF5] rounded-[24px] border-[2.5px] p-5 sm:p-6 flex flex-col justify-between overflow-visible transition-opacity duration-150 ${isFlipped ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: 'rotateY(0deg)',
+              borderColor: t.dark,
+              boxShadow: `4px 4px 0px ${t.dark}`
+            }}
+          >
+            {/* Subtle Decorative Background Accents */}
+            <div className="absolute inset-0 rounded-[22px] overflow-hidden pointer-events-none">
+              <div className="absolute -top-8 -right-8 w-44 h-44 rounded-full" style={{ backgroundColor: t.softBlob }} />
+              <div
+                className="absolute bottom-0 left-0 w-14 h-10 opacity-20"
+                style={{
+                  backgroundImage:
+                    `linear-gradient(45deg, ${t.accent} 25%, transparent 25%), linear-gradient(-45deg, ${t.accent} 25%, transparent 25%), linear-gradient(45deg, transparent 75%, ${t.accent} 75%), linear-gradient(-45deg, transparent 75%, ${t.accent} 75%)`,
+                  backgroundSize: '12px 12px',
+                  backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0'
+                }}
+              />
+            </div>
+
+            {/* Top Row: Pop-Out Date Squircle + Category Pill + Share */}
+            <div className="relative z-10 flex items-start justify-between gap-3 mb-3">
+              {/* Pop-out Tilted Sticker Date Box */}
+              <div className="relative -mt-10 -ml-2 -rotate-[4deg] shrink-0">
+                <svg className="absolute -top-3 -left-3 w-6 h-6 pointer-events-none" style={{ color: t.accent }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round">
+                  <path d="M12 2v5M4 6l4 3M2 14h5" />
+                </svg>
+                <div
+                  className="bg-white p-1.5 rounded-[20px] border-[2.5px]"
+                  style={{ borderColor: t.dark, boxShadow: `4px 4px 0px ${t.dark}` }}
+                >
+                  <div
+                    className="w-16 h-16 sm:w-18 sm:h-18 rounded-[14px] text-white flex flex-col items-center justify-center overflow-hidden relative"
+                    style={{ backgroundColor: t.accent }}
+                  >
+                    <span className="text-2xl font-black leading-none text-[#FEF08A]">{day}</span>
+                    <span className="text-[10px] font-arc-mono font-bold tracking-widest uppercase mt-0.5 text-white">{month}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 pt-0.5">
+                <span
+                  className="font-arc-mono text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3.5 py-1.5 rounded-full border-2 truncate max-w-[170px]"
+                  style={{
+                    backgroundColor: t.pillBg,
+                    color: t.pillText,
+                    borderColor: t.dark,
+                    boxShadow: `3px 3px 0px ${t.dark}`
+                  }}
+                >
+                  {event.badge || event.category || 'CAMPUS EVENT'}
+                </span>
+
+                <button 
+                  onClick={handleShare}
+                  aria-label="Share event link"
+                  className="w-8 h-8 rounded-full bg-white hover:bg-slate-50 border-2 flex items-center justify-center cursor-pointer transition-transform active:scale-90 shrink-0"
+                  style={{ borderColor: t.dark, color: t.dark, boxShadow: `2px 2px 0px ${t.dark}` }}
+                >
+                  {copied ? <Check size={14} className="text-emerald-600 stroke-[2.8]" /> : <Share2 size={14} className="stroke-[2.4]" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Title & Brush Underline */}
+            <div className="relative z-10 mb-2">
+              <h3 className="font-black text-2xl sm:text-[26px] text-[#140508] leading-[1.12] tracking-tight transition-colors line-clamp-2">
+                {event.title}
+              </h3>
+              <div className="w-24 h-1 rounded-full mt-1.5 opacity-85" style={{ backgroundColor: t.accent }} />
+            </div>
+
+            {/* Organiser / Tagline */}
+            <p className="relative z-10 font-sans text-xs sm:text-[13px] text-[#475569] font-semibold leading-snug mb-4 line-clamp-2">
+              {event.description || `Organised by ${event.club} · Amity University Kolkata`}
+            </p>
+
+            {/* Pill Info Box (Full Schedule & Full Location visible without cutoff) */}
+            <div
+              className="relative z-10 bg-white border-2 rounded-[22px] px-4 py-3 flex items-center gap-3 mb-5"
+              style={{ borderColor: t.dark, boxShadow: `3px 3px 0px ${t.dark}` }}
+            >
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                style={{ backgroundColor: t.iconBg, color: t.accent }}
+              >
+                <Calendar size={18} className="stroke-[2.4]" />
+              </div>
+              <div className="w-px h-9 bg-black/10 shrink-0" />
+              <div className="min-w-0 text-left flex-1">
+                <span className="block font-arc-mono text-[10px] font-black uppercase tracking-wider" style={{ color: t.accent }}>
+                  EVENT SCHEDULE:
+                </span>
+                <span className="block font-sans text-xs font-bold text-[#140508] leading-snug">
+                  {event.date} · {startTime}
+                </span>
+                {event.venue && (
+                  <span className="block font-sans text-[11.5px] font-semibold text-[#475569] leading-snug mt-0.5">
+                    📍 {event.venue}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Bottom Row: Club Organiser + CTA Button */}
+            <div className="relative z-10 flex items-center justify-between gap-3 pt-1">
+              <div className="min-w-0">
+                <span className="text-xs font-bold flex items-center gap-1.5 font-sans truncate" style={{ color: t.dark }}>
+                  <Users size={15} style={{ color: t.accent }} className="shrink-0" />
+                  <span className="truncate">{event.club}</span>
+                </span>
+                <div className="w-20 h-0.5 rounded-full mt-1 opacity-60" style={{ backgroundColor: t.accent }} />
+              </div>
+
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowWhatsAppModal(true);
+                }}
+                style={{
+                  backgroundColor: t.accent,
+                  borderColor: t.dark,
+                  boxShadow: `4px 4px 0px ${t.dark}`
+                }}
+                className="shrink-0 text-white font-arc-display font-black text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl border-2 hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                <span>JOIN EVENT</span>
+                <ArrowUpRight size={14} className="stroke-[2.8]" />
+              </button>
+            </div>
+          </div>
+
+          {/* BACK FACE (Description + Full Schedule & Location, No Title) */}
+          <div
+            className={`absolute inset-0 bg-[#FFFDF5] rounded-[24px] border-[2.5px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden transition-opacity duration-150 ${isFlipped ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)',
+              borderColor: t.dark,
+              boxShadow: `4px 4px 0px ${t.dark}`
+            }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span
+                  className="font-arc-mono text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full border-2"
+                  style={{ backgroundColor: t.pillBg, color: t.pillText, borderColor: t.dark }}
+                >
+                  ABOUT THIS EVENT
+                </span>
+                <span className="font-arc-mono text-[10px] font-bold opacity-60 uppercase" style={{ color: t.dark }}>
+                  Tap to flip back ↺
+                </span>
+              </div>
+
+              <p className="font-sans text-xs sm:text-[13.5px] text-[#140508] font-medium leading-relaxed mb-4">
+                {event.description || `Join ${event.club} for an exciting campus session at Amity University Kolkata.`}
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <div
+                className="bg-white border-2 rounded-2xl px-4 py-3"
+                style={{ borderColor: t.dark, boxShadow: `3px 3px 0px ${t.dark}` }}
+              >
+                <span className="block font-arc-mono text-[10px] font-black uppercase tracking-wider mb-0.5" style={{ color: t.accent }}>
+                  SCHEDULE & LOCATION
+                </span>
+                <span className="block font-sans text-xs font-bold text-[#140508]">
+                  {event.date} · {event.time || startTime}
+                </span>
+                {event.venue && (
+                  <span className="block font-sans text-xs font-semibold text-[#475569] mt-0.5">
+                    📍 {event.venue}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-xs font-bold truncate font-sans" style={{ color: t.dark }}>
+                  🎉 {event.club}
+                </span>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowWhatsAppModal(true);
+                  }}
+                  style={{
+                    backgroundColor: t.accent,
+                    borderColor: t.dark,
+                    boxShadow: `3px 3px 0px ${t.dark}`
+                  }}
+                  className="shrink-0 text-white font-arc-display font-black text-xs uppercase tracking-wider px-4 py-2 rounded-xl border-2 flex items-center gap-1.5 transition-all cursor-pointer"
+                >
+                  <span>JOIN EVENT</span>
+                  <ArrowUpRight size={14} className="stroke-[2.8]" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* WhatsApp Modal Pop-up */}
@@ -124,22 +338,22 @@ export default function SocialEventCard({ event }) {
           onClick={() => setShowWhatsAppModal(false)}
         >
           <div 
-            className="w-full max-w-[360px] bg-white rounded-[32px] p-7 shadow-[0_25px_60px_rgba(0,0,0,0.3)] relative border-2 border-black flex flex-col items-center text-center font-arc-display animate-in zoom-in-95 duration-200"
+            className="w-full max-w-[380px] bg-white rounded-[32px] p-6 sm:p-7 shadow-[0_25px_60px_rgba(0,0,0,0.35)] relative border border-rose-200/80 flex flex-col items-center text-center font-arc-display animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setShowWhatsAppModal(false)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 text-gray-500 hover:text-black flex items-center justify-center cursor-pointer transition-colors"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#FFF1F2] hover:bg-[#E11D48] text-[#E11D48] hover:text-white flex items-center justify-center cursor-pointer transition-colors"
               aria-label="Close"
             >
               <X size={16} className="stroke-[2.5]" />
             </button>
 
-            {/* WhatsApp Green Icon */}
-            <div className="w-20 h-20 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_12px_28px_rgba(37,211,102,0.38)] mb-6 mt-1">
+            {/* WhatsApp Icon Badge */}
+            <div className="w-14 h-14 rounded-2xl bg-[#25D366] text-white flex items-center justify-center shadow-[0_10px_24px_rgba(37,211,102,0.3)] mb-3.5 mt-1">
               <svg 
-                className="w-11 h-11 fill-current drop-shadow-xs" 
+                className="w-8 h-8 fill-current" 
                 viewBox="0 0 24 24" 
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -147,14 +361,26 @@ export default function SocialEventCard({ event }) {
               </svg>
             </div>
 
+            <span className="font-arc-mono text-[10px] font-bold uppercase tracking-widest text-[#E11D48] bg-[#FFF1F2] px-3 py-0.5 rounded-full border border-[#FFE4E6] mb-2">
+              Event WhatsApp Group
+            </span>
+
+            <h4 className="font-extrabold text-xl text-[#0F172A] leading-snug mb-1">
+              {event.title}
+            </h4>
+
+            <p className="font-sans text-xs text-[#64748B] font-medium mb-5">
+              {event.date}{event.venue ? ` · ${event.venue}` : ''}
+            </p>
+
             {/* Join WhatsApp Button */}
             <a 
-              href="https://chat.whatsapp.com/" 
+              href={event.whatsappGroup || `https://wa.me/?text=${encodeURIComponent(`Hi! I'd like to join the WhatsApp group for ${event.title} on Afterclass.`)}`}
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-full bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white font-extrabold text-base py-3 px-6 rounded-full flex items-center justify-center gap-2 shadow-md shadow-[#25D366]/30 transition-all cursor-pointer"
+              className="w-full bg-[#25D366] hover:bg-[#1ebe5d] active:scale-[0.98] text-white font-extrabold text-sm py-3 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-md shadow-[#25D366]/25 transition-all cursor-pointer"
             >
-              <span>Join WhatsApp</span>
+              <span>Join WhatsApp Group</span>
             </a>
           </div>
         </div>

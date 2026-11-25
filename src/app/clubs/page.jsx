@@ -112,22 +112,32 @@ export default function ClubsPage() {
       
       {/* 1. HERO SECTION */}
       <section className="arc-grain-red text-white pb-16 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto pt-8 pb-12 text-center flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 bg-[#881337] px-3.5 py-1 rounded-full font-arc-mono text-xs uppercase tracking-wider text-[#FFFDF5] mb-4 border border-white/15">
+        {/* Blended Clubs Hero Background Image */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <img
+            src="/images/clubs-hero-bg.jpg"
+            alt=""
+            className="w-full h-full object-cover object-bottom opacity-70"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#E11D48] via-[#E11D48]/40 to-[#E11D48]/80" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto pt-2 pb-2 text-center flex flex-col items-center">
+          <div className="inline-flex items-center gap-2 bg-[#881337] px-3.5 py-1 rounded-full font-arc-mono text-xs uppercase tracking-wider text-[#FFFDF5] mb-2 border border-white/15">
             <Users size={13} />
             <span>CAMPUS SOCIETIES & DIRECTORY</span>
           </div>
 
-          <h1 className="font-arc-display text-white text-4xl sm:text-6xl md:text-[68px] leading-[1.08] max-w-3xl mb-6">
+          <h1 className="font-arc-display text-white text-2xl sm:text-4xl md:text-[44px] leading-[1.08] max-w-3xl mb-2">
             “Find your club beyond the classroom.”
           </h1>
 
-          <p className="text-white/90 text-base sm:text-lg max-w-xl mx-auto font-normal leading-relaxed mb-8">
+          <p className="text-white/90 text-xs sm:text-sm max-w-xl mx-auto font-normal leading-relaxed mb-2">
             Coding, music ya drama — apni pasand ki society dhoondo. Auditions, recruitment, aur direct registrations ek hi jagah.
           </p>
 
           {/* Interactive 3D Fanned Club Deck */}
-          <div className="w-full flex items-center justify-center py-2 overflow-visible">
+          <div className="w-full flex items-center justify-center overflow-visible">
             <ClubHeroDeck clubs={campusClubs} />
           </div>
         </div>
@@ -177,67 +187,97 @@ export default function ClubsPage() {
               <div className="absolute right-0 top-1/2 -translate-y-1/2 w-16 h-[2px] bg-gradient-to-l from-[#E11D48] to-transparent pointer-events-none"></div>
             </div>
 
-            {/* Right 5 cols: Live Selected Club Preview Card (Dynamic theme per club) */}
+            {/* Right 5 cols: Live Selected Club Preview Card (Matching Comic/Zine Layered Style) */}
             {(() => {
               const theme = getClubTheme(wheelSelectedClub);
               return (
-                <div className={`lg:col-span-5 ${theme.bgClass} rounded-[38px] p-7 sm:p-8 border relative overflow-hidden flex flex-col justify-between min-h-[380px] font-arc-display transition-all duration-500 hover:shadow-2xl hover:-translate-y-1`}>
-                  
-                  {/* Top-right subtle soft gradient glow matching club color */}
-                  <div 
-                    className="absolute top-0 right-0 w-52 h-44 rounded-tr-[38px] rounded-bl-[120px] pointer-events-none"
-                    style={{ background: theme.flowBlob }}
+                <div className="lg:col-span-5 relative pt-5 pb-3 px-2 font-arc-display select-none group">
+                  {/* Layered Tilted Backing Cards */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-3 top-6 bottom-3 bg-[#881337] rounded-[24px] -rotate-[2.2deg] -translate-x-1 translate-y-1 pointer-events-none transition-transform duration-300 group-hover:-rotate-[3.2deg]"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-3 top-6 bottom-3 bg-[#E11D48] rounded-[24px] rotate-[1.6deg] translate-y-2 pointer-events-none transition-transform duration-300 group-hover:rotate-[2.4deg]"
                   />
 
-                  <div className="relative z-10">
-                    {/* Top Row: 3D Squircle Icon + Category Pill */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className={`w-16 h-16 rounded-[22px] ${theme.iconBg} text-white text-3xl flex items-center justify-center overflow-hidden relative shadow-md`}>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-white/25 pointer-events-none" />
-                        <span className="relative z-10 drop-shadow-sm">{wheelSelectedClub.avatar}</span>
+                  <div className="relative bg-[#FFFDF5] rounded-[24px] border-[2.5px] border-[#881337] p-6 sm:p-7 shadow-[4px_4px_0px_#881337] flex flex-col justify-between min-h-[370px] transition-transform duration-300 group-hover:-translate-y-1 overflow-visible">
+                    {/* Decorative Background Accents */}
+                    <div className="absolute inset-0 rounded-[22px] overflow-hidden pointer-events-none">
+                      <div className="absolute -top-8 -right-8 w-44 h-44 bg-[#FFE4E6]/70 rounded-full" />
+                    </div>
+
+                    <div className="relative z-10">
+                      {/* Top Row: Pop-Out Logo Sticker + Category Pill */}
+                      <div className="flex items-start justify-between gap-3 mb-4">
+                        <div className="relative -mt-11 -ml-2 -rotate-[4deg] shrink-0">
+                          <div className="bg-white p-1.5 rounded-[20px] border-[2.5px] border-[#881337] shadow-[4px_4px_0px_#881337]">
+                            <div className={`w-16 h-16 rounded-[14px] ${theme.iconBg} text-white text-3xl flex items-center justify-center overflow-hidden`}>
+                              {wheelSelectedClub.logo ? (
+                                <img src={wheelSelectedClub.logo} alt={wheelSelectedClub.name} className="w-full h-full object-cover" />
+                              ) : (
+                                <span className="drop-shadow-sm">{wheelSelectedClub.avatar}</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        <span className="bg-[#FEF08A] text-[#881337] font-arc-mono text-[11px] font-black uppercase tracking-wider px-4 py-1.5 rounded-full border-2 border-[#881337] shadow-[3px_3px_0px_#881337]">
+                          {wheelSelectedClub.category}
+                        </span>
                       </div>
 
-                      <span className={`font-arc-display text-xs font-extrabold uppercase tracking-wider ${theme.pillBg} px-4 py-1.5 rounded-full shadow-xs`}>
-                        {wheelSelectedClub.category}
-                      </span>
+                      {/* Club Title & Underline */}
+                      <h3 className="font-black text-2xl sm:text-[26px] text-[#140508] mb-1.5 leading-tight tracking-tight">
+                        {wheelSelectedClub.name}
+                      </h3>
+                      <div className="w-24 h-1 bg-[#E11D48] rounded-full mb-3 opacity-85" />
+                      
+                      {/* Tagline */}
+                      <p className="font-sans text-xs sm:text-[13.5px] text-[#475569] font-semibold leading-relaxed mb-5">
+                        {wheelSelectedClub.tagline}
+                      </p>
+
+                      {/* Currently Recruiting Pill Box */}
+                      <div className="bg-white border-2 border-[#881337] rounded-[22px] px-4 py-3 shadow-[3px_3px_0px_#881337] flex items-center gap-3 mb-5">
+                        <div className="w-9 h-9 rounded-xl bg-[#FFF1F2] text-[#E11D48] flex items-center justify-center shrink-0">
+                          <Sparkles size={17} className="stroke-[2.4]" />
+                        </div>
+                        <div className="w-px h-8 bg-[#881337]/15 shrink-0" />
+                        <div className="min-w-0 text-left flex-1">
+                          <span className="block font-arc-mono text-[10px] font-black uppercase tracking-wider text-[#E11D48]">
+                            CURRENTLY RECRUITING:
+                          </span>
+                          <span className="block font-sans text-xs sm:text-[13px] font-bold text-[#140508] leading-snug">
+                            {wheelSelectedClub.openRoles}
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Club Title */}
-                    <h3 className="font-extrabold text-2xl sm:text-[26px] text-[#0F172A] mb-1.5 leading-tight tracking-tight">
-                      {wheelSelectedClub.name}
-                    </h3>
-                    
-                    {/* Tagline */}
-                    <p className="font-sans text-xs sm:text-[13.5px] text-[#475569] font-medium leading-relaxed mb-5">
-                      {wheelSelectedClub.tagline}
-                    </p>
-
-                    {/* Currently Recruiting Box */}
-                    <div className={`p-4 rounded-2xl ${theme.boxBg} shadow-xs mb-4`}>
-                      <span className="text-[11px] font-extrabold text-amber-500 flex items-center gap-1.5 uppercase tracking-wider mb-1">
-                        <Sparkles size={12} className="fill-amber-400 stroke-amber-500" />
-                        <span>CURRENTLY RECRUITING:</span>
+                    {/* Bottom Row: Active Members & Explore Club CTA */}
+                    <div className="relative z-10 pt-1 flex items-center justify-between gap-3">
+                      <span className="font-sans text-xs sm:text-[13px] text-[#881337] font-bold flex items-center gap-1.5">
+                        <Users size={15} className="text-[#E11D48]" />
+                        <span>{wheelSelectedClub.membersCount} Active Members</span>
                       </span>
-                      <span className="text-xs sm:text-[13px] font-sans text-[#1E293B] font-bold block leading-snug">
-                        {wheelSelectedClub.openRoles}
-                      </span>
+                      
+                      <Link
+                        href={`#${wheelSelectedClub.id}`}
+                        onClick={(e) => {
+                          const target = document.getElementById(wheelSelectedClub.id);
+                          if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                        className="inline-flex items-center gap-1.5 bg-[#E11D48] hover:bg-[#BE123C] text-white px-5 py-2.5 rounded-xl border-2 border-[#881337] shadow-[4px_4px_0px_#881337] hover:translate-x-[2px] hover:translate-y-[2px] text-xs font-black uppercase tracking-wider transition-all cursor-pointer"
+                      >
+                        <span>EXPLORE CLUB</span>
+                        <ArrowUpRight size={14} className="stroke-[2.8]" />
+                      </Link>
                     </div>
-                  </div>
-
-                  {/* Bottom Row: Active Members & Explore Club Pill */}
-                  <div className="relative z-10 pt-2 border-t border-black/5 flex items-center justify-between">
-                    <span className="font-sans text-xs sm:text-[13px] text-[#64748B] font-bold flex items-center gap-1.5">
-                      <Users size={15} className="opacity-70" />
-                      <span>{wheelSelectedClub.membersCount} Active Members</span>
-                    </span>
-                    
-                    <Link
-                      href={`/clubs/${wheelSelectedClub.id}`}
-                      className={`inline-flex items-center gap-2 ${theme.btnBg} px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold uppercase tracking-wide transition-all duration-200 active:scale-95 cursor-pointer`}
-                    >
-                      <span>EXPLORE CLUB</span>
-                      <ArrowUpRight size={14} className="stroke-[2.8]" />
-                    </Link>
                   </div>
                 </div>
               );
